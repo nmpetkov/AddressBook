@@ -1,0 +1,45 @@
+<!--[* $Id: addressbook_user_menu.html 69 2010-04-01 13:30:14Z herr.vorragend $ *]-->
+<!--[pnpagesetvar name='title' value=$templatetitle]-->
+<!--[securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_ADD' assign='addAuth']-->
+<!--[pnuserloggedin assign="loggedin"]-->
+<!--[formutil_getpassedvalue key="func" assign="func"]-->
+<h2><!--[pnmodgetvar module="AddressBook" name="abtitle"]--></h2>
+
+<div class="z-menu">
+    <span class="z-menuitem-title">
+        [
+        <span><a href="<!--[pnmodurl modname=AddressBook type=user func=main]-->"><!--[gt text="Address list"]--></a></span>
+
+        <!--[if $addAuth]-->
+        <span>| <a href="<!--[pnmodurl modname=AddressBook type=user func=edit]-->"><!--[gt text="Add an address"]--></a></span>
+        <!--[/if]-->
+
+        <!--[if !empty($loggedin)]-->
+        <!--[if $ot=="favourite"]-->
+        <span>| <a href="<!--[pnmodurl modname=AddressBook type=user func=view ot=address]-->"><!--[gt text="Show all"]--></a></span>
+        <!--[else]-->
+        <span>| <a href="<!--[pnmodurl modname=AddressBook type=user func=view ot=favourite]-->"><!--[gt text="Show favourites"]--></a></span>
+        <!--[/if]-->
+        <!--[/if]-->
+
+        <!--[if $user_id && $func neq 'edit']-->
+        <span id="fav" <!--[if $isFavourite]-->style="display:none;"<!--[/if]-->>
+            | <a href="#" onclick="javascript:add_fav(<!--[$address.id|pnvarprepfordisplay]-->,<!--[$user_id|pnvarprepfordisplay]-->);"><!--[gt text="Add to favourites"]--></a>
+        </span>
+        <span id="nofav" <!--[if !$isFavourite]-->style="display:none;"<!--[/if]-->>
+            | <a href="#" onclick="javascript:del_fav(<!--[$address.id|pnvarprepfordisplay]-->,<!--[$user_id|pnvarprepfordisplay]-->);"><!--[gt text="Remove favourite"]--></a>
+        </span>
+        <!--[/if]-->
+
+        ]
+    </span>
+</div>
+
+<!--[insert name='getstatusmsg']-->
+
+<!--[if $$templatetitle]-->
+<h3 style="line-height:25px;">
+    <!--[$templatetitle]--><!--[if $ot=="favourite"]--> - <!--[gt text="Favourites"]--><!--[/if]-->
+    <!--[pnimg id="ajax_indicator" style="display: none;" modname='core' set='icons/extrasmall' src="indicator_circle.gif" alt=""]-->
+</h3>
+<!--[/if]-->

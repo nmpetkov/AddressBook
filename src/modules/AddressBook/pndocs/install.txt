@@ -1,0 +1,51 @@
+----------------------------------------------------------------------
+First Installation:
+----------------------------------------------------------------------
+
+To install the AddressBook simply unzip the distribution inside your 
+PostNuke html directory. This will create the ./modules/AddressBook 
+directory and should contain all the files of the distribution. 
+
+From the Administration of the portal go to: 
+'modules'->'AddressBook'->Initialize->Activate 
+
+----------------------------------------------------------------------
+Upgrade Installation:
+----------------------------------------------------------------------
+
+IMPORTANT: Since 1.3 the module name has changed to "AddressBook".
+Please adjust all your permissions rules and please change the directory
+name to the new camel case spelling.
+
+BEFORE: modules/Addressbook/
+AFTER:  modules/AddressBook/
+
+To upgrade the AddressBook simply unzip the distribution inside your 
+PostNuke html directory. This will overwrite the ./modules/AddressBook 
+directory and should contain all the files of the distribution. 
+
+From the Administration of the portal go to: 
+'modules'->'AddressBook'->Upgrade->Activate
+
+------------------------------------------------------------------------
+Menu Configuration
+------------------------------------------------------------------------
+You can link to the AddressBook by entering {AddressBook} in a menu block.
+
+Using [AddressBook] will also work, but this is for old style modules. 
+Using the method above will produce much better results.
+
+Goto your Block administration and edit/create the Menu block to hold 
+your link to the guestbook.
+
+The Menu Block editing screen should look something like this:
+ 
++--------------+----------------+-------------+--------+--------+-------+ 
+| Title        | URL            | Description | Delete | Insert | Blank |
++--------------+----------------+-------------+--------+--------+-------+ 
+| AddressBook  | {AddressBook}  | Please sign |        |        |       |
++--------------+----------------+-------------+--------+--------+-------+ 
+
+----------------------------------------------------------------------
+See readme.txt for introducing the features.
+----------------------------------------------------------------------

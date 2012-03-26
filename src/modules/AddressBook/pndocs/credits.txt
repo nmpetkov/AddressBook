@@ -1,0 +1,17 @@
+Credits
+-------------------------------
+(c) AddressBook Development Team
+
+Authors:
+===============================
+- Thomas Smiatek (former)
+    <thomas@smiatek.com> 
+    http://www.smiatek.com
+
+- Carsten Volmer
+    <carsten@zikula.org>
+    http://carsten-volmer.de
+
+- planetenkiller
+
+- Mr.Montesa

@@ -19,8 +19,6 @@ function AddressBook_pntables()
     // Initialise table array
     $pntable = array();
 
-    $dbdriver = DBConnectionStack::getConnectionDBDriver();
-
     $pntable['addressbook_address'] = DBUtil::getLimitedTablename('addressbook_address');
     $pntable['addressbook_address_column'] = array(
     'id'               => 'adr_id',
@@ -58,7 +56,8 @@ function AddressBook_pntables()
     'note'             => 'adr_note',
     'user_id'          => 'adr_user',
     'private'          => 'adr_private',
-    'date'             => 'adr_date'
+    'date'             => 'adr_date',
+    'counter'          => 'adr_counter' // count clicks
     );
 
     // Enable categorization services
@@ -87,25 +86,26 @@ function AddressBook_pntables()
     'state'         => "VARCHAR(60) DEFAULT NULL",
     'country'       => "VARCHAR(60) DEFAULT NULL",
     'geodata'       => "VARCHAR(180) DEFAULT NULL",
-    'contact_1'     => "VARCHAR(80) DEFAULT NULL",
-    'contact_2'     => "VARCHAR(80) DEFAULT NULL",
-    'contact_3'     => "VARCHAR(80) DEFAULT NULL",
-    'contact_4'     => "VARCHAR(80) DEFAULT NULL",
-    'contact_5'     => "VARCHAR(80) DEFAULT NULL",
+    'contact_1'     => "VARCHAR(100) DEFAULT NULL",
+    'contact_2'     => "VARCHAR(100) DEFAULT NULL",
+    'contact_3'     => "VARCHAR(100) DEFAULT NULL",
+    'contact_4'     => "VARCHAR(100) DEFAULT NULL",
+    'contact_5'     => "VARCHAR(100) DEFAULT NULL",
     'c_label_1'     => "I(4) DEFAULT NULL",
     'c_label_2'     => "I(4) DEFAULT NULL",
     'c_label_3'     => "I(4) DEFAULT NULL",
     'c_label_4'     => "I(4) DEFAULT NULL",
     'c_label_5'     => "I(4) DEFAULT NULL",
     'c_main'        => "I(4) DEFAULT NULL",
-    'custom_1'      => "VARCHAR(60) DEFAULT NULL",
-    'custom_2'      => "VARCHAR(60) DEFAULT NULL",
-    'custom_3'      => "VARCHAR(60) DEFAULT NULL",
-    'custom_4'      => "VARCHAR(60) DEFAULT NULL",
-    'note'          => "TEXT DEFAULT NULL",
+    'custom_1'      => "LONGTEXT DEFAULT NULL",
+    'custom_2'      => "LONGTEXT DEFAULT NULL",
+    'custom_3'      => "LONGTEXT DEFAULT NULL",
+    'custom_4'      => "LONGTEXT DEFAULT NULL",
+    'note'          => "LONGTEXT DEFAULT NULL",
     'user_id'       => "I(11) DEFAULT NULL",
     'private'       => "I(4) DEFAULT NULL",
-    'date'          => "I(11)  NOTNULL DEFAULT 0"
+    'date'          => "I(11)  NOTNULL DEFAULT 0",
+    'counter'       => "I(11)  NOTNULL DEFAULT 0"
     );
     ObjectUtil::addStandardFieldsToTableDataDefinition($pntable['addressbook_address_column_def'], 'adr_');
 
@@ -113,14 +113,16 @@ function AddressBook_pntables()
     $pntable['addressbook_labels'] = DBUtil::getLimitedTablename('addressbook_labels');
     $pntable['addressbook_labels_column'] = array(
     'id'            => 'lab_id',
-    'name'          => 'lab_name'
+    'name'          => 'lab_name',
+    'name1'          => 'lab_name1' // for localization, can use in templates
     );
     $pntable['addressbook_labels_primary_key_column'] = 'id';
     ObjectUtil::addStandardFieldsToTableDefinition($pntable['addressbook_labels_column'], 'lab_');
 
     $pntable['addressbook_labels_column_def'] = array(
     'id'            => "I AUTO PRIMARY",
-    'name'          => "VARCHAR(30) DEFAULT NULL"
+    'name'          => "VARCHAR(30) DEFAULT NULL",
+    'name1'          => "VARCHAR(30) DEFAULT NULL"
     );
     ObjectUtil::addStandardFieldsToTableDataDefinition($pntable['addressbook_labels_column_def'], 'lab_');
 
@@ -128,6 +130,7 @@ function AddressBook_pntables()
     $pntable['addressbook_customfields_column'] = array(
     'id'            => 'cus_id',
     'name'          => 'cus_name',
+    'name1'         => 'cus_name1', // for localization, can use in templates
     'type'          => 'cus_type',
     'position'      => 'cus_pos',
     'option'        => 'cus_option'
@@ -138,6 +141,7 @@ function AddressBook_pntables()
     $pntable['addressbook_customfields_column_def'] = array(
     'id'           => "I AUTO PRIMARY",
     'name'         => "VARCHAR(30) DEFAULT NULL",
+    'name1'        => "VARCHAR(30) DEFAULT NULL",
     'type'         => "VARCHAR(30) DEFAULT NULL",
     'position'     => "I(11)  NOTNULL DEFAULT 0",
     'option'       => "TEXT DEFAULT NULL"

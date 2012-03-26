@@ -174,9 +174,11 @@
 
     <div class="z-formbuttons">
         <a href="<!--[pnmodurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search]-->"><!--[pnimg modname='core' src='agt_back.gif' set='icons/small'   __alt='Back' __title='Back']--></a>
-        <!--[literal]--><!--[if IE]><!--[/literal]-->
+
+        {browserhack condition="if IE"}
         &nbsp;&nbsp;<a href="#" onclick="javascript:window.clipboardData.setData('Text','<!--[if $address.company|pnvarprepfordisplay]--><!--[$address.company|pnvarprepfordisplay]-->\n<!--[/if]--><!--[if $address.fname|pnvarprepfordisplay]--><!--[$address.fname|pnvarprepfordisplay]--> <!--[/if]--><!--[if $address.lname]--><!--[$address.lname]-->\n\n<!--[/if]--><!--[if $address.address1]--><!--[$address.address1|pnvarprepfordisplay]-->\n<!--[/if]--><!--[if $address.address2]--><!--[$address.address2|pnvarprepfordisplay]-->\n<!--[/if]--><!--[if $address.zip]--><!--[$address.zip|pnvarprepfordisplay]--> <!--[/if]--><!--[if $address.city]--><!--[$address.city|pnvarprepfordisplay]-->\n<!--[/if]--><!--[if $address.country]--><!--[$address.country|pnvarprepfordisplay]--><!--[/if]-->');"><!--[pnimg modname='core' src='editpaste.gif' set='icons/small'   __alt="Copy" __title="Copy"]--></a>
-        <!--[literal]--><![endif]--><!--[/literal]-->
+
+        {/browserhack}
         <!--[if $editAuth || $user_id == $address.user_id]-->
         &nbsp;&nbsp;<a href="<!--[pnmodurl modname=AddressBook type=user func=edit id=$address.id formcall="edit" ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search returnid=$address.id]-->"><!--[pnimg modname='core' set='icons/small' src="edit.gif" __alt='Edit' __title='Edit']--></a>
         <!--[/if]-->

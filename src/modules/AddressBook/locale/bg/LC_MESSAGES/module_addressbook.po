@@ -1,0 +1,658 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula AddressBook module\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-01 15:20+0000\n"
+"PO-Revision-Date: 2010-04-09 13:29+0200\n"
+"Last-Translator: Nikolay Petkov <nik@osi.bg>\n"
+"Language-Team: www.cmstory.com <office@cmstory.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Bulgarian\n"
+"X-Poedit-Country: BULGARIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: pnadmin.php:60
+#: pnadmin.php:106
+#: pnadmin.php:145
+#: pnuserapi.php:90
+#: pnuserapi.php:154
+#: pnuser.php:80
+#: pnuser.php:133
+#: pnuser.php:284
+#: pnuser.php:359
+#: pnuser.php:368
+#: pnuser.php:531
+#: pnadminform.php:72
+#: pnadminform.php:113
+#: pnuserform.php:59
+#: pnuserform.php:159
+#, php-format
+msgid "Error! Unable to load class [%s]"
+msgstr "Грешка! Проблем при зареждането на клас [%s]"
+
+#: pnadmin.php:151
+msgid "Error! No such item found."
+msgstr "Грешка! Няма намерена такава позиция."
+
+#: pnadmin.php:172
+#: pnadminform.php:130
+msgid "Done! Item deleted."
+msgstr "Готово! Позицията е изтрита."
+
+#: pnajax.php:21
+#: pnajax.php:39
+#: pnajax.php:55
+#: pnajax.php:79
+msgid "Error! No authorization to access this module."
+msgstr "Грешка! Нямате право на достъп до този модул."
+
+#: pnajax.php:68
+#: pninit.php:202
+#: pninit.php:281
+msgid "Error! Update attempt failed."
+msgstr "Грешка! Записът на данни не успя."
+
+#: pnversion.php:17
+msgid "Address book"
+msgstr "Адресен указател"
+
+#: pnversion.php:18
+msgid "addressbook"
+msgstr ""
+
+#: pnversion.php:20
+msgid "A name and address book (NAB) is for storing entries called contacts. Each contact entry usually consists of a few standard fields."
+msgstr ""
+
+#: pnsearchapi.php:157
+msgid "Error! Could not load addresses."
+msgstr "Грешка! Неуспешно зареждане на данните."
+
+#: pnuserapi.php:45
+#: pnuser.php:189
+#, php-format
+msgid "This website require it's users to be registered to use the address book.<br />Register for free <a href=\"%1$s\">here</a>, or <a href=\\\"%1$s\\\">log in</a> if you are already registered."
+msgstr "Изисква се потребителите да са регистрирани за да използват адресния указател.<br />Регистрирайте се <a href=\"%1$s\">тук</a>, или <a href=\\\"%1$s\\\">влезте</a> ако вече сте регистриран."
+
+#: pnuserapi.php:117
+#: pnuser.php:73
+#: pnuser.php:142
+#: pnuser.php:321
+#: pnuser.php:540
+#: classes/PNAddress.class.php:62
+msgid "Error! Unable to load class [customfield]"
+msgstr "Грешка! Проблем при зареждането на клас [customfield]"
+
+#: pncontenttypesapi/address.php:11
+msgid "AddressBook contact"
+msgstr "Контакт в адресния указател"
+
+#: pncontenttypesapi/address.php:16
+msgid "Display a single address."
+msgstr "Показва"
+
+#: pncontenttypesapi/address.php:38
+msgid "No address selected"
+msgstr "Няма избран адрес"
+
+#: pnuser.php:44
+#: pnuserform.php:207
+msgid "Error! Unable to load class [address]"
+msgstr "Грешка! Проблем при зареждането на клас [address]"
+
+#: pnuser.php:60
+msgid "Be careful. This is a duplicate!"
+msgstr ""
+
+#: pnuser.php:121
+#: pnuser.php:526
+#, php-format
+msgid "Error! Invalid id [%s] received."
+msgstr "Грешка! Подаден е невалиден номер [%s]."
+
+#: pnuser.php:163
+msgid "Error! Unable to load class [favourite]"
+msgstr "Грешка! Проблем при зареждането на клас [favourite]"
+
+#: pnuser.php:295
+msgid "Current search term: "
+msgstr "Текушо се търси за:"
+
+#: pnadminform.php:42
+msgid "Error! Both fields must contain the same number of characters - Special character replacement was NOT saved!"
+msgstr ""
+
+#: pnadminform.php:46
+msgid "Done! Configuration saved."
+msgstr "Готово! Конфигурацията е запазена."
+
+#: pnadminform.php:119
+#, php-format
+msgid "%1$s with ID of %2$s doesn'\\t seem to exist"
+msgstr "%1$s с ID от %2$s изглежда не съществува"
+
+#: pnadminapi.php:22
+#: pntemplates/addressbook_admin_labels_view.html:3
+msgid "Contact labels"
+msgstr ""
+
+#: pnadminapi.php:29
+#: pntemplates/addressbook_admin_customfield_view.html:7
+#: pntemplates/addressbook_admin_customfield_edit.html:10
+msgid "Custom fields"
+msgstr ""
+
+#: pnadminapi.php:36
+#: pntemplates/addressbook_admin_modifyconfig.html:4
+#: pntemplates/addressbook_admin_modifyconfig.html:6
+msgid "Settings"
+msgstr "Настройки"
+
+#: pninit.php:25
+msgid "Work"
+msgstr "Офис"
+
+#: pninit.php:28
+msgid "Fax"
+msgstr "Факс"
+
+#: pninit.php:31
+msgid "Mobile"
+msgstr "Мобилен"
+
+#: pninit.php:34
+msgid "Home"
+msgstr "Домашен"
+
+#: pninit.php:37
+msgid "Email"
+msgstr "Е-мейл"
+
+#: pninit.php:40
+msgid "URL"
+msgstr "Сайт"
+
+#: pninit.php:43
+msgid "Other"
+msgstr "Друг"
+
+#: pninit.php:57
+msgid "Custom Label 1"
+msgstr ""
+
+#: pninit.php:62
+msgid "Custom Label 2"
+msgstr ""
+
+#: pninit.php:67
+msgid "Custom Label 3"
+msgstr ""
+
+#: pninit.php:72
+msgid "Custom Label 4"
+msgstr ""
+
+#: pninit.php:92
+msgid "Error! Creation attempt failed."
+msgstr "Грешка!Създаването на записа не успя."
+
+#: pninit.php:173
+#: pninit.php:333
+msgid "AddressBook"
+msgstr ""
+
+#: pninit.php:174
+#: pninit.php:334
+msgid "Adress administration."
+msgstr ""
+
+#: pninit.php:252
+#: pninit.php:253
+#: pninit.php:393
+#: pninit.php:394
+#: pntemplates/addressbook_user_edit.html:66
+msgid "Form of address"
+msgstr "Тип на адреса"
+
+#: pninit.php:350
+#: pninit.php:351
+msgid "Business"
+msgstr "Бизнес"
+
+#: pninit.php:364
+#: pninit.php:365
+msgid "Personal"
+msgstr "Персонален"
+
+#: pninit.php:410
+#: pninit.php:411
+msgid "Mr."
+msgstr "Г-н"
+
+#: pninit.php:424
+#: pninit.php:425
+msgid "Mrs."
+msgstr "Г-жа"
+
+#: pnuserform.php:106
+msgid "Done! The address was saved."
+msgstr "Готово! Адресът е записан."
+
+#: pnuserform.php:166
+msgid "Error! The deletion of this address failed."
+msgstr "Грешка! Изтриването на записа не успя."
+
+#: pnuserform.php:171
+msgid "Done! The deletion of this address was successful."
+msgstr "Готово! Изтриването на адреса е успешно."
+
+#: pnuserform.php:223
+msgid "Error! Company update failed."
+msgstr "Грешка! Записа на данни не успя."
+
+#: pnuserform.php:226
+msgid "Done! Company update successful."
+msgstr "Готово! Записът на данни е успешен."
+
+#: classes/PNAddress.class.php:131
+msgid "An address must contain data in at least one field of the name tab!"
+msgstr ""
+
+#: pntemplates/addressbook_admin_delete.htm:4
+#: pntemplates/addressbook_admin_delete.htm:26
+#: pntemplates/addressbook_admin_customfield_view.html:30
+#: pntemplates/addressbook_admin_labels_view.html:28
+#: pntemplates/addressbook_user_delete.html:20
+#: pntemplates/addressbook_user_view.html:94
+msgid "Delete"
+msgstr "Изтрий"
+
+#: pntemplates/addressbook_admin_delete.htm:5
+#: pntemplates/addressbook_user_simpledisplay.html:20
+#: pntemplates/addressbook_user_edit.html:278
+#: pntemplates/addressbook_user_edit.html:280
+#: pntemplates/addressbook_user_display.html:38
+#: pntemplates/addressbook_user_view.html:21
+msgid "Category"
+msgstr "Категория"
+
+#: pntemplates/addressbook_admin_delete.htm:6
+#: pntemplates/addressbook_admin_labels_edit.html:9
+#: pntemplates/addressbook_admin_labels_view.html:14
+msgid "Contact label"
+msgstr ""
+
+#: pntemplates/addressbook_admin_delete.htm:7
+msgid "Prefix"
+msgstr "Префикс"
+
+#: pntemplates/addressbook_admin_delete.htm:8
+msgid "Do you really want to delete this item?"
+msgstr "Наистина ли искате да изтриете тази позиция?"
+
+#: pntemplates/addressbook_admin_delete.htm:18
+#: pntemplates/addressbook_user_change_company.html:21
+#: pntemplates/addressbook_user_delete.html:18
+msgid "Confirmation prompt"
+msgstr "Потвърждение"
+
+#: pntemplates/addressbook_admin_delete.htm:20
+#: pntemplates/addressbook_user_simpledisplay.html:26
+#: pntemplates/addressbook_user_edit.html:63
+#: pntemplates/addressbook_user_display.html:44
+#: pntemplates/addressbook_admin_labels_edit.html:27
+#: pntemplates/addressbook_user_view.html:49
+#: pntemplates/addressbook_user_view.html:51
+msgid "Name"
+msgstr "Контакт"
+
+#: pntemplates/addressbook_admin_delete.htm:27
+#: pntemplates/addressbook_user_edit.html:306
+#: pntemplates/addressbook_user_edit.html:308
+#: pntemplates/addressbook_admin_labels_edit.html:34
+#: pntemplates/addressbook_admin_modifyconfig.html:61
+#: pntemplates/addressbook_user_change_company.html:24
+#: pntemplates/addressbook_admin_customfield_edit.html:52
+#: pntemplates/addressbook_user_delete.html:21
+msgid "Cancel"
+msgstr "Отказ"
+
+#: pntemplates/addressbook_user_simpledisplay.html:39
+#: pntemplates/addressbook_user_edit.html:84
+#: pntemplates/addressbook_user_display.html:57
+msgid "Title"
+msgstr "Титла"
+
+#: pntemplates/addressbook_user_simpledisplay.html:48
+#: pntemplates/addressbook_user_edit.html:88
+#: pntemplates/addressbook_user_display.html:66
+#: pntemplates/addressbook_user_view.html:54
+#: pntemplates/addressbook_user_view.html:56
+msgid "Company"
+msgstr "Наименование"
+
+#: pntemplates/addressbook_user_simpledisplay.html:55
+#: pntemplates/addressbook_user_edit.html:120
+#: pntemplates/addressbook_user_edit.html:122
+#: pntemplates/addressbook_user_display.html:12
+#: pntemplates/addressbook_user_display.html:73
+msgid "Address"
+msgstr "Адрес"
+
+#: pntemplates/addressbook_user_simpledisplay.html:71
+#: pntemplates/addressbook_user_edit.html:166
+#: pntemplates/addressbook_user_display.html:89
+#: pntemplates/addressbook_user_view.html:58
+msgid "Contact"
+msgstr "Контакт"
+
+#: pntemplates/addressbook_user_simpledisplay.html:135
+#: pntemplates/addressbook_user_edit.html:270
+#: pntemplates/addressbook_user_display.html:153
+msgid "Note"
+msgstr "Бележки"
+
+#: pntemplates/addressbook_user_simpledisplay.html:142
+#: pntemplates/addressbook_user_display.html:160
+msgid "Map"
+msgstr "Карта"
+
+#: pntemplates/addressbook_user_edit.html:38
+msgid "Edit this address"
+msgstr "Редактирай този адрес"
+
+#: pntemplates/addressbook_user_edit.html:40
+#: pntemplates/addressbook_user_menu.html:14
+msgid "Add an address"
+msgstr "Добави контакт"
+
+#: pntemplates/addressbook_user_edit.html:68
+msgid "No Prefix/Title"
+msgstr "Без префикс/титла"
+
+#: pntemplates/addressbook_user_edit.html:76
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: pntemplates/addressbook_user_edit.html:80
+msgid "First Name"
+msgstr "Име"
+
+#: pntemplates/addressbook_user_edit.html:131
+#: pntemplates/addressbook_user_edit.html:144
+msgid "Zip"
+msgstr "Пощ.код"
+
+#: pntemplates/addressbook_user_edit.html:135
+#: pntemplates/addressbook_user_edit.html:140
+msgid "City"
+msgstr "Град"
+
+#: pntemplates/addressbook_user_edit.html:149
+msgid "State"
+msgstr "Област"
+
+#: pntemplates/addressbook_user_edit.html:153
+msgid "Country"
+msgstr "Държава"
+
+#: pntemplates/addressbook_user_edit.html:158
+msgid "Google Maps coordinates"
+msgstr "Google Maps координати"
+
+#: pntemplates/addressbook_user_edit.html:160
+msgid "Get coordinates"
+msgstr "Вземи координатите"
+
+#: pntemplates/addressbook_user_edit.html:241
+msgid "%Y-%m-%d"
+msgstr ""
+
+#: pntemplates/addressbook_user_edit.html:272
+msgid "Content"
+msgstr "Съдържание"
+
+#: pntemplates/addressbook_user_edit.html:281
+msgid "Choose a category"
+msgstr "Избери категория"
+
+#: pntemplates/addressbook_user_edit.html:292
+msgid "Private"
+msgstr "Частен"
+
+#: pntemplates/addressbook_user_edit.html:299
+#: pntemplates/addressbook_admin_labels_edit.html:33
+#: pntemplates/addressbook_admin_customfield_edit.html:51
+msgid "Create"
+msgstr "Създай"
+
+#: pntemplates/addressbook_user_edit.html:301
+msgid "Duplicate this contact"
+msgstr ""
+
+#: pntemplates/addressbook_user_edit.html:303
+msgid "Save and duplicate this contact"
+msgstr "Запис и дублиране на контакта"
+
+#: pntemplates/addressbook_admin_customfield_view.html:10
+msgid "You can change the order of the fields with drag and drop."
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_view.html:11
+msgid "Add new custom field"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_view.html:14
+#: pntemplates/addressbook_admin_labels_view.html:13
+msgid "ID"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_view.html:15
+msgid "Custom field"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_view.html:16
+#: pntemplates/addressbook_admin_customfield_edit.html:36
+msgid "Data Type"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_view.html:17
+#: pntemplates/addressbook_admin_labels_view.html:16
+#: pntemplates/addressbook_user_view.html:59
+msgid "Action"
+msgstr "Действие"
+
+#: pntemplates/addressbook_admin_customfield_view.html:28
+#: pntemplates/addressbook_user_display.html:181
+#: pntemplates/addressbook_admin_labels_view.html:27
+#: pntemplates/addressbook_user_view.html:91
+msgid "Edit"
+msgstr "Редакция"
+
+#: pntemplates/addressbook_user_display.html:173
+#, php-format
+msgid "Last changed on %s"
+msgstr "Последна промяна %s"
+
+#: pntemplates/addressbook_user_display.html:176
+msgid "Back"
+msgstr "Назад"
+
+#: pntemplates/addressbook_user_display.html:178
+msgid "Copy"
+msgstr "Копирай"
+
+#: pntemplates/addressbook_admin_labels_edit.html:21
+msgid "Edit contact label"
+msgstr ""
+
+#: pntemplates/addressbook_admin_labels_edit.html:23
+msgid "Add contact label"
+msgstr ""
+
+#: pntemplates/addressbook_user_menu.html:11
+#: pntemplates/addressbook_user_view.html:2
+msgid "Address list"
+msgstr "Адресен указател"
+
+#: pntemplates/addressbook_user_menu.html:19
+msgid "Show all"
+msgstr "Покажи всички"
+
+#: pntemplates/addressbook_user_menu.html:21
+msgid "Show favourites"
+msgstr "Покажи маркираните"
+
+#: pntemplates/addressbook_user_menu.html:27
+msgid "Add to favourites"
+msgstr "Добави към маркирани"
+
+#: pntemplates/addressbook_user_menu.html:30
+msgid "Remove favourite"
+msgstr "Премахни като маркиран"
+
+#: pntemplates/addressbook_user_menu.html:42
+msgid "Favourites"
+msgstr "Маркирани"
+
+#: pntemplates/addressbook_search_options.html:5
+#: pntemplates/addressbook_admin_menu.htm:4
+msgid "Address Book"
+msgstr "Адресен указател"
+
+#: pntemplates/contenttype/address_edit.html:3
+msgid "Please enter the address id"
+msgstr "Моля въведете номер на адрес"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:9
+msgid "General settings"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:12
+msgid "Title of this Address Book"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:16
+msgid "Special character (Umlauts) replacement for sort columns"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:24
+msgid "Contacts per page"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:28
+msgid "Disable personal address book mode"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:32
+msgid "Enable the use of the 'form of address' field"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:36
+msgid "Enable embedding of mediashare images"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:41
+msgid "Google Maps integration"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:43
+msgid "Google API key"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:47
+msgid "Google zoom"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:52
+msgid "Custom tab"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:54
+msgid "Tab name"
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:56
+msgid "If empty, no custom fields are displayed."
+msgstr ""
+
+#: pntemplates/addressbook_admin_modifyconfig.html:60
+msgid "Update Configuration"
+msgstr ""
+
+#: pntemplates/addressbook_user_change_company.html:2
+msgid "Company update"
+msgstr ""
+
+#: pntemplates/addressbook_user_change_company.html:5
+msgid "You have changed the address for a company contact."
+msgstr ""
+
+#: pntemplates/addressbook_user_change_company.html:6
+msgid "Should all other contacts for this company be updated automatically (company name, address, zip, city, state and country)?"
+msgstr ""
+
+#: pntemplates/addressbook_user_change_company.html:23
+msgid "Update"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_edit.html:26
+msgid "Edit field"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_edit.html:28
+msgid "Add field"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_edit.html:31
+msgid "Field name"
+msgstr ""
+
+#: pntemplates/addressbook_admin_customfield_edit.html:45
+msgid "Items (comma-separated values)"
+msgstr ""
+
+#: pntemplates/addressbook_admin_labels_view.html:9
+msgid "Add new contact label"
+msgstr ""
+
+#: pntemplates/addressbook_user_delete.html:2
+msgid "Delete contact"
+msgstr ""
+
+#: pntemplates/addressbook_user_delete.html:5
+msgid "Do you really want to delete this address?"
+msgstr ""
+
+#: pntemplates/addressbook_user_view.html:16
+msgid "Show private contacts only"
+msgstr "Покажи само персоналните контакти"
+
+#: pntemplates/addressbook_user_view.html:22
+msgid "All"
+msgstr "Всички"
+
+#: pntemplates/addressbook_user_view.html:30
+msgid "Search"
+msgstr "Търси за"
+
+#: pntemplates/addressbook_user_view.html:35
+msgid "Go search"
+msgstr "Търси"
+
+#: pntemplates/addressbook_user_view.html:88
+msgid "View"
+msgstr "Преглед"
+
+#: pntemplates/addressbook_user_view.html:99
+msgid "No address found."
+msgstr "Няма намерени позиции."
+

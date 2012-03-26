@@ -144,6 +144,8 @@ function AddressBook_user_display()
     $cus_Array = new $cus_class();
     $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
+    DBUtil::incrementObjectFieldByID('addressbook_address', 'counter', $id, 'id'); // count clicks
+
     $pnRender = & pnRender::getInstance('AddressBook', false);
     $pnRender->assign('address', $data);
     $pnRender->assign('customfields', $customfields);

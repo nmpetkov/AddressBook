@@ -26,4 +26,5 @@ $modversion['official']         = 0;
 $modversion['author']           = 'AddressBook Development Team';
 $modversion['contact']          = 'http://code.zikula.org/addressbook/';
 $modversion['admin']            = 1;
+$modversion['user']             = 1;
 $modversion['securityschema']   = array('AddressBook::' => '::');

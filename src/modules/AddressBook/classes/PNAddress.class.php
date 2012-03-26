@@ -50,8 +50,8 @@ class PNAddress extends PNObject
             $sortvalue = $data[lname].', '.$data[fname];
         }
 
-        $data['sortname']    = _normalize_special_chars($sortvalue);
-        $data['sortcompany'] = _normalize_special_chars($data['company']);
+        $data['sortname']    = $sortvalue; // removet _normalize_special_chars, no need if utf8
+        $data['sortcompany'] = $data['company']; // same
         $data['date']        = GetUserTime(time());
 
         // convert custom date type and numeric values
@@ -135,17 +135,5 @@ class PNAddress extends PNObject
 
         return true;
     }
-
-}
-
-function _normalize_special_chars ($string)
-{
-
-    $special1 = pnModGetVar('AddressBook', 'special_chars_1');
-    $special2 = pnModGetVar('AddressBook', 'special_chars_2');
-    $string = utf8_decode($string);
-    $string = strtr($string, utf8_decode($special1), $special2);
-    $string = strtolower($string);
-    return utf8_encode($string);
 
 }

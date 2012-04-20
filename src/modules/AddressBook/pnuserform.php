@@ -175,6 +175,9 @@ function AddressBook_userform_delete()
     $object->delete();
     LogUtil::registerStatus(__('Done! The deletion of this address was successful.', $dom));
 
+    // clear respective cache
+    ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
+
     return pnRedirect($url);
 }
 
@@ -235,6 +238,10 @@ function AddressBook_userform_change_company()
         LogUtil::registerError (__('Error! Company update failed.', $dom));
         return pnRedirect($url);
     }
+
+    // clear respective cache
+    ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
+
     LogUtil::registerStatus (__('Done! Company update successful.', $dom));
 
     return pnRedirect($url);

@@ -159,3 +159,45 @@ function AddressBook_userapi_search ($args)
 
     return $data;
 }
+
+/**
+ * Clear cache for given item. Can be called from other modules to clear an item cache.
+ *
+ * @param $item - the item: array with data or id of the item
+ */
+function AddressBook_userapi_clearItemCache ($item)
+{
+    if ($item && !is_array($item)) {
+        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
+            return pn_exit(__('Error! Unable to load class [address]', $dom));
+        }
+        $object = new $class();
+        $item = $object->get($item);
+    }
+    if ($item) {
+        // Clear View_cache
+        $cache_ids = array();
+        $cache_ids[] = 'display/id_'.$item['id'];
+        $view = Zikula_View::getInstance('AddressBook');
+        foreach ($cache_ids as $cache_id) {
+            $view->clear_cache(null, $cache_id);
+        }
+
+        // Clear Theme_cache
+        $cache_ids = array();
+        $cache_ids[] = 'AddressBook/user/display/id_'.$item['id']; // for given Id, according to new cache_id structure in Zikula 1.3.2.dev (1.3.3)
+        //$cache_ids[] = 'homepage'; // for homepage (it can be adjustment in module settings)
+        $cache_ids[] = 'AddressBook/user/view'; // view function (contacts list)
+        $cache_ids[] = 'AddressBook/user/main'; // main function
+        $theme = Zikula_View_Theme::getInstance();
+        //if (Zikula_Core::VERSION_NUM > '1.3.2') {
+        if (method_exists($theme, 'clear_cacheid_allthemes')) {
+            $theme->clear_cacheid_allthemes($cache_ids);
+        } else {
+            // clear cache for current theme only
+            foreach ($cache_ids as $cache_id) {
+                $theme->clear_cache(null, $cache_id);
+            }
+        }
+    }
+}

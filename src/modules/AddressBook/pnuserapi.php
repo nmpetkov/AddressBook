@@ -178,6 +178,8 @@ function AddressBook_userapi_clearItemCache ($item)
         // Clear View_cache
         $cache_ids = array();
         $cache_ids[] = 'display/id_'.$item['id'];
+        $cache_ids[] = 'view/cat_0';
+        $cache_ids[] = 'view/cat_'.$item['cat_id'];
         $view = Zikula_View::getInstance('AddressBook');
         foreach ($cache_ids as $cache_id) {
             $view->clear_cache(null, $cache_id);

@@ -224,6 +224,15 @@ function AddressBook_user_view()
         $user_id = 0;
     }
 
+    $pnRender = & pnRender::getInstance('AddressBook');
+    $pnRender->setCacheId('view|cat_'.$category . 
+        '|ot'.$ot.'_stnum'.$startnum.'_itpg'.$pagesize.'_let'.$letter.'_sort'.$sort.'_prv'.$private.'_srch'.$search.
+        '|uid_'.$user_id);
+    $template = 'addressbook_user_view.html';
+    if ($pnRender->is_cached($template)) {
+        return $pnRender->fetch($template);
+    }
+
     // build the where clause
     $where = '';
 
@@ -379,8 +388,6 @@ function AddressBook_user_view()
     }
     $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
-    // instantiate the PNRender class for this module
-    $pnRender = & pnRender::getInstance('AddressBook', false);
     $pnRender->assign('catregistry',   $catregistry);
     $pnRender->assign('ot',            $ot);
     $pnRender->assign('objectArray',   $data);
@@ -393,7 +400,7 @@ function AddressBook_user_view()
     $pnRender->assign('pager',         array('numitems'     => $objcount,
                                              'itemsperpage' => $pagesize));
 
-    return $pnRender->fetch('addressbook_user_view.html');
+    return $pnRender->fetch($template);
 }
 
 function AddressBook_user_delete()
@@ -514,7 +521,6 @@ function AddressBook_user_getajaxcompanies()
     echo $out;
     return true;
 }
-
 
 function AddressBook_user_simpledisplay($args)
 {

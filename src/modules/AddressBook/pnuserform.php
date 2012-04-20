@@ -110,6 +110,9 @@ function AddressBook_userform_edititem()
     // create a status message
     LogUtil::registerStatus (__('Done! The address was saved.', $dom));
 
+    // clear respective cache
+    ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
+
     // clear the the session from FailedObjects
     FormUtil::clearValidationFailedObjects('address');
 

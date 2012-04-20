@@ -23,11 +23,6 @@ function AddressBook_user_main()
 
 function AddressBook_user_edit()
 {
-    // security check
-    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT))) {
-        return LogUtil::registerPermissionError();
-    }
-
     $dom = ZLanguage::getModuleDomain('AddressBook');
 
     $ot         = FormUtil::getPassedValue('ot', 'address', 'GET');
@@ -66,6 +61,11 @@ function AddressBook_user_edit()
 
     }
 
+    // security check
+    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT) || $user_id == $data['user_id'])) {
+        return LogUtil::registerPermissionError();
+    }
+
     // get the custom fields
     $cus_where = "";
     $cus_sort = "cus_pos ASC";
@@ -81,7 +81,8 @@ function AddressBook_user_edit()
     }
     $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
+    $pnRender = & pnRender::getInstance('AddressBook', false); // caching is false
+    $pnRender->setCaching(false); // not suitable for cachin
     $pnRender->assign('catregistry',  $catregistry);
     $pnRender->assign('address',      $data);
     $pnRender->assign('ot',           $ot);
@@ -127,6 +128,14 @@ function AddressBook_user_display()
     } else {
         $user_id = 0;
     }
+    
+    $pnRender = & pnRender::getInstance('AddressBook');
+    $pnRender->setCacheId('display|id_'.$id . '|uid_'.$user_id);
+    $template = 'addressbook_user_display.html';
+    if ($pnRender->is_cached($template)) {
+        return $pnRender->fetch($template);
+    }
+    
 
     // get the details
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
@@ -146,7 +155,6 @@ function AddressBook_user_display()
 
     DBUtil::incrementObjectFieldByID('addressbook_address', 'counter', $id, 'id'); // count clicks
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
     $pnRender->assign('address', $data);
     $pnRender->assign('customfields', $customfields);
     $pnRender->assign('user_id', $user_id);
@@ -179,7 +187,7 @@ function AddressBook_user_display()
     $pnRender->assign('preferences', pnModGetVar('AddressBook'));
     $pnRender->assign('lang',        ZLanguage::getLanguageCode());
 
-    return $pnRender->fetch('addressbook_user_display.html');
+    return $pnRender->fetch($template);
 
 }
 
@@ -426,9 +434,9 @@ function AddressBook_user_delete()
 function AddressBook_user_change_company()
 {
     // check permissions
-    if (!SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT)){
+    /*if (!SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT)){
         return LogUtil::registerPermissionError();
-    }
+    }*/
 
     // get arguments
     $ot = FormUtil::getPassedValue('ot', 'address', 'GETPOST');

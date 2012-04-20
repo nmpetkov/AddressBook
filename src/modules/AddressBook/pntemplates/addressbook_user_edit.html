@@ -43,7 +43,7 @@
 <!--[include file="addressbook_user_menu.html"]-->
 <!--[formutil_getvalidationerror objectType="address" field="company" assign="valerror"]-->
 <!--[if $valerror]--><p class="z-warningmsg"><!--[$valerror]--></p><!--[/if]-->
-<form id="addressform" class="z-form" action="<!--[pnmodurl modname="AddressBook" type="userform" func="edit"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<form id="addressform" class="z-form" action="<!--[pnmodurl modname="AddressBook" type="userform" func="edititem"]-->" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <!--[if ($address.id)]-->
         <input id="address_id" name="address[id]" value="<!--[$address.id|pnvarprepfordisplay]-->" type="hidden" />
@@ -212,7 +212,7 @@
         </fieldset>
 
         <!--[if $preferences.custom_tab]-->
-        <fieldset>
+        <fieldset class="z-linear">
             <legend><!--[$preferences.custom_tab]--></legend>
             <!--[foreach item=cusfield from=$customfields]-->
             <!--[assign_concat 1="custom_" 2=$cusfield.id name="fieldname"]-->
@@ -266,7 +266,7 @@
         <!--[/foreach]-->
         <!--[/if]-->
 
-        <fieldset>
+        <fieldset class="z-linear">
             <legend><!--[gt text="Note"]--></legend>
             <div class="z-formrow">
                 <label for="address_note"><!--[gt text="Content"]--></label>

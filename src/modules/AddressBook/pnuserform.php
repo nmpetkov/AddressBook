@@ -10,13 +10,8 @@
  * @subpackage UI
  */
 
-function AddressBook_userform_edit()
+function AddressBook_userform_edititem()
 {
-    // permission check
-    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT))) {
-        return LogUtil::registerPermissionError();
-    }
-
     // security check
     if (!SecurityUtil::confirmAuthKey()) {
         return LogUtil::registerAuthidError($url);
@@ -61,6 +56,16 @@ function AddressBook_userform_edit()
     $object = new $class();
     $data =& $object->getDataFromInput();
 
+    // permission check
+    if (pnUserLoggedIn()) {
+        $user_id = pnUserGetVar('uid');
+    } else {
+        $user_id = 0;
+    }
+    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT) || ($user_id >0 && $user_id == $data['user_id']))) {
+        return LogUtil::registerPermissionError();
+    }
+
     // validation
     if (!$object->validate()) {
         return pnRedirect(pnModURL('AddressBook', 'user', 'edit'));
@@ -83,7 +88,7 @@ function AddressBook_userform_edit()
 
     // check for company update - part 1: get the old data
     if ($data['id']) {
-        $oldObject = DBUtil::selectObjectByID( 'addressbook_address', $data['id']);
+        $oldObject = DBUtil::selectObjectByID('addressbook_address', $data['id']);
         if (($oldObject['company'])&&(($oldObject['company']!=$data['company'])||($oldObject['address1']!=$data['address1'])||($oldObject['address2']!=$data['address2'])||($oldObject['zip']!=$data['zip'])||($oldObject['city']!=$data['city'])||($oldObject['state']!=$data['state'])||($oldObject['country']!=$data['country'])))
         {
             $companyHasChanged = true;
@@ -176,10 +181,6 @@ function AddressBook_userform_delete()
 function AddressBook_userform_change_company()
 {
     $dom = ZLanguage::getModuleDomain('AddressBook');
-    // security check
-    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT))) {
-        return LogUtil::registerPermissionError();
-    }
 
     $ot = FormUtil::getPassedValue('ot', 'address', 'GETPOST');
     $id = (int)FormUtil::getPassedValue('id', 0, 'GETPOST');
@@ -208,6 +209,17 @@ function AddressBook_userform_change_company()
     }
     $object = new $class();
     $data = $object->get($id);
+
+    // security check
+    // Get user id
+    if (pnUserLoggedIn()) {
+        $user_id = pnUserGetVar('uid');
+    } else {
+        $user_id = 0;
+    }
+    if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_EDIT) || $user_id == $data['user_id'])) {
+        return LogUtil::registerPermissionError();
+    }
 
     $obj = array('company'  => $data[company],
                  'address1' => $data[address1],

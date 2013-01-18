@@ -21,7 +21,7 @@ function AddressBook_pntables()
     // Initialise table array
     $ztable = array();
 
-    $ztable['addressbook_address'] = DBUtil::getLimitedTablename('addressbook_address');
+    $ztable['addressbook_address'] = 'addressbook_address';
     $ztable['addressbook_address_column'] = array(
     'id'               => 'adr_id',
     'cat_id'           => 'adr_catid',
@@ -112,7 +112,7 @@ function AddressBook_pntables()
     ObjectUtil::addStandardFieldsToTableDataDefinition($ztable['addressbook_address_column_def'], 'adr_');
 
 
-    $ztable['addressbook_labels'] = DBUtil::getLimitedTablename('addressbook_labels');
+    $ztable['addressbook_labels'] = 'addressbook_labels';
     $ztable['addressbook_labels_column'] = array(
     'id'            => 'lab_id',
     'name'          => 'lab_name',
@@ -128,7 +128,7 @@ function AddressBook_pntables()
     );
     ObjectUtil::addStandardFieldsToTableDataDefinition($ztable['addressbook_labels_column_def'], 'lab_');
 
-    $ztable['addressbook_customfields'] = DBUtil::getLimitedTablename('addressbook_customfields');
+    $ztable['addressbook_customfields'] = 'addressbook_customfields';
     $ztable['addressbook_customfields_column'] = array(
     'id'            => 'cus_id',
     'name'          => 'cus_name',
@@ -150,7 +150,7 @@ function AddressBook_pntables()
     );
     ObjectUtil::addStandardFieldsToTableDataDefinition($ztable['addressbook_customfields_column_def'], 'cus_');
 
-    $ztable['addressbook_favourites'] = DBUtil::getLimitedTablename('addressbook_favourites');
+    $ztable['addressbook_favourites'] = 'addressbook_favourites';
     $ztable['addressbook_favourites_column'] = array(
     'favadr_id'    => 'fav_adr_id',
     'favuser_id'   => 'fav_user_id'
@@ -167,11 +167,7 @@ function AddressBook_pntables()
 
 function addCustomFieldsToTableDefinition(&$columns)
 {
-    // get the global db prefix
-    $prefix = System::getVar('prefix');
-    $prefix = $prefix ? $prefix.'_' : '';
-
-    $table = $prefix.'addressbook_customfields';
+    $table = 'addressbook_customfields';
     $sql = "SHOW TABLES LIKE '".$table."'";
     $result = DBUtil::executeSQL($sql);
     if ($result) {

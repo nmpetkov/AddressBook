@@ -79,15 +79,13 @@ function AddressBook_adminform_edit()
     if ($ot == "customfield")
     {
         $obj = $object->getDataFromInput();
-        $prefix = System::getVar('prefix');
-        $prefix = $prefix ? $prefix.'_' : '';
         if ($obj['type']=='dropdown')
         $obj['type']='text';
         if ($obj['id']) {
-            $sql="ALTER TABLE ".$prefix."addressbook_address CHANGE adr_custom_".$obj['id']." adr_custom_".$obj['id']." ".$obj['type'];
+            $sql="ALTER TABLE addressbook_address CHANGE adr_custom_".$obj['id']." adr_custom_".$obj['id']." ".$obj['type'];
         } else {
             $cus_id = DBUtil::getInsertID('addressbook_customfields');
-            $sql="ALTER TABLE ".$prefix."addressbook_address ADD adr_custom_".$cus_id." ".$obj['type'];
+            $sql="ALTER TABLE addressbook_address ADD adr_custom_".$cus_id." ".$obj['type'];
         }
         DBUtil::executeSQL($sql,-1,-1,false,true);
     }
@@ -124,9 +122,7 @@ function AddressBook_adminform_delete()
 
     if ($ot == "customfield")
     {
-        $prefix = System::getVar('prefix');
-        $prefix = $prefix ? $prefix.'_' : '';
-        $sql="ALTER TABLE ".$prefix."addressbook_address DROP adr_custom_".$id;
+        $sql="ALTER TABLE addressbook_address DROP adr_custom_".$id;
         DBUtil::executeSQL($sql,-1,-1,true,true);
     }
     LogUtil::registerStatus (__('Done! Item deleted.', $dom));

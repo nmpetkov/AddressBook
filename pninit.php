@@ -116,7 +116,7 @@ function AddressBook_upgrade($oldversion)
     $prefix = $prefix ? $prefix.'_' : '';
 
     switch($oldversion) {
-        case 1.0:
+        case '1.0':
             $sql = "ALTER TABLE ".$prefix."addressbook_address ADD adr_geodata VARCHAR( 180 ) NULL AFTER adr_country";
             if (!DBUtil::executeSQL($sql,-1,-1,false,true))
             return false;
@@ -124,19 +124,37 @@ function AddressBook_upgrade($oldversion)
             ModUtil::setVar('Addressbook', 'google_api_key', '');
             ModUtil::setVar('Addressbook', 'google_zoom', 15);
             return AddressBook_upgrade(1.1);
-        case 1.1:
+        case '1.1':
             _addressbook_migratecategories();
             _addressbook_migrateprefixes();
             ModUtil::delVar('Addressbook', 'name_order');
             ModUtil::delVar('Addressbook', 'zipbeforecity');
             return AddressBook_upgrade(1.2);
-        case 1.2:
+        case '1.2':
             ModUtil::delVar('Addressbook', 'textareawidth');
             ModUtil::delVar('Addressbook', 'dateformat');
             ModUtil::delVar('Addressbook', 'numformat');
             _addressbook_upgradeto_1_3();
             return true;
-        case 1.3:
+        case '1.3':
+        case '1.3.1':
+            // drop table prefix
+            if ($prefix) {
+                $connection = Doctrine_Manager::getInstance()->getConnection('default');
+                $sqlStatements = array();
+                $sqlStatements[] = 'RENAME TABLE ' . $prefix . 'addressbook_address' . " TO `addressbook_address`";
+                $sqlStatements[] = 'RENAME TABLE ' . $prefix . 'addressbook_customfields' . " TO `addressbook_customfields`";
+                $sqlStatements[] = 'RENAME TABLE ' . $prefix . 'addressbook_favourites' . " TO `addressbook_favourites`";
+                $sqlStatements[] = 'RENAME TABLE ' . $prefix . 'addressbook_labels' . " TO `addressbook_labels`";
+                foreach ($sqlStatements as $sql) {
+                    $stmt = $connection->prepare($sql);
+                    try {
+                        $stmt->execute();
+                    } catch (Exception $e) {
+                    }   
+                }
+            }
+        case '1.3.2':
             return true;
     }
 }

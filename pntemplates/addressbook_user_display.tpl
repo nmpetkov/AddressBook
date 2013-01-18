@@ -1,4 +1,4 @@
-{* $Id: addressbook_user_display.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_user_display.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {ajaxheader modname=AddressBook filename=addressbook.js}
 {userloggedin assign="loggedin"}
 {securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
@@ -17,7 +17,7 @@
 {/if}
 {/capture}
 
-{include file="addressbook_user_menu.html"}
+{include file="addressbook_user_menu.tpl"}
 
 <div class="adr_display z-form">
     <input type="hidden" name="authid" value="{insert name='generateauthkey' module='AddressBook'}" />

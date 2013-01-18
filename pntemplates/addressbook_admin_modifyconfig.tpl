@@ -1,5 +1,5 @@
-{* $Id: addressbook_admin_modifyconfig.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
-{include file="addressbook_admin_menu.htm"}
+{* $Id: addressbook_admin_modifyconfig.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{include file="addressbook_admin_menu.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='configure.gif' set='icons/large' __alt='Settings' }</div>
     <form class="z-form" action="{modurl modname="AddressBook" type="adminform" func="modifyconfig"}" method="post">

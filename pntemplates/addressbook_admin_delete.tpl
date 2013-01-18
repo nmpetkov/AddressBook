@@ -1,5 +1,5 @@
-{* $Id: addressbook_admin_delete.htm 68 2010-04-01 13:07:05Z herr.vorragend $ *}
-{include file="addressbook_admin_menu.htm"}
+{* $Id: addressbook_admin_delete.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{include file="addressbook_admin_menu.tpl"}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='editdelete.gif' set='icons/large' __alt='Delete' }</div>
     {if $ot=="categories"}<h2>{gt text="Category"}</h2>{/if}

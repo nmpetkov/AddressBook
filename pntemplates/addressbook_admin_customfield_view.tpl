@@ -1,8 +1,8 @@
-{* $Id: addressbook_admin_customfield_view.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_admin_customfield_view.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {ajaxheader modname="AddressBook" filename="addressbook.js"}
 {insert name='generateauthkey' module='AddressBook' assign="authid"}
 
-{include file="addressbook_admin_menu.htm"}
+{include file="addressbook_admin_menu.tpl"}
 <div class="z-admincontainer">
     {gt text="Custom fields" assign="templatetitle"}
     <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle}</div>

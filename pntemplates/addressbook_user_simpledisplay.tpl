@@ -1,4 +1,4 @@
-{* $Id: addressbook_user_simpledisplay.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_user_simpledisplay.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {ajaxheader modname=AddressBook filename=addressbook.js}
 
 {if $preferences.use_img}

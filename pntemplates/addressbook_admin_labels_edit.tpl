@@ -1,5 +1,5 @@
-{* $Id: addressbook_admin_labels_edit.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
-{include file="addressbook_admin_menu.htm"}
+{* $Id: addressbook_admin_labels_edit.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{include file="addressbook_admin_menu.tpl"}
 <div class="z-admincontainer">
     {if ($labels.id)}
     <div class="z-adminpageicon">{img modname='core' src='xedit.gif' set='icons/large' alt=$templatetitle}</div>

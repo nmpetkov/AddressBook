@@ -1,4 +1,4 @@
-{* $Id: addressbook_user_edit.html 69 2010-04-01 13:30:14Z herr.vorragend $ *}
+{* $Id: addressbook_user_edit.tpl 69 2010-04-01 13:30:14Z herr.vorragend $ *}
 {ajaxheader modname=AddressBook filename=addressbook.js}
 {pageaddvar name="javascript" value="javascript/ajax/prototype.js,javascript/ajax/scriptaculous.js,javascript/ajax/effects.js,javascript/ajax/pnajax.js,javascript/ajax/controls.js,javascript/ajax/validation.js"}
 {pageaddvar name="javascript" value="javascript/helpers/texpand.js"}
@@ -40,7 +40,7 @@
 {gt text="Add an address" assign="templatetitle"}
 {/if}
 
-{include file="addressbook_user_menu.html"}
+{include file="addressbook_user_menu.tpl"}
 {formutil_getvalidationerror objectType="address" field="company" assign="valerror"}
 {if $valerror}<p class="z-warningmsg">{$valerror}</p>{/if}
 <form id="addressform" class="z-form" action="{modurl modname="AddressBook" type="userform" func="edititem"}" method="post" enctype="application/x-www-form-urlencoded">

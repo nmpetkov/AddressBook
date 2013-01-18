@@ -1,4 +1,4 @@
-{* $Id: addressbook_user_menu.html 69 2010-04-01 13:30:14Z herr.vorragend $ *}
+{* $Id: addressbook_user_menu.tpl 69 2010-04-01 13:30:14Z herr.vorragend $ *}
 {pagesetvar name='title' value=$templatetitle}
 {securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_ADD' assign='addAuth'}
 {userloggedin assign="loggedin"}

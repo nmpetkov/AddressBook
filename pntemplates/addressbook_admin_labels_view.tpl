@@ -1,7 +1,7 @@
-{* $Id: addressbook_admin_labels_view.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_admin_labels_view.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {insert name='generateauthkey' module='AddressBook' assign="authid"}
 {gt text="Contact labels" assign="templatetitle"}
-{include file="addressbook_admin_menu.htm"}
+{include file="addressbook_admin_menu.tpl"}
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle}</div>

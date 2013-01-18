@@ -1,6 +1,6 @@
-{* $Id: addressbook_user_delete.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_user_delete.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {gt text="Delete contact" assign=templatetitle}
-{include file="addressbook_user_menu.html"}
+{include file="addressbook_user_menu.tpl"}
 
 <p class="z-warningmsg">{gt text="Do you really want to delete this address?"}</p>
 <form class="z-form" action="{modurl modname="AddressBook" type="userform" func="delete"}" method="post" enctype="application/x-www-form-urlencoded">

@@ -37,7 +37,7 @@ function AddressBook_admin_modifyconfig()
 
     $Renderer = Zikula_View::getInstance('AddressBook', false);
     $Renderer->assign('preferences', ModUtil::getVar('AddressBook'));
-    return $Renderer->fetch('addressbook_admin_modifyconfig.html');
+    return $Renderer->fetch('addressbook_admin_modifyconfig.tpl');
 }
 
 
@@ -76,7 +76,7 @@ function AddressBook_admin_edit($args)
         $Renderer->assign('new_position', $new_position);
     }
 
-    $tpl = 'addressbook_admin_' . $ot . '_edit.html';
+    $tpl = 'addressbook_admin_' . $ot . '_edit.tpl';
 
     return $Renderer->fetch($tpl);
 }
@@ -117,7 +117,7 @@ function AddressBook_admin_view()
     $Renderer->assign('pager', array('numitems'     => $objcount,
                                      'itemsperpage' => $pagesize));
 
-    $tpl = 'addressbook_admin_' . $ot . '_view.html';
+    $tpl = 'addressbook_admin_' . $ot . '_view.tpl';
 
     return $Renderer->fetch($tpl);
 }
@@ -158,7 +158,7 @@ function AddressBook_admin_delete()
         $Renderer->assign('id', $id);
         $Renderer->assign('ot', $ot);
         $Renderer->assign('object', $data);
-        return $Renderer->fetch('addressbook_admin_delete.htm');
+        return $Renderer->fetch('addressbook_admin_delete.tpl');
     }
 
     // If we get here it means that the user has confirmed the action

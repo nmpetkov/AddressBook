@@ -1,6 +1,6 @@
-{* $Id: addressbook_admin_customfield_edit.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_admin_customfield_edit.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {ajaxheader modname="AddressBook" filename="addressbook.js"}
-{include file="addressbook_admin_menu.htm"}
+{include file="addressbook_admin_menu.tpl"}
 <div class="z-admincontainer">
     {if ($customfield.id)}
     <div class="z-adminpageicon">{img modname='core' src='xedit.gif' set='icons/large' alt=$templatetitle}</div>

@@ -97,7 +97,7 @@ function AddressBook_user_edit()
     $Renderer->assign('returnid',     $returnid);
     $Renderer->assign('preferences',  ModUtil::getVar('AddressBook'));
 
-    return $Renderer->fetch('addressbook_user_edit.html');
+    return $Renderer->fetch('addressbook_user_edit.tpl');
 }
 
 function AddressBook_user_display()
@@ -131,7 +131,7 @@ function AddressBook_user_display()
     
     $Renderer = Zikula_View::getInstance('AddressBook');
     $Renderer->setCacheId('display|id_'.$id . '|uid_'.$user_id);
-    $template = 'addressbook_user_display.html';
+    $template = 'addressbook_user_display.tpl';
     if ($Renderer->is_cached($template)) {
         return $Renderer->fetch($template);
     }
@@ -228,7 +228,7 @@ function AddressBook_user_view()
     $Renderer->setCacheId('view|cat_'.$category . 
         '|ot'.$ot.'_stnum'.$startnum.'_itpg'.$pagesize.'_let'.$letter.'_sort'.$sort.'_prv'.$private.'_srch'.$search.
         '|uid_'.$user_id);
-    $template = 'addressbook_user_view.html';
+    $template = 'addressbook_user_view.tpl';
     if ($Renderer->is_cached($template)) {
         return $Renderer->fetch($template);
     }
@@ -435,7 +435,7 @@ function AddressBook_user_delete()
     $Renderer->assign('search',     $search);
 
     // return output
-    return $Renderer->fetch('addressbook_user_delete.html');
+    return $Renderer->fetch('addressbook_user_delete.tpl');
 }
 
 function AddressBook_user_change_company()
@@ -471,7 +471,7 @@ function AddressBook_user_change_company()
     $Renderer->assign('search',     $search);
 
     // return output
-    return $Renderer->fetch('addressbook_user_change_company.html');
+    return $Renderer->fetch('addressbook_user_change_company.tpl');
 }
 
 function AddressBook_user_getajaxcompanies()
@@ -567,5 +567,5 @@ function AddressBook_user_simpledisplay($args)
     $Renderer->assign('preferences', ModUtil::getVar('AddressBook'));
     $Renderer->assign('lang',        ZLanguage::getLanguageCode());
 
-    return $Renderer->fetch('addressbook_user_simpledisplay.html');
+    return $Renderer->fetch('addressbook_user_simpledisplay.tpl');
 }

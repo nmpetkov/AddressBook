@@ -1,6 +1,6 @@
-{* $Id: addressbook_user_view.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{* $Id: addressbook_user_view.tpl 68 2010-04-01 13:07:05Z herr.vorragend $ *}
 {gt text="Address list" assign=templatetitle}
-{include file="addressbook_user_menu.html"}
+{include file="addressbook_user_menu.tpl"}
 {formutil_getpassedvalue key="sort" assign="sort"}
 {usergetvar name="uid" assign="user_id"}
 {userloggedin assign="loggedin"}

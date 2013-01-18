@@ -16,6 +16,8 @@
 
 function AddressBook_pntables()
 {
+    require_once 'lib/legacy/Compat.php';
+    
     // Initialise table array
     $ztable = array();
 

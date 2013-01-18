@@ -168,7 +168,7 @@ function _addressbook_migratecategories()
     $adrCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook');
 
     if (!$adrCat) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'AddressBook');
         $cat->setDataField('display_name', array($lang => __('AddressBook', $dom)));
@@ -185,7 +185,7 @@ function _addressbook_migratecategories()
 
     // migrate our main categories
     foreach ($categories as $category) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $adrCat['id']);
         $cat->setDataField('name', $category[1]);
         $cat->setDataField('is_leaf', 1);
@@ -206,7 +206,7 @@ function _addressbook_migratecategories()
 
     if ($adrCat) {
         // place category registry entry
-        $registry = new PNCategoryRegistry();
+        $registry = new Categories_DBObject_Registry();
         $registry->setDataField('modname', 'AddressBook');
         $registry->setDataField('table', 'addressbook_address');
         $registry->setDataField('property', 'AddressBook');
@@ -248,7 +248,7 @@ function _addressbook_migrateprefixes()
     $foaCat  = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address');
 
     if (!$foaCat) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'Form of address');
         $cat->setDataField('display_name', array($lang => __('Form of address', $dom)));
@@ -265,7 +265,7 @@ function _addressbook_migrateprefixes()
 
     // migrate our main categories
     foreach ($prefixes as $prefix) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $foaCat['id']);
         $cat->setDataField('name', $prefix[1]);
         $cat->setDataField('is_leaf', 1);
@@ -329,7 +329,7 @@ function _addressbook_createdefaultcategory()
     $adrCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook');
 
     if (!$adrCat) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'AddressBook');
         $cat->setDataField('display_name', array($lang => __('AddressBook', $dom)));
@@ -345,7 +345,7 @@ function _addressbook_createdefaultcategory()
     $adrCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook');
     $adrCat1    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook/Business');
     if (!$adrCat1) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $adrCat['id']);
         $cat->setDataField('name', 'Business');
         $cat->setDataField('is_leaf', 1);
@@ -359,7 +359,7 @@ function _addressbook_createdefaultcategory()
     }
     $adrCat2    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook/Personal');
     if (!$adrCat2) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $adrCat['id']);
         $cat->setDataField('name', 'Personal');
         $cat->setDataField('is_leaf', 1);
@@ -375,7 +375,7 @@ function _addressbook_createdefaultcategory()
 
     if ($adrCat) {
         // place category registry entry for products (key == Products)
-        $registry = new PNCategoryRegistry();
+        $registry = new Categories_DBObject_Registry();
         $registry->setDataField('modname', 'AddressBook');
         $registry->setDataField('table', 'addressbook_address');
         $registry->setDataField('property', 'AddressBook');
@@ -389,7 +389,7 @@ function _addressbook_createdefaultcategory()
     $foaCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address');
 
     if (!$foaCat) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'Form of address');
         $cat->setDataField('display_name', array($lang => __('Form of address', $dom)));
@@ -405,7 +405,7 @@ function _addressbook_createdefaultcategory()
     $foaCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address');
     $foaCat1    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address/Mr');
     if (!$foaCat1) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $foaCat['id']);
         $cat->setDataField('name', 'Mr');
         $cat->setDataField('is_leaf', 1);
@@ -419,7 +419,7 @@ function _addressbook_createdefaultcategory()
     }
     $foaCat2    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address/Mrs');
     if (!$foaCat2) {
-        $cat = new PNCategory();
+        $cat = new Categories_DBObject_Category();
         $cat->setDataField('parent_id', $foaCat['id']);
         $cat->setDataField('name', 'Mrs');
         $cat->setDataField('is_leaf', 1);

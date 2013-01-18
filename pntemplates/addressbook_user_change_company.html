@@ -1,27 +1,27 @@
-<!--[* $Id: addressbook_user_change_company.html 68 2010-04-01 13:07:05Z herr.vorragend $ *]-->
-<!--[gt text="Company update" assign=templatetitle]-->
-<!--[include file="addressbook_user_menu.html"]-->
+{* $Id: addressbook_user_change_company.html 68 2010-04-01 13:07:05Z herr.vorragend $ *}
+{gt text="Company update" assign=templatetitle}
+{include file="addressbook_user_menu.html"}
 <p class="z-informationmsg">
-    <!--[gt text="You have changed the address for a company contact."]-->
-    <!--[gt text="Should all other contacts for this company be updated automatically (company name, address, zip, city, state and country)?"]-->
+    {gt text="You have changed the address for a company contact."}
+    {gt text="Should all other contacts for this company be updated automatically (company name, address, zip, city, state and country)?"}
 </p>
-<form class="z-form" action="<!--[pnmodurl modname="AddressBook" type="userform" func="change_company"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<form class="z-form" action="{modurl modname="AddressBook" type="userform" func="change_company"}" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='AddressBook']-->" />
-        <input type="hidden" name="ot" value="<!--[$ot|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="id" value="<!--[$id|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="startnum" value="<!--[$startnum|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="letter" value="<!--[$letter|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="sort" value="<!--[$sort|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="private" value="<!--[$private|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="category" value="<!--[$category|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="search" value="<!--[$search|pnvarprepfordisplay]-->" />
-        <input type="hidden" name="oldvalue" value="<!--[$oldvalue|pnvarprepfordisplay]-->" />
+        <input type="hidden" name="authid" value="{insert name='generateauthkey' module='AddressBook'}" />
+        <input type="hidden" name="ot" value="{$ot|varprepfordisplay}" />
+        <input type="hidden" name="id" value="{$id|varprepfordisplay}" />
+        <input type="hidden" name="startnum" value="{$startnum|varprepfordisplay}" />
+        <input type="hidden" name="letter" value="{$letter|varprepfordisplay}" />
+        <input type="hidden" name="sort" value="{$sort|varprepfordisplay}" />
+        <input type="hidden" name="private" value="{$private|varprepfordisplay}" />
+        <input type="hidden" name="category" value="{$category|varprepfordisplay}" />
+        <input type="hidden" name="search" value="{$search|varprepfordisplay}" />
+        <input type="hidden" name="oldvalue" value="{$oldvalue|varprepfordisplay}" />
         <fieldset>
-            <legend><!--[gt text="Confirmation prompt"]--></legend>
+            <legend>{gt text="Confirmation prompt"}</legend>
             <div class="z-formbuttons">
-                <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update" __title="Update"]-->
-                <a href="<!--[pnmodurl modname=AddressBook type=user func=view startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+                {button src='button_ok.gif' set='icons/small' __alt="Update" __title="Update"}
+                <a href="{modurl modname=AddressBook type=user func=view startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}</a>
             </div>
         </fieldset>
     </div>

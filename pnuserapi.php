@@ -16,7 +16,7 @@ class AddressBook_result_checker
 
     function addressbook_result_checker()
     {
-        $this->enablecategorization = pnModGetVar('AddressBook', 'enablecategorization');
+        $this->enablecategorization = ModUtil::getVar('AddressBook', 'enablecategorization');
     }
 
     // This method is called by DBUtil::selectObjectArrayFilter() for each and every search result.
@@ -41,8 +41,8 @@ function AddressBook_userapi_search ($args)
 {
     $dom = ZLanguage::getModuleDomain('AddressBook');
     //Private Address Book mode, for users only
-    if ((!pnUserLoggedIn()) && (pnModGetVar('AddressBook', 'globalprotect')==1)) {
-        return LogUtil::registerError(__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(pnModURL('Users', 'user', 'view')), $dom));
+    if ((!UserUtil::isLoggedIn()) && (ModUtil::getVar('AddressBook', 'globalprotect')==1)) {
+        return LogUtil::registerError(__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(ModUtil::url('Users', 'user', 'view')), $dom));
     }
 
     // security check
@@ -55,8 +55,8 @@ function AddressBook_userapi_search ($args)
     $ot   = "address";
 
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
@@ -64,16 +64,16 @@ function AddressBook_userapi_search ($args)
     // build the where clause
     $where = '';
 
-    $pntable = pnDBGetTables();
-    $address_table = $pntable['addressbook_address'];
-    $address_column = &$pntable['addressbook_address_column'];
+    $ztable = DBUtil::getTables();
+    $address_table = $ztable['addressbook_address'];
+    $address_column = &$ztable['addressbook_address_column'];
 
     // admin always sees all records but favourites
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
         $where .= "($address_column[user_id] IS NOT NULL)";
     } else {
         // global protect - users see only their own records (admin sees all)
-        if (((pnModGetVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
+        if (((ModUtil::getVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
             $where = "($address_column[user_id]=$user_id)";
         } else {
             // if private = 1, show only private records
@@ -87,7 +87,7 @@ function AddressBook_userapi_search ($args)
     }
 
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     // typecasting / security
@@ -114,7 +114,7 @@ function AddressBook_userapi_search ($args)
     $cus_where = "";
     $cus_sort = "cus_pos ASC";
     if (!($class_cus = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-        return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+        return z_exit(__('Error! Unable to load class [customfield]', $dom));
     }
     $cus_Array = new $class_cus();
     $customfields = $cus_Array->get ($cus_where, $cus_sort);
@@ -151,7 +151,7 @@ function AddressBook_userapi_search ($args)
 
     // get the result
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $objectArray = new $class();
@@ -169,7 +169,7 @@ function AddressBook_userapi_clearItemCache ($item)
 {
     if ($item && !is_array($item)) {
         if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return pn_exit(__('Error! Unable to load class [address]', $dom));
+            return z_exit(__('Error! Unable to load class [address]', $dom));
         }
         $object = new $class();
         $item = $object->get($item);

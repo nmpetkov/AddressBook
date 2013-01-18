@@ -39,8 +39,8 @@ function AddressBook_ajax_deletefavourite()
         AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
     }
 
-    $pntables    = pnDBGetTables();
-    $fav_column = $pntables['addressbook_favourites_column'];
+    $ztables    = DBUtil::getTables();
+    $fav_column = $ztables['addressbook_favourites_column'];
     $where      = "$fav_column[favadr_id] = '" . DataUtil::formatForStore($objectid) . "' AND $fav_column[favuser_id] = '" . DataUtil::formatForStore($userid) . "'";
     DBUtil::deleteWhere ('addressbook_favourites', $where);
 
@@ -85,7 +85,7 @@ function AddressBook_ajax_get_geodata()
     $val_4 = FormUtil::getPassedValue('val_4', NULL, 'POST');
 
     //GMaps test
-    $key = pnModGetVar('AddressBook', 'google_api_key');
+    $key = ModUtil::getVar('AddressBook', 'google_api_key');
     Loader::loadClass('GoogleMapAPI', 'modules/AddressBook/classes/GMaps/');
     $map = new GoogleMapAPI();
     $map->setAPIKey($key);

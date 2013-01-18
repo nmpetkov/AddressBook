@@ -31,7 +31,7 @@ function AddressBook_userform_edititem()
 
     // build standard return url
     if(!empty($returnid)) {
-        $url = pnModURL('AddressBook', 'user', 'display', array('id'=>$returnid,
+        $url = ModUtil::url('AddressBook', 'user', 'display', array('id'=>$returnid,
                                                            'ot'=>$ot,
                                                            'startnum'=>$startnum,
                                                            'letter'=>$letter,
@@ -40,7 +40,7 @@ function AddressBook_userform_edititem()
                                                            'category'=>$category,
                                                            'private'=>$private));
     } else {
-        $url = pnModURL('AddressBook', 'user', 'view', array('ot'=>$ot,
+        $url = ModUtil::url('AddressBook', 'user', 'view', array('ot'=>$ot,
                                                            'startnum'=>$startnum,
                                                            'letter'=>$letter,
                                                            'sort'=>$sort,
@@ -51,14 +51,14 @@ function AddressBook_userform_edititem()
 
     // load class and data
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
     $object = new $class();
     $data =& $object->getDataFromInput();
 
     // permission check
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
@@ -68,12 +68,12 @@ function AddressBook_userform_edititem()
 
     // validation
     if (!$object->validate()) {
-        return pnRedirect(pnModURL('AddressBook', 'user', 'edit'));
+        return System::redirect(ModUtil::url('AddressBook', 'user', 'edit'));
     }
 
     // check for duplication request and return to the form
     if (FormUtil::getPassedValue('btn_duplicate', null, 'POST')) {
-        $url = pnModURL('AddressBook', 'user', 'edit', array('ot'=>$ot,
+        $url = ModUtil::url('AddressBook', 'user', 'edit', array('ot'=>$ot,
                                                          'id' => $data['id'],
                                                          'duplicate' => 1,
                                                          'startnum'=>$startnum,
@@ -83,7 +83,7 @@ function AddressBook_userform_edititem()
                                                          'category'=>$category,
                                                          'private'=>$private));
 
-        return pnRedirect($url);
+        return System::redirect($url);
     }
 
     // check for company update - part 1: get the old data
@@ -92,7 +92,7 @@ function AddressBook_userform_edititem()
         if (($oldObject['company'])&&(($oldObject['company']!=$data['company'])||($oldObject['address1']!=$data['address1'])||($oldObject['address2']!=$data['address2'])||($oldObject['zip']!=$data['zip'])||($oldObject['city']!=$data['city'])||($oldObject['state']!=$data['state'])||($oldObject['country']!=$data['country'])))
         {
             $companyHasChanged = true;
-            $url = pnModURL('AddressBook', 'user', 'change_company', array('ot'=>$ot,
+            $url = ModUtil::url('AddressBook', 'user', 'change_company', array('ot'=>$ot,
                                                                        'id' => $data['id'],
                                                                        'oldvalue'=>$oldObject['company'],
                                                                        'startnum'=>$startnum,
@@ -118,7 +118,7 @@ function AddressBook_userform_edititem()
 
     // check for save and duplicate request and return to the form
     if (FormUtil::getPassedValue('btn_save_duplicate', null, 'POST')) {
-        $url = pnModURL('AddressBook', 'user', 'edit', array('ot'=>$ot,
+        $url = ModUtil::url('AddressBook', 'user', 'edit', array('ot'=>$ot,
                                                          'id' => $data['id'],
                                                          'duplicate' => 1,
                                                          'startnum'=>$startnum,
@@ -130,7 +130,7 @@ function AddressBook_userform_edititem()
     }
 
     // return to standard return url
-    return pnRedirect($url);
+    return System::redirect($url);
 }
 
 function AddressBook_userform_delete()
@@ -151,7 +151,7 @@ function AddressBook_userform_delete()
     $category = FormUtil::getPassedValue('category', 0);
     $private  = FormUtil::getPassedValue('private', 0);
 
-    $url = pnModURL('AddressBook', 'user', 'view', array('ot'=>$ot,
+    $url = ModUtil::url('AddressBook', 'user', 'view', array('ot'=>$ot,
                                                          'startnum'=>$startnum,
                                                          'letter'=>$letter,
                                                          'sort'=>$sort,
@@ -164,7 +164,7 @@ function AddressBook_userform_delete()
     }
 
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $object = new $class();
@@ -172,7 +172,7 @@ function AddressBook_userform_delete()
 
     if (!$data) {
         LogUtil::registerError(__('Error! The deletion of this address failed.', $dom));
-        return pnRedirect($url);
+        return System::redirect($url);
     }
 
     $object->delete();
@@ -181,7 +181,7 @@ function AddressBook_userform_delete()
     // clear respective cache
     ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
 
-    return pnRedirect($url);
+    return System::redirect($url);
 }
 
 function AddressBook_userform_change_company()
@@ -198,7 +198,7 @@ function AddressBook_userform_change_company()
     $category = FormUtil::getPassedValue('category', 0);
     $private  = FormUtil::getPassedValue('private', 0);
 
-    $url = pnModURL('AddressBook', 'user', 'view', array('ot'=>$ot,
+    $url = ModUtil::url('AddressBook', 'user', 'view', array('ot'=>$ot,
                                                          'startnum'=>$startnum,
                                                          'letter'=>$letter,
                                                          'sort'=>$sort,
@@ -211,15 +211,15 @@ function AddressBook_userform_change_company()
     }
 
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__('Error! Unable to load class [address]', $dom));
+        return z_exit(__('Error! Unable to load class [address]', $dom));
     }
     $object = new $class();
     $data = $object->get($id);
 
     // security check
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
@@ -239,7 +239,7 @@ function AddressBook_userform_change_company()
 
     if (!$res) {
         LogUtil::registerError (__('Error! Company update failed.', $dom));
-        return pnRedirect($url);
+        return System::redirect($url);
     }
 
     // clear respective cache
@@ -247,5 +247,5 @@ function AddressBook_userform_change_company()
 
     LogUtil::registerStatus (__('Done! Company update successful.', $dom));
 
-    return pnRedirect($url);
+    return System::redirect($url);
 }

@@ -27,9 +27,9 @@ function addressbook_searchapi_options($args)
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_READ)) {
         // Create output object - this object will store all of our output so that
         // we can return it easily when required
-        $pnRender = & pnRender::getInstance('AddressBook');
-        $pnRender->assign('active',(isset($args['active'])&&isset($args['active']['AddressBook']))||(!isset($args['active'])));
-        return $pnRender->fetch('addressbook_search_options.html');
+        $Renderer = Zikula_View::getInstance('AddressBook');
+        $Renderer->assign('active',(isset($args['active'])&&isset($args['active']['AddressBook']))||(!isset($args['active'])));
+        return $Renderer->fetch('addressbook_search_options.html');
     }
 
     return '';
@@ -45,12 +45,12 @@ function addressbook_searchapi_search($args)
         return true;
     }
 
-    pnModDBInfoLoad('Search');
-    $pntable = pnDBGetTables();
-    $addresstable = $pntable['addressbook_address'];
-    $addresscolumn = $pntable['addressbook_address_column'];
-    $searchTable = $pntable['search_result'];
-    $searchColumn = $pntable['search_result_column'];
+    ModUtil::dbInfoLoad('Search');
+    $ztable = DBUtil::getTables();
+    $addresstable = $ztable['addressbook_address'];
+    $addresscolumn = $ztable['addressbook_address_column'];
+    $searchTable = $ztable['search_result'];
+    $searchColumn = $ztable['search_result_column'];
 
     $searchcols = array($addresscolumn['lname'],
     $addresscolumn['fname'],
@@ -69,8 +69,8 @@ function addressbook_searchapi_search($args)
     $cusfields = DBUtil::selectFieldArray('addressbook_customfields','id');
 
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
@@ -89,7 +89,7 @@ function addressbook_searchapi_search($args)
         $where .= " AND ($addresscolumn[user_id] IS NOT NULL)";
     } else {
         // global protect - users see only their own records (admin sees all)
-        if (((pnModGetVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
+        if (((ModUtil::getVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
             $where .= " AND ($addresscolumn[user_id]=$user_id)";
         } else {
             // if private = 1, show only private records
@@ -114,7 +114,7 @@ function addressbook_searchapi_search($args)
   $searchColumn[session])
 VALUES ";
 
-  pnModAPILoad('AddressBook', 'user');
+  ModUtil::loadApi('AddressBook', 'user');
 
   $sort = "sortname DESC,sortcompany DESC";
 
@@ -124,7 +124,7 @@ VALUES ";
 
   foreach ($addresses as $address)
   {
-      if ((pnModGetVar('AddressBook', 'name_order'))==1)
+      if ((ModUtil::getVar('AddressBook', 'name_order'))==1)
       {
           $line_1 = $address['fname']." ".$address['lname'];
       } else {
@@ -137,7 +137,7 @@ VALUES ";
           $line_1 .= " [".$address['company']."]";
       }
 
-      if ((pnModGetVar('AddressBook', 'zipbeforecity'))==1)
+      if ((ModUtil::getVar('AddressBook', 'zipbeforecity'))==1)
       {
           $line_2 = $address['zip']." ".$address['city'];
       } else {

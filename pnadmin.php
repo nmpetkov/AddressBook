@@ -35,9 +35,9 @@ function AddressBook_admin_modifyconfig()
         return LogUtil::registerPermissionError();
     }
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
-    $pnRender->assign('preferences', pnModGetVar('AddressBook'));
-    return $pnRender->fetch('addressbook_admin_modifyconfig.html');
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
+    $Renderer->assign('preferences', ModUtil::getVar('AddressBook'));
+    return $Renderer->fetch('addressbook_admin_modifyconfig.html');
 }
 
 
@@ -57,7 +57,7 @@ function AddressBook_admin_edit($args)
     $id = (int)FormUtil::getPassedValue('id', 0, 'GET');
 
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $data = array();
@@ -68,17 +68,17 @@ function AddressBook_admin_edit($args)
         $data['id'] = 0;
     }
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
-    $pnRender->assign($ot, $data);
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
+    $Renderer->assign($ot, $data);
 
     if ($ot=="customfield") {
         $new_position = DBUtil::selectFieldMax('addressbook_customfields', 'position') + 1;
-        $pnRender->assign('new_position', $new_position);
+        $Renderer->assign('new_position', $new_position);
     }
 
     $tpl = 'addressbook_admin_' . $ot . '_edit.html';
 
-    return $pnRender->fetch($tpl);
+    return $Renderer->fetch($tpl);
 }
 
 //=========================================================================
@@ -96,30 +96,30 @@ function AddressBook_admin_view()
     $ot   = FormUtil::getPassedValue('ot', 'categories', 'GET');
     $sort = FormUtil::getPassedValue('sort', 'id', 'GET');
     $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
-    $pagesize = pnModGetVar('AddressBook', 'itemsperpage', 25);
+    $pagesize = ModUtil::getVar('AddressBook', 'itemsperpage', 25);
 
     if ($ot == "customfield")
     $sort = "cus_pos";
 
     $where = '';
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $objectArray = new $class();
     $data = $objectArray->get ($where, $sort, $startnum-1, $pagesize);
     $objcount = $objectArray->getCount ($where);
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
-    $pnRender->assign('objectArray', $data);
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
+    $Renderer->assign('objectArray', $data);
 
     // Assign the information required to create the pager
-    $pnRender->assign('pager', array('numitems'     => $objcount,
+    $Renderer->assign('pager', array('numitems'     => $objcount,
                                      'itemsperpage' => $pagesize));
 
     $tpl = 'addressbook_admin_' . $ot . '_view.html';
 
-    return $pnRender->fetch($tpl);
+    return $Renderer->fetch($tpl);
 }
 
 //=========================================================================
@@ -138,27 +138,27 @@ function AddressBook_admin_delete()
     $id = (int)FormUtil::getPassedValue('id', 0, 'GETPOST');
     $confirmation = (int)FormUtil::getPassedValue('confirmation', false);
 
-    $url = pnModURL('AddressBook', 'admin', 'view', array('ot'=>$ot));
+    $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
     // Check for existence
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $object = new $class();
     $data = $object->get($id);
     if (!$data) {
         LogUtil::registerError(__('Error! No such item found.', $dom), 404);
-        return pnRedirect($url);
+        return System::redirect($url);
     }
 
     // Check for confirmation.
     if (empty($confirmation)) {
-        $pnRender = & pnRender::getInstance('AddressBook', false);
-        $pnRender->assign('id', $id);
-        $pnRender->assign('ot', $ot);
-        $pnRender->assign('object', $data);
-        return $pnRender->fetch('addressbook_admin_delete.htm');
+        $Renderer = Zikula_View::getInstance('AddressBook', false);
+        $Renderer->assign('id', $id);
+        $Renderer->assign('ot', $ot);
+        $Renderer->assign('object', $data);
+        return $Renderer->fetch('addressbook_admin_delete.htm');
     }
 
     // If we get here it means that the user has confirmed the action
@@ -166,11 +166,11 @@ function AddressBook_admin_delete()
         return LogUtil::registerAuthidError($url);
     }
 
-    if (pnModFunc('AddressBook', 'adminform', 'delete',
+    if (ModUtil::func('AddressBook', 'adminform', 'delete',
     array('id' => $id, 'ot' => $ot))) {
         // Success
         LogUtil::registerStatus (__('Done! Item deleted.', $dom));
     }
 
-    return pnRedirect($url);
+    return System::redirect($url);
 }

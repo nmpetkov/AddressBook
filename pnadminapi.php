@@ -18,21 +18,21 @@ function AddressBook_adminapi_getlinks()
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
         $args = array();
         $args['ot'] = 'labels';
-        $url = pnModURL('AddressBook', 'admin', 'view', $args);
+        $url = ModUtil::url('AddressBook', 'admin', 'view', $args);
         $links[] = array('url' => $url, 'text' => __('Contact labels', $dom));
     }
 
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
         $args = array();
         $args['ot'] = 'customfield';
-        $url = pnModURL('AddressBook', 'admin', 'view', $args);
+        $url = ModUtil::url('AddressBook', 'admin', 'view', $args);
         $links[] = array('url' => $url, 'text' => __('Custom fields', $dom));
     }
 
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
         $args = array();
         $args['ot'] = 'address';
-        $url = pnModURL('AddressBook', 'admin', 'modifyconfig', $args);
+        $url = ModUtil::url('AddressBook', 'admin', 'modifyconfig', $args);
         $links[] = array('url' => $url, 'text' => __('Settings', $dom));
     }
 

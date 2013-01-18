@@ -43,7 +43,7 @@ class PNAddress extends PNObject
         $data =& $this->_objData;
 
         // sort column
-        if (pnModGetVar('AddressBook', 'name_order')==1) {
+        if (ModUtil::getVar('AddressBook', 'name_order')==1) {
             $sortvalue = $data[fname].' '.$data[lname];
         }
         else {
@@ -59,7 +59,7 @@ class PNAddress extends PNObject
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
         if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+            return z_exit(__('Error! Unable to load class [customfield]', $dom));
         }
         $cus_Array = new $cus_class();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);

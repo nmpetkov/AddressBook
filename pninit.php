@@ -92,19 +92,18 @@ function AddressBook_init()
         return LogUtil::registerError(__('Error! Creation attempt failed.', $dom));
     }
 
-
     // Set up an initial value for a module variable.
-    pnModSetVar('AddressBook', 'abtitle', 'Zikula Address Book');
-    pnModSetVar('AddressBook', 'itemsperpage', 30);
-    pnModSetVar('AddressBook', 'globalprotect', 0);
-    pnModSetVar('AddressBook', 'custom_tab', '');
-    pnModSetVar('AddressBook', 'use_prefix', 0);
-    pnModSetVar('AddressBook', 'use_img', 0);
-    pnModSetVar('AddressBook', 'google_api_key', '');
-    pnModSetVar('AddressBook', 'google_zoom', 15);
-    pnModSetVar('AddressBook', 'special_chars_1', 'ÄÖÜäöüß');
-    pnModSetVar('AddressBook', 'special_chars_2', 'AOUaous');
-    pnModSetVar('AddressBook', 'enablecategorization', true);
+    ModUtil::setVar('AddressBook', 'abtitle', 'Zikula Address Book');
+    ModUtil::setVar('AddressBook', 'itemsperpage', 30);
+    ModUtil::setVar('AddressBook', 'globalprotect', 0);
+    ModUtil::setVar('AddressBook', 'custom_tab', '');
+    ModUtil::setVar('AddressBook', 'use_prefix', 0);
+    ModUtil::setVar('AddressBook', 'use_img', 0);
+    ModUtil::setVar('AddressBook', 'google_api_key', '');
+    ModUtil::setVar('AddressBook', 'google_zoom', 15);
+    ModUtil::setVar('AddressBook', 'special_chars_1', 'ÄÖÜäöüß');
+    ModUtil::setVar('AddressBook', 'special_chars_2', 'AOUaous');
+    ModUtil::setVar('AddressBook', 'enablecategorization', true);
 
     // Initialisation successful
     return true;
@@ -113,27 +112,28 @@ function AddressBook_init()
 function AddressBook_upgrade($oldversion)
 {
 
-    $prefix = pnConfigGetVar('prefix');
+    $prefix = System::getVar('prefix');
+    $prefix = $prefix ? $prefix.'_' : '';
 
     switch($oldversion) {
         case 1.0:
-            $sql = "ALTER TABLE ".$prefix."_addressbook_address ADD adr_geodata VARCHAR( 180 ) NULL AFTER adr_country";
+            $sql = "ALTER TABLE ".$prefix."addressbook_address ADD adr_geodata VARCHAR( 180 ) NULL AFTER adr_country";
             if (!DBUtil::executeSQL($sql,-1,-1,false,true))
             return false;
             // Upgrade successfull
-            pnModSetVar('Addressbook', 'google_api_key', '');
-            pnModSetVar('Addressbook', 'google_zoom', 15);
+            ModUtil::setVar('Addressbook', 'google_api_key', '');
+            ModUtil::setVar('Addressbook', 'google_zoom', 15);
             return AddressBook_upgrade(1.1);
         case 1.1:
             _addressbook_migratecategories();
             _addressbook_migrateprefixes();
-            pnModDelVar('Addressbook', 'name_order');
-            pnModDelVar('Addressbook', 'zipbeforecity');
+            ModUtil::delVar('Addressbook', 'name_order');
+            ModUtil::delVar('Addressbook', 'zipbeforecity');
             return AddressBook_upgrade(1.2);
         case 1.2:
-            pnModDelVar('Addressbook', 'textareawidth');
-            pnModDelVar('Addressbook', 'dateformat');
-            pnModDelVar('Addressbook', 'numformat');
+            ModUtil::delVar('Addressbook', 'textareawidth');
+            ModUtil::delVar('Addressbook', 'dateformat');
+            ModUtil::delVar('Addressbook', 'numformat');
             _addressbook_upgradeto_1_3();
             return true;
         case 1.3:
@@ -144,10 +144,11 @@ function AddressBook_upgrade($oldversion)
 function _addressbook_migratecategories()
 {
     $dom = ZLanguage::getModuleDomain('AddressBook');
-    $dbprefix = pnConfigGetVar('prefix');
+    $dbprefix = System::getVar('prefix');
+    $dbprefix = $dbprefix ? $dbprefix.'_' : '';
 
     // pull old category values
-    $sql = "SELECT cat_id, cat_name FROM {$dbprefix}_addressbook_categories";
+    $sql = "SELECT cat_id, cat_name FROM {$dbprefix}addressbook_categories";
     $result = DBUtil::executeSQL($sql);
     $categories = array();
     for (; !$result->EOF; $result->MoveNext()) {
@@ -197,7 +198,7 @@ function _addressbook_migratecategories()
         $cat->update();
         $catid = $cat->getDataField('id');
 
-        $sql = "UPDATE {$dbprefix}_addressbook_address SET adr_catid = $catid WHERE adr_catid = $category[0]";
+        $sql = "UPDATE {$dbprefix}addressbook_address SET adr_catid = $catid WHERE adr_catid = $category[0]";
         if (!DBUtil::executeSQL($sql)) {
             return LogUtil::registerError(__('Error! Update attempt failed.', $dom));
         }
@@ -214,7 +215,7 @@ function _addressbook_migratecategories()
     }
 
     // now drop the category table
-    $sql = "DROP TABLE ".$dbprefix."_addressbook_categories";
+    $sql = "DROP TABLE ".$dbprefix."addressbook_categories";
     DBUtil::executeSQL($sql);
 
     return true;
@@ -223,10 +224,11 @@ function _addressbook_migratecategories()
 function _addressbook_migrateprefixes()
 {
     $dom = ZLanguage::getModuleDomain('AddressBook');
-    $dbprefix = pnConfigGetVar('prefix');
+    $dbprefix = System::getVar('prefix');
+    $dbprefix = $dbprefix ? $dbprefix.'_' : '';
 
     // pull old prefix values
-    $sql = "SELECT pre_id, pre_name FROM {$dbprefix}_addressbook_prefixes";
+    $sql = "SELECT pre_id, pre_name FROM {$dbprefix}addressbook_prefixes";
     $result = DBUtil::executeSQL($sql);
     $prefixes = array();
     for (; !$result->EOF; $result->MoveNext()) {
@@ -276,14 +278,14 @@ function _addressbook_migrateprefixes()
         $cat->update();
         $catid = $cat->getDataField('id');
 
-        $sql = "UPDATE {$dbprefix}_addressbook_address SET adr_prefix = $catid WHERE adr_prefix = $prefix[0]";
+        $sql = "UPDATE {$dbprefix}addressbook_address SET adr_prefix = $catid WHERE adr_prefix = $prefix[0]";
         if (!DBUtil::executeSQL($sql)) {
             return LogUtil::registerError(__('Error! Update attempt failed.', $dom));
         }
     }
 
     // now drop the prefixes table
-    $sql = "DROP TABLE ".$dbprefix."_addressbook_prefixes";
+    $sql = "DROP TABLE ".$dbprefix."addressbook_prefixes";
     DBUtil::executeSQL($sql);
 
     return true;
@@ -298,14 +300,14 @@ function AddressBook_delete()
     DBUtil::dropTable('addressbook_customfields');
     DBUtil::dropTable('addressbook_favourites');
 
-    pnModDelVar ('AddressBook');
+    ModUtil::delVar ('AddressBook');
 
     // Delete entries from category registry
-    if (!pnModDBInfoLoad('Categories')) {
+    if (!ModUtil::dbInfoLoad('Categories')) {
         return false;
     }
 
-    DBUtil::deleteWhere('categories_registry', "crg_modname='AddressBook'");
+    DBUtil::deleteWhere('categories_registry', "modname='AddressBook'");
 
     // Deletion successful
     return true;
@@ -440,14 +442,14 @@ function _addressbook_createdefaultcategory()
  */
 function _addressbook_upgradeto_1_3()
 {        
-    $oldvars = pnModGetVar('Addressbook');
+    $oldvars = ModUtil::getVar('Addressbook');
 
     foreach ($oldvars as $varname => $oldvar)
     {
-        pnModDelVar('AddressBook', $varname, $oldvar);
+        ModUtil::delVar('AddressBook', $varname, $oldvar);
     }
 
-    pnModSetVars('AddressBook', $oldvars);
+    ModUtil::setVars('AddressBook', $oldvars);
 
     return true;
 }

@@ -17,7 +17,7 @@ function AddressBook_user_main()
         return LogUtil::registerPermissionError();
     }
     // do nothing
-    return pnRedirect(pnModURL('AddressBook', 'user', 'view'));
+    return System::redirect(ModUtil::url('AddressBook', 'user', 'view'));
 }
 
 
@@ -36,12 +36,12 @@ function AddressBook_user_edit()
     $returnid   = FormUtil::getPassedValue('returnid', 0, 'GET');
 
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__('Error! Unable to load class [address]', $dom));
+        return z_exit(__('Error! Unable to load class [address]', $dom));
     }
 
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
@@ -70,34 +70,34 @@ function AddressBook_user_edit()
     $cus_where = "";
     $cus_sort = "cus_pos ASC";
     if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-        return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+        return z_exit(__('Error! Unable to load class [customfield]', $dom));
     }
     $cus_Array = new $cus_class();
     $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
     // load the category registry util
     if (!Loader::loadClass('CategoryRegistryUtil')) {
-        pn_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
+        z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
     }
     $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
-    $pnRender = & pnRender::getInstance('AddressBook', false); // caching is false
-    $pnRender->setCaching(false); // not suitable for cachin
-    $pnRender->assign('catregistry',  $catregistry);
-    $pnRender->assign('address',      $data);
-    $pnRender->assign('ot',           $ot);
-    $pnRender->assign('user_id',      $user_id);
-    $pnRender->assign('customfields', $customfields);
-    $pnRender->assign('startnum',     $startnum);
-    $pnRender->assign('letter',       $letter);
-    $pnRender->assign('category',     $category);
-    $pnRender->assign('private',      $private);
-    $pnRender->assign('sort',         $sort);
-    $pnRender->assign('search',       $search);
-    $pnRender->assign('returnid',     $returnid);
-    $pnRender->assign('preferences',  pnModGetVar('AddressBook'));
+    $Renderer = Zikula_View::getInstance('AddressBook', false); // caching is false
+    $Renderer->setCaching(false); // not suitable for cachin
+    $Renderer->assign('catregistry',  $catregistry);
+    $Renderer->assign('address',      $data);
+    $Renderer->assign('ot',           $ot);
+    $Renderer->assign('user_id',      $user_id);
+    $Renderer->assign('customfields', $customfields);
+    $Renderer->assign('startnum',     $startnum);
+    $Renderer->assign('letter',       $letter);
+    $Renderer->assign('category',     $category);
+    $Renderer->assign('private',      $private);
+    $Renderer->assign('sort',         $sort);
+    $Renderer->assign('search',       $search);
+    $Renderer->assign('returnid',     $returnid);
+    $Renderer->assign('preferences',  ModUtil::getVar('AddressBook'));
 
-    return $pnRender->fetch('addressbook_user_edit.html');
+    return $Renderer->fetch('addressbook_user_edit.html');
 }
 
 function AddressBook_user_display()
@@ -119,27 +119,27 @@ function AddressBook_user_display()
     $private  = FormUtil::getPassedValue('private', 0);
 
     if (!$id) {
-        return pn_exit(__f('Error! Invalid id [%s] received.', $id, $dom));
+        return z_exit(__f('Error! Invalid id [%s] received.', $id, $dom));
     }
 
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
     
-    $pnRender = & pnRender::getInstance('AddressBook');
-    $pnRender->setCacheId('display|id_'.$id . '|uid_'.$user_id);
+    $Renderer = Zikula_View::getInstance('AddressBook');
+    $Renderer->setCacheId('display|id_'.$id . '|uid_'.$user_id);
     $template = 'addressbook_user_display.html';
-    if ($pnRender->is_cached($template)) {
-        return $pnRender->fetch($template);
+    if ($Renderer->is_cached($template)) {
+        return $Renderer->fetch($template);
     }
     
 
     // get the details
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
     $object = new $class();
     $data = $object->get($id);
@@ -148,46 +148,46 @@ function AddressBook_user_display()
     $cus_where = "";
     $cus_sort = "cus_pos ASC";
     if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-        return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+        return z_exit(__('Error! Unable to load class [customfield]', $dom));
     }
     $cus_Array = new $cus_class();
     $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
     DBUtil::incrementObjectFieldByID('addressbook_address', 'counter', $id, 'id'); // count clicks
 
-    $pnRender->assign('address', $data);
-    $pnRender->assign('customfields', $customfields);
-    $pnRender->assign('user_id', $user_id);
-    $pnRender->assign('ot', $ot);
+    $Renderer->assign('address', $data);
+    $Renderer->assign('customfields', $customfields);
+    $Renderer->assign('user_id', $user_id);
+    $Renderer->assign('ot', $ot);
 
     // assign the criteria from the view modus
-    $pnRender->assign('startnum',   $startnum);
-    $pnRender->assign('letter',     $letter);
-    $pnRender->assign('category',   $category);
-    $pnRender->assign('private',    $private);
-    $pnRender->assign('sort',       $sort);
-    $pnRender->assign('search',     $search);
+    $Renderer->assign('startnum',   $startnum);
+    $Renderer->assign('letter',     $letter);
+    $Renderer->assign('category',   $category);
+    $Renderer->assign('private',    $private);
+    $Renderer->assign('sort',       $sort);
+    $Renderer->assign('search',     $search);
 
     // favourite?
     if (!($tclass = Loader::loadClassFromModule('AddressBook', 'favourite',true)))
-    return pn_exit(__('Error! Unable to load class [favourite]', $dom));
+    return z_exit(__('Error! Unable to load class [favourite]', $dom));
 
     $where = "fav_adr_id=$id AND fav_user_id=$user_id";
     $fav = new $tclass();
     $favData  = $fav->getWhere ($where);
 
     if ($favData)
-    $pnRender->assign ('isFavourite', 1);
+    $Renderer->assign ('isFavourite', 1);
 
     unset ($fav);
     unset ($favData);
     unset ($where);
 
     // Google Maps
-    $pnRender->assign('preferences', pnModGetVar('AddressBook'));
-    $pnRender->assign('lang',        ZLanguage::getLanguageCode());
+    $Renderer->assign('preferences', ModUtil::getVar('AddressBook'));
+    $Renderer->assign('lang',        ZLanguage::getLanguageCode());
 
-    return $pnRender->fetch($template);
+    return $Renderer->fetch($template);
 
 }
 
@@ -195,8 +195,8 @@ function AddressBook_user_view()
 {
 
     //Private Address Book mode, for users only
-    if ((!pnUserLoggedIn()) && (pnModGetVar('AddressBook', 'globalprotect')==1)) {
-        return LogUtil::registerError(__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(pnModURL('Users', 'user', 'view')), $dom));
+    if ((!UserUtil::isLoggedIn()) && (ModUtil::getVar('AddressBook', 'globalprotect')==1)) {
+        return LogUtil::registerError(__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(ModUtil::url('Users', 'user', 'view')), $dom));
     }
 
     // security check
@@ -206,7 +206,7 @@ function AddressBook_user_view()
 
     $ot   = FormUtil::getPassedValue('ot', 'address', 'GET');
     $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
-    $pagesize = pnModGetVar('AddressBook', 'itemsperpage', 30);
+    $pagesize = ModUtil::getVar('AddressBook', 'itemsperpage', 30);
     $letter   = FormUtil::getPassedValue('letter', 0);
     $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
     $search   = FormUtil::getPassedValue('search', 0);
@@ -218,27 +218,27 @@ function AddressBook_user_view()
     }
 
     // Get user id
-    if (pnUserLoggedIn()) {
-        $user_id = pnUserGetVar('uid');
+    if (UserUtil::isLoggedIn()) {
+        $user_id = UserUtil::getVar('uid');
     } else {
         $user_id = 0;
     }
 
-    $pnRender = & pnRender::getInstance('AddressBook');
-    $pnRender->setCacheId('view|cat_'.$category . 
+    $Renderer = Zikula_View::getInstance('AddressBook');
+    $Renderer->setCacheId('view|cat_'.$category . 
         '|ot'.$ot.'_stnum'.$startnum.'_itpg'.$pagesize.'_let'.$letter.'_sort'.$sort.'_prv'.$private.'_srch'.$search.
         '|uid_'.$user_id);
     $template = 'addressbook_user_view.html';
-    if ($pnRender->is_cached($template)) {
-        return $pnRender->fetch($template);
+    if ($Renderer->is_cached($template)) {
+        return $Renderer->fetch($template);
     }
 
     // build the where clause
     $where = '';
 
-    $pntable = pnDBGetTables();
-    $address_table = $pntable['addressbook_address'];
-    $address_column = &$pntable['addressbook_address_column'];
+    $ztable = DBUtil::getTables();
+    $address_table = $ztable['addressbook_address'];
+    $address_column = &$ztable['addressbook_address_column'];
 
     // admin always sees all records but favourites
     if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
@@ -248,7 +248,7 @@ function AddressBook_user_view()
         $where .= "($address_column[user_id] IS NOT NULL)";
     } else {
         // global protect - users see only their own records (admin sees all)
-        if (((pnModGetVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
+        if (((ModUtil::getVar('AddressBook', 'globalprotect'))==1) && (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)))) {
             if ($ot == "favourite")
             $where = "(fav_user_id=$user_id)";
             else
@@ -300,7 +300,7 @@ function AddressBook_user_view()
     }
 
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     // filter for category
@@ -337,7 +337,7 @@ function AddressBook_user_view()
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
         if (!($class_cus = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+            return z_exit(__('Error! Unable to load class [customfield]', $dom));
         }
         $cus_Array = new $class_cus();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
@@ -375,7 +375,7 @@ function AddressBook_user_view()
 
     // get the result
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $objectArray = new $class();
@@ -384,23 +384,23 @@ function AddressBook_user_view()
 
     // load the category registry util
     if (!Loader::loadClass('CategoryRegistryUtil')) {
-        pn_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
+        z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
     }
     $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
-    $pnRender->assign('catregistry',   $catregistry);
-    $pnRender->assign('ot',            $ot);
-    $pnRender->assign('objectArray',   $data);
-    $pnRender->assign('startnum',      $startnum);
-    $pnRender->assign('letter',        $letter);
-    $pnRender->assign('category',      $category);
-    $pnRender->assign('private',       $private);
-    $pnRender->assign('search',        $search);
-    $pnRender->assign('globalprotect', pnModGetVar('AddressBook', 'globalprotect'));
-    $pnRender->assign('pager',         array('numitems'     => $objcount,
+    $Renderer->assign('catregistry',   $catregistry);
+    $Renderer->assign('ot',            $ot);
+    $Renderer->assign('objectArray',   $data);
+    $Renderer->assign('startnum',      $startnum);
+    $Renderer->assign('letter',        $letter);
+    $Renderer->assign('category',      $category);
+    $Renderer->assign('private',       $private);
+    $Renderer->assign('search',        $search);
+    $Renderer->assign('globalprotect', ModUtil::getVar('AddressBook', 'globalprotect'));
+    $Renderer->assign('pager',         array('numitems'     => $objcount,
                                              'itemsperpage' => $pagesize));
 
-    return $pnRender->fetch($template);
+    return $Renderer->fetch($template);
 }
 
 function AddressBook_user_delete()
@@ -421,21 +421,21 @@ function AddressBook_user_delete()
     $private  = FormUtil::getPassedValue('private', 0);
 
     // create the output object
-    $pnRender = & pnRender::getInstance('AddressBook', false);
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
 
-    $pnRender->assign('id', $id);
-    $pnRender->assign('ot', $ot);
+    $Renderer->assign('id', $id);
+    $Renderer->assign('ot', $ot);
 
     // assign the criteria from the view modus
-    $pnRender->assign('startnum',   $startnum);
-    $pnRender->assign('letter',     $letter);
-    $pnRender->assign('category',   $category);
-    $pnRender->assign('private',    $private);
-    $pnRender->assign('sort',       $sort);
-    $pnRender->assign('search',     $search);
+    $Renderer->assign('startnum',   $startnum);
+    $Renderer->assign('letter',     $letter);
+    $Renderer->assign('category',   $category);
+    $Renderer->assign('private',    $private);
+    $Renderer->assign('sort',       $sort);
+    $Renderer->assign('search',     $search);
 
     // return output
-    return $pnRender->fetch('addressbook_user_delete.html');
+    return $Renderer->fetch('addressbook_user_delete.html');
 }
 
 function AddressBook_user_change_company()
@@ -457,32 +457,32 @@ function AddressBook_user_change_company()
     $private  = FormUtil::getPassedValue('private', 0);
 
     // create the output object
-    $pnRender = & pnRender::getInstance('AddressBook', false);
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
 
-    $pnRender->assign('id', $id);
-    $pnRender->assign('ot', $ot);
+    $Renderer->assign('id', $id);
+    $Renderer->assign('ot', $ot);
 
     // assign the criteria from the view modus
-    $pnRender->assign('startnum',   $startnum);
-    $pnRender->assign('letter',     $letter);
-    $pnRender->assign('category',   $category);
-    $pnRender->assign('private',    $private);
-    $pnRender->assign('sort',       $sort);
-    $pnRender->assign('search',     $search);
+    $Renderer->assign('startnum',   $startnum);
+    $Renderer->assign('letter',     $letter);
+    $Renderer->assign('category',   $category);
+    $Renderer->assign('private',    $private);
+    $Renderer->assign('sort',       $sort);
+    $Renderer->assign('search',     $search);
 
     // return output
-    return $pnRender->fetch('addressbook_user_change_company.html');
+    return $Renderer->fetch('addressbook_user_change_company.html');
 }
 
 function AddressBook_user_getajaxcompanies()
 {
     $fragment = FormUtil::getPassedValue('fragment');
     // Get DB
-    $dbconn = &pnDBGetConn(true);
-    $pntable = &pnDBGetTables();
+    $dbconn = Doctrine_Manager::getInstance()->getCurrentConnection();
+    $ztable = DBUtil::getTables();
     // define tables and columns
-    $userstable = &$pntable['addressbook_address'];
-    $userscolumn = &$pntable['addressbook_address_column'];
+    $userstable = &$ztable['addressbook_address'];
+    $userscolumn = &$ztable['addressbook_address_column'];
 
     $sql = "SELECT DISTINCT $userscolumn[company],
     $userscolumn[address1],
@@ -539,12 +539,12 @@ function AddressBook_user_simpledisplay($args)
     unset($args);
 
     if (!$id) {
-        return pn_exit(__f('Error! Invalid id [%s] received.', $id, $dom));
+        return z_exit(__f('Error! Invalid id [%s] received.', $id, $dom));
     }
 
     // get the details
     if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
     $object = new $class();
     $data = $object->get($id);
@@ -553,19 +553,19 @@ function AddressBook_user_simpledisplay($args)
     $cus_where = "";
     $cus_sort = "cus_pos ASC";
     if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-        return pn_exit(__('Error! Unable to load class [customfield]', $dom));
+        return z_exit(__('Error! Unable to load class [customfield]', $dom));
     }
     $cus_Array = new $cus_class();
     $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
-    $pnRender = & pnRender::getInstance('AddressBook', false);
-    $pnRender->assign('address', $data);
-    $pnRender->assign('customfields', $customfields);
-    $pnRender->assign('ot', $ot);
-    $pnRender->assign('category', $category);
-    $pnRender->assign('private', $private);
-    $pnRender->assign('preferences', pnModGetVar('AddressBook'));
-    $pnRender->assign('lang',        ZLanguage::getLanguageCode());
+    $Renderer = Zikula_View::getInstance('AddressBook', false);
+    $Renderer->assign('address', $data);
+    $Renderer->assign('customfields', $customfields);
+    $Renderer->assign('ot', $ot);
+    $Renderer->assign('category', $category);
+    $Renderer->assign('private', $private);
+    $Renderer->assign('preferences', ModUtil::getVar('AddressBook'));
+    $Renderer->assign('lang',        ZLanguage::getLanguageCode());
 
-    return $pnRender->fetch('addressbook_user_simpledisplay.html');
+    return $Renderer->fetch('addressbook_user_simpledisplay.html');
 }

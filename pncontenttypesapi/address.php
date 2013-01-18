@@ -24,7 +24,7 @@ class AddressBook_contenttypesapi_addressPlugin extends contentTypeBase
 
     function display()
     {
-        $address = pnModFunc('AddressBook', 'user', 'simpledisplay', array('id' => (int) $this->addressid));
+        $address = ModUtil::func('AddressBook', 'user', 'simpledisplay', array('id' => (int) $this->addressid));
         return $address;
     }
 
@@ -33,7 +33,7 @@ class AddressBook_contenttypesapi_addressPlugin extends contentTypeBase
         $dom = ZLanguage::getModuleDomain('AddressBook');
         if (!empty($this->addressid))
         {
-            return pnModFunc('AddressBook', 'user', 'simpledisplay', array('id' => (int) $this->addressid));
+            return ModUtil::func('AddressBook', 'user', 'simpledisplay', array('id' => (int) $this->addressid));
         }
         return __('No address selected', $dom);
     }

@@ -20,23 +20,23 @@ function AddressBook_adminform_modifyconfig()
     }
 
     if (!SecurityUtil::confirmAuthKey()) {
-        return LogUtil::registerAuthidError(pnModURL('AddressBook', 'admin', 'main'));
+        return LogUtil::registerAuthidError(ModUtil::url('AddressBook', 'admin', 'main'));
     }
 
     // retrieve the associative preferences array
     $prefs = FormUtil::getPassedValue('preferences', null, 'POST');
 
     // now for each perference entry, set the appropriate module variable
-    pnModSetVar('AddressBook', 'abtitle', (isset($prefs['abtitle']) ? $prefs['abtitle'] : ''));
-    pnModSetVar('AddressBook', 'special_chars_1', (isset($prefs['special_chars_1']) ? $prefs['special_chars_1'] : ''));
-    pnModSetVar('AddressBook', 'special_chars_2', (isset($prefs['special_chars_2']) ? $prefs['special_chars_2'] : ''));
-    pnModSetVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
-    pnModSetVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
-    pnModSetVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
-    pnModSetVar('AddressBook', 'google_api_key', (isset($prefs['google_api_key']) ? $prefs['google_api_key'] : ''));
-    pnModSetVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));
-    pnModSetVar('AddressBook', 'itemsperpage', ($prefs['itemsperpage']>1 ? $prefs['itemsperpage'] : 30));
-    pnModSetVar('AddressBook', 'custom_tab', (isset($prefs['custom_tab']) ? $prefs['custom_tab'] : ''));
+    ModUtil::setVar('AddressBook', 'abtitle', (isset($prefs['abtitle']) ? $prefs['abtitle'] : ''));
+    ModUtil::setVar('AddressBook', 'special_chars_1', (isset($prefs['special_chars_1']) ? $prefs['special_chars_1'] : ''));
+    ModUtil::setVar('AddressBook', 'special_chars_2', (isset($prefs['special_chars_2']) ? $prefs['special_chars_2'] : ''));
+    ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
+    ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
+    ModUtil::setVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
+    ModUtil::setVar('AddressBook', 'google_api_key', (isset($prefs['google_api_key']) ? $prefs['google_api_key'] : ''));
+    ModUtil::setVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));
+    ModUtil::setVar('AddressBook', 'itemsperpage', ($prefs['itemsperpage']>1 ? $prefs['itemsperpage'] : 30));
+    ModUtil::setVar('AddressBook', 'custom_tab', (isset($prefs['custom_tab']) ? $prefs['custom_tab'] : ''));
 
     if (mb_strlen($prefs['special_chars_1']) != mb_strlen($prefs['special_chars_2']))
     LogUtil::registerError(__('Error! Both fields must contain the same number of characters - Special character replacement was NOT saved!', $dom));
@@ -44,7 +44,7 @@ function AddressBook_adminform_modifyconfig()
 
     // redirect back to to main admin page
     LogUtil::registerStatus (__('Done! Configuration saved.', $dom));
-    return pnRedirect(pnModURL('AddressBook', 'admin', 'main'));
+    return System::redirect(ModUtil::url('AddressBook', 'admin', 'main'));
 }
 
 function AddressBook_adminform_edit()
@@ -57,7 +57,7 @@ function AddressBook_adminform_edit()
     $dom = ZLanguage::getModuleDomain('AddressBook');
 
     $ot =  FormUtil::getPassedValue('ot', 'categories', 'POST');
-    $url = pnModURL('AddressBook', 'admin', 'view', array('ot'=>$ot));
+    $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
     if (!SecurityUtil::confirmAuthKey()) {
         return LogUtil::registerAuthidError($url);
@@ -65,11 +65,11 @@ function AddressBook_adminform_edit()
 
     if (FormUtil::getPassedValue('button_cancel', null, 'POST')) {
         LogUtil::registerStatus ('Operation cancelled.');
-        return pnRedirect($url);
+        return System::redirect($url);
     }
 
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $object = new $class();
@@ -79,19 +79,20 @@ function AddressBook_adminform_edit()
     if ($ot == "customfield")
     {
         $obj = $object->getDataFromInput();
-        $prefix = pnConfigGetVar('prefix');
+        $prefix = System::getVar('prefix');
+        $prefix = $prefix ? $prefix.'_' : '';
         if ($obj['type']=='dropdown')
         $obj['type']='text';
         if ($obj['id']) {
-            $sql="ALTER TABLE ".$prefix."_addressbook_address CHANGE adr_custom_".$obj['id']." adr_custom_".$obj['id']." ".$obj['type'];
+            $sql="ALTER TABLE ".$prefix."addressbook_address CHANGE adr_custom_".$obj['id']." adr_custom_".$obj['id']." ".$obj['type'];
         } else {
             $cus_id = DBUtil::getInsertID('addressbook_customfields');
-            $sql="ALTER TABLE ".$prefix."_addressbook_address ADD adr_custom_".$cus_id." ".$obj['type'];
+            $sql="ALTER TABLE ".$prefix."addressbook_address ADD adr_custom_".$cus_id." ".$obj['type'];
         }
         DBUtil::executeSQL($sql,-1,-1,false,true);
     }
 
-    return pnRedirect($url);
+    return System::redirect($url);
 }
 
 
@@ -107,27 +108,28 @@ function AddressBook_adminform_delete()
     $ot = FormUtil::getPassedValue('ot', 'categories', 'GETPOST');
     $id = (int)FormUtil::getPassedValue('id', 0, 'GETPOST');
 
-    $url = pnModURL('AddressBook', 'admin', 'view', array('ot'=>$ot));
+    $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
     if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
-        return pn_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+        return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
     }
 
     $object = new $class();
     $data = $object->get($id);
     if (!$data) {
         LogUtil::registerError(__f('%1$s with ID of %2$s doesn\'\t seem to exist', array($ot, $id), $dom));
-        return pnRedirect($url);
+        return System::redirect($url);
     }
     $object->delete();
 
     if ($ot == "customfield")
     {
-        $prefix = pnConfigGetVar('prefix');
-        $sql="ALTER TABLE ".$prefix."_addressbook_address DROP adr_custom_".$id;
+        $prefix = System::getVar('prefix');
+        $prefix = $prefix ? $prefix.'_' : '';
+        $sql="ALTER TABLE ".$prefix."addressbook_address DROP adr_custom_".$id;
         DBUtil::executeSQL($sql,-1,-1,true,true);
     }
     LogUtil::registerStatus (__('Done! Item deleted.', $dom));
 
-    return pnRedirect($url);
+    return System::redirect($url);
 }

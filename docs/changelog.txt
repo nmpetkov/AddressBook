@@ -1,0 +1,205 @@
+-------------------------
+Version 1.3.3 2013 (N.Petkov)
+-------------------------
+- refactored to Zikula 1.3 standards
+- Implemented subscribers hooks - display and edit
+
+-------------------------
+Version 1.3.2 2013 (N.Petkov)
+-------------------------
+- tegged version
+- more cleanup
+
+-------------------------
+Version 1.3.1 2012 (N.Petkov)
+-------------------------
+- making to work with Zikula 1.3 in legacy mode
+- replaced depreciated commands
+
+-------------------------
+Version 1.3 April 2010
+-------------------------
+- new module name: AddressBook (camel case)
+- converted into Gettext and UTF-8
+- new improved templates
+- multilanguage fixes
+- added basic plugin for the content-module
+- using now JSCalendar for date fields
+- fixed dropdown fields
+- fixed company autocomplete
+- fixed GoogleMaps zoom factor
+- fixed problems with shortURLs
+
+-------------------------
+Version 1.2 23 April 2009
+-------------------------
+
+Added Features
+--------------
+- Added support for Zikula categories
+- Added API search function for external modules
+
+
+BugFixes
+--------------
+- Fixed some language defines (english)
+- Fixed missing adr_geodata field in a fresh install
+- Some preferences are not longer supported like "zip before city" or "name order list"
+
+-------------------------
+Version 1.1 6 March 2009
+-------------------------
+
+Added Features
+--------------
+- Added support for update contacts from the detail page
+- Added support for Google Maps
+- URL and mail information are now clickable
+
+
+BugFixes
+--------------
+- Fixed missing title information of the contact in detail page
+- Fixed Zikula overall search issue
+- Bugfix for category search filter
+- Fixed problem with linebreaks in contact information like emails in small themes
+- Fixed bug with select lists for contact labels losing their focus in add/edit mode
+
+-----------------------------
+Version 1.0 22 September 2008
+-----------------------------
+This is version 1.0 of the module AddressBook for Zikula
+All version until 2.1 depend on the module pnAddressbook
+wirtten for Postnuke
+
+Added Features
+--------------
+- Complete rewrite for Zikula application framework
+- Output via pnRender templates
+- and much more...
+
+
+-------------------------
+Version 2.1 07 June 2004
+-------------------------
+
+BugFixes
+--------------
+- Fixed a security issue, that let user change/delete records without permission
+
+-------------------------
+Version 2.1 23 July 2003
+-------------------------
+
+Added Features
+--------------
+- Additional custom field type "Dropdown list" was added. This
+  field type can take list options, displayed in a selection box.
+  List items can be set in the Administration.
+  
+BugFixes
+--------------
+- The use of phpSniffer caused a problem with eNvolution 1.25
+
+-------------------------
+Version 2.0 14 June 2003
+-------------------------
+
+Added Features
+--------------
+- Added support for the PostNuke Search Function
+
+-------------------------
+Version 2.0 30 April 2003
+-------------------------
+
+Added Features
+--------------
+- Additional custom field type "Text, unlimited, 6 lines" was added. This
+  field type can take up to 64k of text.
+
+-------------------------
+Version 2.0 03 April 2003
+-------------------------
+
+Added Features
+--------------
+- I changed the way to get data in the details page. There are no longer sent 
+  via POST. The amount of text you can put in the note field (and other 
+  custom fields) isn't limited by POST anymore and hopefully some other bugs
+  with quotes in the note field are fixed.
+
+BugFixes
+--------
+- In addition, there was a bug, if you wanted to change the company of a 
+  record using the selection field with a list of existing companies.
+
+-------------------------------------   
+Version 2.0 released 02 February 2003
+-------------------------------------
+
+Added Features
+--------------
+- Unlimited custom fields
+- The following data types can be assigned to any custom field:
+  a) Text 60 characters displayed in 1 line
+  b) Text 120 characters displayed in 2 lines
+  c) Text 240 characters displayed in 4 lines
+  d) Integer numbers
+  e) Decimal numbers
+  f) Date
+- Blank line or horizontal rules available to design the custom area
+- Fexible order of custom fields, can be manipulated at any time
+- The input/output format for decimal numbers and date can be
+  set in the Administration
+- For better fit in the layout the width of a custom textarea field can be
+  set in the Administration
+- Two absolut free configurable sort orders are available: Choose any field
+  you like in the Admnisration (including custom fields)
+- Free column order in the list view. Column order depends on the selected
+  sort order.
+- Support for images/logos (for Admins only). Admins will see a selection 
+  box of all files in the img-directory of AddressBook and can assign it 
+  to a record. The picture is shown in the upper right of the detail page.
+- Image support can be enabled/disabled in the Administration
+- Main Menu can now be disabled for all or guests only
+- Second Main Menu line can be disabled, so that only categories, sort 
+  orders and the search field are visible
+- MySQL 3.x uses the Latin-1 character set as default. Most users have no
+  permission to change these settings. Therefore names and companies are 
+  now stored in special sort columns for correct sortings when special
+  characters (Umlauts) are used. There is an admin setting where you can
+  set up the character replacement to correct the sort for each language
+- New column Prefix/Title (Mr. Mrs. etc.). Values can be set in the 
+  Administration and are presented with a selection field in the form. This 
+  column is visible only in the insert/edit form. You can disable it 
+  completely in the Administration. It was added for compatibility with 
+  future import/export extensions, particularly to export for serial 
+  letters
+- Admin setting for the sort order and displayof names in the list view, so 
+  you can change the default «Last Name, First Name» to 
+  «First Name Last Name», which is default in some countries
+- Permission theme was changed in the way, that you can assign a kind of 
+  sub-admins, if you give a a user the EDIT access for AddressBook in the 
+  PostNuke permission system
+
+BugFixes
+--------
+- Value for custom field 1 was shown twice indetail view
+- Plus sign (+) was shown in list view, but was lost in the edit form
+- Colums in the contact tab of the insert/edit form had a poor layout
+  in small themes (800*600)
+- Automatically detected URLs had no target ('_blank')
+- Deletion of a contact label could lead to a dissorder of all following
+  labels
+- If the Admin edited a user's record, then the user had no longer access 
+  to edit / delete this record, because now it was assigned to the Admin.
+- The sort order in A-Z view was always assigned to the Last Name column
+  and not the first column of the selected sort order
+- The tabs in the insert/edit form didn't work with Opera and IE < 5.5
+  
+
+---------------------------
+Version 1.0 06 January 2003
+   - initial version
+---------------------------

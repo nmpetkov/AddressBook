@@ -153,11 +153,12 @@
     </fieldset>
     {/if}
 
-    {if (($preferences.google_api_key) && ($address.geodata))}
+    {if $address.geodata}
     <fieldset class="z-linear">
         <legend>{gt text="Map"}</legend>
         <div id="googlemap{$address.id|varprepfordisplay}" class="map" style="width: 100%; height: 200px"></div>
         {if false}{* Google maps Api v2*}
+        {if $preferences.google_api_key}
         <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={$preferences.google_api_key|varprepfordisplay}"></script>
         <script type="text/javascript">
             //<![CDATA[
@@ -166,6 +167,7 @@
             false);
             //]]>
         </script>
+        {/if}
         {else}{* Google maps Api v3*}
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">

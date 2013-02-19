@@ -8,8 +8,6 @@
  */
 function AddressBook_tables()
 {
-    require_once 'lib/legacy/Compat.php';
-    
     // Initialise table array
     $tables = array();
 

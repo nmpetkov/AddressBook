@@ -115,7 +115,8 @@
             <div class="z-formrow">
                 <label for="address_geodata">{gt text="Google Maps coordinates"}</label>
                 <input id="address_geodata" name="address[geodata]" value="{$address.geodata|varprepfordisplay}" type="text" size="60" maxlength="280" />
-                <em class="z-sub z-formnote"><a href="javascript:get_geodata();">{gt text="Get coordinates"}</a></em>
+                <em class="z-sub z-formnote"><a href="javascript:get_geodata();">{gt text="Get coordinates Ajax"}</a>&nbsp;|&nbsp;
+                <a href="{modurl modname='AddressBook' type='ajax' func='get_geodata' val_1=$address.address1 val_2=$address.zip val_3=$address.city val_4=$address.country plane=1}">{gt text="Get coordinates"}</a></em>
             </div>
             {/if}
         </fieldset>

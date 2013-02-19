@@ -78,10 +78,10 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
             AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
         }
 
-        $val_1 = FormUtil::getPassedValue('val_1', NULL, 'POST');
-        $val_2 = FormUtil::getPassedValue('val_2', NULL, 'POST');
-        $val_3 = FormUtil::getPassedValue('val_3', NULL, 'POST');
-        $val_4 = FormUtil::getPassedValue('val_4', NULL, 'POST');
+        $val_1 = FormUtil::getPassedValue('val_1', NULL, 'GETPOST');
+        $val_2 = FormUtil::getPassedValue('val_2', NULL, 'GETPOST');
+        $val_3 = FormUtil::getPassedValue('val_3', NULL, 'GETPOST');
+        $val_4 = FormUtil::getPassedValue('val_4', NULL, 'GETPOST');
 
         //GMaps test
         include_once('modules/AddressBook/lib/vendor/GMaps/GoogleMapAPI.class.php');
@@ -91,6 +91,9 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
         $geocode = $map->getGeocode($val_1.', '.$val_2.', '.$val_3.', '.$val_4);
         $result = $geocode['lat'].','.$geocode['lon'];
 
+        if (FormUtil::getPassedValue('plane', NULL, 'GETPOST')) {
+            return $result;
+        }
         return array('data' => $result,'result' => true);
     }
 }

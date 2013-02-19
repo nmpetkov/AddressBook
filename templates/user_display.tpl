@@ -3,7 +3,6 @@
 {securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
 
 {if $preferences.use_img}
-<script type="text/javascript" src="modules/mediashare/pnjavascript/finditem.js"></script>
 {ajaxheader lightbox=true}
 {/if}
 

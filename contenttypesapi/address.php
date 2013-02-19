@@ -46,7 +46,7 @@ class AddressBook_contenttypesapi_addressPlugin extends contentTypeBase
 
     function startEditing(&$render)
     {
-        array_push($render->plugins_dir, 'modules/AddressBook/pntemplates/pnform');
+        array_push($render->plugins_dir, 'modules/AddressBook/templates/form');
     }
 }
 

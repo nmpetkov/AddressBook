@@ -1,35 +1,5 @@
 {ajaxheader modname=AddressBook filename=addressbook.js}
-{pageaddvar name="javascript" value="javascript/ajax/prototype.js,javascript/ajax/scriptaculous.js,javascript/ajax/effects.js,javascript/ajax/pnajax.js,javascript/ajax/controls.js,javascript/ajax/validation.js"}
-{pageaddvar name="javascript" value="javascript/helpers/texpand.js"}
-<script type="text/javascript">
-    function getContact(inp1) {
-        var str = document.getElementById(inp1).value;
-        var strSplit = str.split("#");
-        for (var i = 0; i < strSplit.length; i++) {
-            var val = strSplit[i];
-            if (val) {
-                // strSplit[1] was the address, shown in the popup
-                var val0 = strSplit[0]; // company
-                var val1 = strSplit[2]; // address1
-                var val2 = strSplit[3]; // address2
-                var val3 = strSplit[4]; // zip
-                var val4 = strSplit[5]; // city
-                var val5 = strSplit[6]; // state
-                var val6 = strSplit[7]; // country
-            }
-        }
-        document.getElementById(inp1).value               = val0;
-        document.getElementById('address_address1').value = val1;
-        document.getElementById('address_address2').value = val2;
-        document.getElementById('address_zip').value      = val3;
-        document.getElementById('address_city').value     = val4;
-        document.getElementById('address_state').value    = val5;
-        document.getElementById('address_country').value  = val6;
-    }
-</script>
-
 {if $preferences.use_img}
-<script type="text/javascript" src="modules/mediashare/pnjavascript/finditem.js"></script>
 {ajaxheader lightbox=true}
 {/if}
 
@@ -86,18 +56,6 @@
             <div class="z-formrow">
                 <label for="address_company">{gt text="Company"}</label>
                 <input id="address_company" name="address[company]" value="{$address.company|varprepfordisplay}" type="text" size="60" maxlength="280" />
-                <div id="livecompanysearch" class="z-hide">
-                    <div id="company_choices" class="autocomplete_company"></div>
-                    <script type="text/javascript">
-                        Element.removeClassName('livecompanysearch', 'z-hide');
-                        new Ajax.Autocompleter("address_company", "company_choices", document.location.pnbaseURL + "index.php?module=AddressBook"+"&"+"func=getajaxcompanies",
-                        {tokens: [',', '\n'],
-                            paramName: 'fragment',
-                            afterUpdateElement: function(){getContact('address_company')},
-                        minChars: 3}
-                        );
-                    </script>
-                </div>
             </div>
 
             {if $preferences.use_img==1}

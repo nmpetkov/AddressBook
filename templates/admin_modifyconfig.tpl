@@ -32,7 +32,7 @@
                     <input id="preferences_use_prefix" type="checkbox" name="preferences[use_prefix]" value="1" {if $preferences.use_prefix}checked="checked"{/if} />
                 </div>
                 <div class="z-formrow">
-                    <label for="preferences_use_img">{gt text="Enable embedding of mediashare images"}</label>
+                    <label for="preferences_use_img">{gt text="Enable images"}</label>
                     <input id="preferences_use_img" type="checkbox" name="preferences[use_img]" value="1" {if $preferences.use_img}checked="checked"{/if} />
                 </div>
             </fieldset>

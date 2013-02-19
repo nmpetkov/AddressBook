@@ -9,16 +9,12 @@ function addressbook_texpand_init()
 
 function get_geodata() {
     var params = '';
-    params += '&val_1=' + encodeURIComponent(document
-            .getElementById('address_address1').value);
-    params += '&val_2=' + encodeURIComponent(document
-            .getElementById('address_zip').value);
-    params += '&val_3=' + encodeURIComponent(document
-            .getElementById('address_city').value);
-    params += '&val_4=' + encodeURIComponent(document
-            .getElementById('address_country').value);
-    var pars = "module=AddressBook&func=get_geodata" + params;
-    var myAjax = new Ajax.Request(document.location.pnbaseURL + "ajax.php", {
+    params += '&val_1=' + encodeURIComponent(document.getElementById('address_address1').value);
+    params += '&val_2=' + encodeURIComponent(document.getElementById('address_zip').value);
+    params += '&val_3=' + encodeURIComponent(document.getElementById('address_city').value);
+    params += '&val_4=' + encodeURIComponent(document.getElementById('address_country').value);
+    var pars = "module=AddressBook&type=ajax&func=get_geodata" + params;
+    var myAjax = new Zikula.Ajax.Request("ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : get_geodata_response
@@ -36,9 +32,9 @@ function get_geodata_response(req) {
 }
 
 function add_fav(objectid, userid) {
-    var pars = "module=AddressBook&func=addfavourite&objectid=" + objectid
+    var pars = "module=AddressBook&type=ajax&func=addfavourite&objectid=" + objectid
             + "&userid=" + userid;
-    var myAjax = new Ajax.Request(document.location.pnbaseURL + "ajax.php", {
+    var myAjax = new Zikula.Ajax.Request("ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : add_fav_response
@@ -46,9 +42,9 @@ function add_fav(objectid, userid) {
 }
 
 function del_fav(objectid, userid) {
-    var pars = "module=AddressBook&func=deletefavourite&objectid=" + objectid
+    var pars = "module=AddressBook&type=ajax&func=deletefavourite&objectid=" + objectid
             + "&userid=" + userid;
-    var myAjax = new Ajax.Request(document.location.pnbaseURL + "ajax.php", {
+    var myAjax = new Zikula.Ajax.Request("ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : del_fav_response
@@ -90,9 +86,9 @@ function customfieldinit() {
 }
 
 function cforderchanged() {
-    var pars = "module=AddressBook&func=change_cf_order&"
+    var pars = "module=AddressBook&type=ajax&func=change_cf_order&"
             + Sortable.serialize("cf_list");
-    var myAjax = new Ajax.Request(document.location.pnbaseURL + "ajax.php", {
+    var myAjax = new Zikula.Ajax.Request("ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : cforderchanged_response

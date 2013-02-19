@@ -1,37 +1,3 @@
-/* Used to style the cancel delete button when asking for a confirmation */
-
-/* AutoCompleter */
-div.autocomplete_company {
-    position:absolute;
-    width: 25em;
-    background-color: white;
-    border: 1px solid #888;
-    margin: 0;
-    padding: 0;
-    z-index: 99;
-}
-
-div.autocomplete_company ul {
-    list-style-type: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-div.autocomplete_company ul li.selected {
-    background-color: #eee;
-}
-
-div.autocomplete_company ul li {
-    margin: 0;
-    padding: 0.1em 0 0.1em 0;
-    line-height: 1.4em;
-    cursor:pointer;
-}
-
-#livecompanysearch {
-    margin: 0;
-}
-
 #addnewitem {
     background:url("../../../images/icons/extrasmall/filenew.gif") no-repeat scroll 0 50% transparent;
     margin:1.5em 0;

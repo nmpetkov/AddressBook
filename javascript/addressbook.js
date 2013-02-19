@@ -27,7 +27,7 @@ function get_geodata_response(req) {
         showajaxerror(req.responseText);
         return;
     }
-    var json = dejsonize(req.responseText);
+    var json = Zikula.dejsonize(req.responseText);
     document.getElementById('address_geodata').value = json.data;
 }
 

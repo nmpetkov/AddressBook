@@ -84,10 +84,12 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
         $val_4 = FormUtil::getPassedValue('val_4', NULL, 'GETPOST');
 
         //GMaps test
-        include_once('modules/AddressBook/lib/vendor/GMaps/GoogleMapAPI.class.php');
+        /*include_once('modules/AddressBook/lib/vendor/GMaps/GoogleMapAPI.class.php');
         $key = ModUtil::getVar('AddressBook', 'google_api_key');
         $map = new GoogleMapAPI();
-        $map->setAPIKey($key);
+        $map->setAPIKey($key);*/
+        include_once('modules/AddressBook/lib/vendor/GMaps/GoogleMapV3.php');
+        $map = new GoogleMapAPI();
         $geocode = $map->getGeocode($val_1.', '.$val_2.', '.$val_3.', '.$val_4);
         $result = $geocode['lat'].','.$geocode['lon'];
 

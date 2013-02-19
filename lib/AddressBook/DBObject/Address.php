@@ -41,7 +41,7 @@ class AddressBook_DBObject_Address extends DBObject
 
         $data['sortname']    = $sortvalue; // removet _normalize_special_chars, no need if utf8
         $data['sortcompany'] = $data['company']; // same
-        $data['date']        = GetUserTime(time());
+        $data['date']        = time();
 
         // convert custom date type and numeric values
         // get the custom fields

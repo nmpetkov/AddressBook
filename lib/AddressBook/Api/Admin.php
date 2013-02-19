@@ -47,7 +47,8 @@ class AddressBook_Api_Admin extends Zikula_AbstractApi
 
         $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot);
+        if (!class_exists($class)) {
             return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
         }
 

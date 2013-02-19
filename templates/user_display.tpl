@@ -19,7 +19,6 @@
 {include file="user_menu.tpl"}
 
 <div class="adr_display z-form">
-    <input type="hidden" name="authid" value="{insert name='generateauthkey' module='AddressBook'}" />
     <input type="hidden" name="ot" value="{$ot|varprepfordisplay}" />
     <input type="hidden" name="startnum" value="{$startnum|varprepfordisplay}" />
     <input type="hidden" name="letter" value="{$letter|varprepfordisplay}" />
@@ -163,7 +162,7 @@
         <script type="text/javascript">
             //<![CDATA[
             Event.observe(window, 'load',
-            function() { googlemap.showMap({$address.id}, "{$address.geodata|varprepfordisplay}", "{$preferences.google_zoom|varprepfordisplay}"); },
+            function() { googlemap.showMap({{$address.id}}, "{{$address.geodata|varprepfordisplay}}", "{{$preferences.google_zoom|varprepfordisplay}}"); },
             false);
             //]]>
         </script>

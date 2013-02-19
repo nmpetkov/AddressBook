@@ -28,7 +28,6 @@
             <div class="z-formrow">
                 <label for="search_letter">{gt text="Search"}</label>
                 <input id="search_letter" type="text" name="search" value="" style="width:120px;" maxlength="50" />
-                <input type="hidden" name="authid" id="authid" value="{insert name='generateauthkey' module='AddressBook'}" />
             </div>
             <div class="z-formbuttons">
                 <input type="submit" value="{gt text="Go search"}" />

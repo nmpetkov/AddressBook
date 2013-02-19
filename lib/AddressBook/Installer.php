@@ -218,11 +218,6 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $categories[] = $result->fields;
         }
 
-        // load necessary classes
-        Loader::loadClass('CategoryUtil');
-        Loader::loadClassFromModule('Categories', 'Category');
-        Loader::loadClassFromModule('Categories', 'CategoryRegistry');
-
         // get the language file
         $lang = ZLanguage::getLanguageCode();
 
@@ -298,11 +293,6 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $prefixes[] = $result->fields;
         }
 
-        // load necessary classes
-        Loader::loadClass('CategoryUtil');
-        Loader::loadClassFromModule('Categories', 'Category');
-        Loader::loadClassFromModule('Categories', 'CategoryRegistry');
-
         // get the language file
         $lang = ZLanguage::getLanguageCode();
 
@@ -375,10 +365,6 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
     function _addressbook_createdefaultcategory()
     {
         $dom = ZLanguage::getModuleDomain('AddressBook');
-        // load necessary classes
-        Loader::loadClass('CategoryUtil');
-        Loader::loadClassFromModule('Categories', 'Category');
-        Loader::loadClassFromModule('Categories', 'CategoryRegistry');
 
         // get the language file
         $lang = ZLanguage::getLanguageCode();
@@ -388,7 +374,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $adrCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook');
 
         if (!$adrCat) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'AddressBook');
             $cat->setDataField('display_name', array($lang => __('AddressBook', $dom)));
@@ -404,7 +390,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $adrCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook');
         $adrCat1    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook/Business');
         if (!$adrCat1) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $adrCat['id']);
             $cat->setDataField('name', 'Business');
             $cat->setDataField('is_leaf', 1);
@@ -418,7 +404,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         }
         $adrCat2    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/AddressBook/Personal');
         if (!$adrCat2) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $adrCat['id']);
             $cat->setDataField('name', 'Personal');
             $cat->setDataField('is_leaf', 1);
@@ -434,7 +420,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
 
         if ($adrCat) {
             // place category registry entry for products (key == Products)
-            $registry = new PNCategoryRegistry();
+            $registry = new Categories_DBObject_Registry();
             $registry->setDataField('modname', 'AddressBook');
             $registry->setDataField('table', 'addressbook_address');
             $registry->setDataField('property', 'AddressBook');
@@ -448,7 +434,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $foaCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address');
 
         if (!$foaCat) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'Form of address');
             $cat->setDataField('display_name', array($lang => __('Form of address', $dom)));
@@ -464,7 +450,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $foaCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address');
         $foaCat1    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address/Mr');
         if (!$foaCat1) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $foaCat['id']);
             $cat->setDataField('name', 'Mr');
             $cat->setDataField('is_leaf', 1);
@@ -478,7 +464,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         }
         $foaCat2    = CategoryUtil::getCategoryByPath('/__SYSTEM__/General/Form of address/Mrs');
         if (!$foaCat2) {
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $foaCat['id']);
             $cat->setDataField('name', 'Mrs');
             $cat->setDataField('is_leaf', 1);

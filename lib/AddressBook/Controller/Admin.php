@@ -79,7 +79,8 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         $ot = FormUtil::getPassedValue('ot', 'categories', 'GET');
         $id = (int)FormUtil::getPassedValue('id', 0, 'GET');
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot);
+        if (!class_exists($class)) {
             return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
         }
 
@@ -121,7 +122,8 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
             return System::redirect($url);
         }
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot);
+        if (!class_exists($class)) {
             return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
         }
 
@@ -165,7 +167,8 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         $sort = "cus_pos";
 
         $where = '';
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot) . 'Array';
+        if (!class_exists($class)) {
             return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
         }
 
@@ -187,9 +190,6 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
      */
     public function delete()
     {
-        // Confirm the forms authorisation key
-        $this->checkCsrfToken();
-
         // Security check
         if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN))) {
             return LogUtil::registerPermissionError();
@@ -202,7 +202,8 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
         // Check for existence
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot);
+        if (!class_exists($class)) {
             return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
         }
 
@@ -220,6 +221,10 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
             $this->view->assign('object', $data);
             return $this->view->fetch('admin_delete.tpl');
         }
+
+        // If we get here it means that the user has confirmed the action
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
 
         if (ModUtil::apiFunc('AddressBook', 'admin', 'delete', array('id' => $id, 'ot' => $ot))) {
             // Success

@@ -1,8 +1,6 @@
-{insert name='generateauthkey' module='AddressBook' assign="authid"}
-{gt text="Contact labels" assign="templatetitle"}
 {include file="admin_menu.tpl"}
-
 <div class="z-admincontainer">
+    {gt text="Contact labels" assign="templatetitle"}
     <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle}</div>
     <h2>{$templatetitle}</h2>
     <p><a id="addnewitem" title="{gt text="Add new contact label"}" href="{modurl modname="AddressBook" type="admin" func="edit" ot="labels"}">{gt text="Add new contact label"}</a></p>
@@ -24,7 +22,7 @@
                 {securityutil_checkpermission_block component='AddressBook::' instance='::' level=ACCESS_ADMIN}
                 <td>
                     <a href="{modurl modname="AddressBook" type="admin" func="edit" ot="labels" id=$obj.id}">{img modname=core src=xedit.gif set=icons/extrasmall __alt="Edit" __title="Edit"}</a>
-                    <a href="{modurl modname="AddressBook" type="admin" func="delete" ot="labels" id=$obj.id authid=$authid}">{img src='14_layer_deletelayer.gif' modname='core' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>
+                    <a href="{modurl modname="AddressBook" type="admin" func="delete" ot="labels" id=$obj.id }">{img src='14_layer_deletelayer.gif' modname='core' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>
                 </td>
                 {/securityutil_checkpermission_block}
             </tr>

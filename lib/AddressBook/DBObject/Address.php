@@ -2,26 +2,15 @@
 /**
  * AddressBook
  *
- * @copyright (c) 2009, AddressBook Development Team
- * @link http://code.zikula.org/addressbook
- * @version $Id: PNAddress.class.php 61 2010-03-31 13:44:02Z herr.vorragend $
+ * @copyright (c) AddressBook Development Team
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  * @package AddressBook
- * @subpackage DB
- */
-/*  ----------------------------------------------------------------------
- *  Original Author of file: Thomas Smiatek
- *  Author Contact: thomas@smiatek.com
- *  Purpose of file: PN module version file
- *  Copyright: Thomas Smiatek
- *  ----------------------------------------------------------------------
  */
 
-class PNAddress extends PNObject
+class AddressBook_DBObject_Address extends DBObject
 {
-    function PNAddress($init=null, $key=0)
+    function AddressBook_DBObject_Address($init=null, $key=0)
     {
-        $this->PNObject();
         $this->_objType  = 'addressbook_address';
         $this->_objField = 'id';
         $this->_objPath  = 'address';
@@ -58,10 +47,7 @@ class PNAddress extends PNObject
         // get the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
-        if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return z_exit(__('Error! Unable to load class [customfield]', $dom));
-        }
-        $cus_Array = new $cus_class();
+        $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
         foreach ($customfields as $cus)
         {

@@ -26,10 +26,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $category   = FormUtil::getPassedValue('category', 0);
         $returnid   = FormUtil::getPassedValue('returnid', 0, 'GET');
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit($this->__('Error! Unable to load class [address]'));
-        }
-
         // Get user id
         if (UserUtil::isLoggedIn()) {
             $user_id = UserUtil::getVar('uid');
@@ -39,7 +35,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         $data = array();
         if ($id) {
-            $object = new $class();
+            $object = new AddressBook_DBObject_Address();
             $data = $object->get($id);
             if ($duplicate) {
                 $data['id'] = 0;
@@ -60,16 +56,9 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         // get the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
-        if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return z_exit($this->__('Error! Unable to load class [customfield]'));
-        }
-        $cus_Array = new $cus_class();
+        $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
-        // load the category registry util
-        if (!Loader::loadClass('CategoryRegistryUtil')) {
-            z_exit($this->__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-        }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
         $this->view->setCaching(false); // not suitable for cachin
@@ -127,11 +116,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
                                                                'private'=>$private));
         }
 
-        // load class and data
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
-        }
-        $object = new $class();
+        $object = new AddressBook_DBObject_Address();
         $data =& $object->getDataFromInput();
 
         // permission check
@@ -244,21 +229,13 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             return $this->view->fetch($template);
         }
         
-
-        // get the details
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
-        }
-        $object = new $class();
+        $object = new AddressBook_DBObject_Address();
         $data = $object->get($id);
 
         // get the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
-        if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return z_exit($this->__('Error! Unable to load class [customfield]'));
-        }
-        $cus_Array = new $cus_class();
+        $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
         DBUtil::incrementObjectFieldByID('addressbook_address', 'counter', $id, 'id'); // count clicks
@@ -276,12 +253,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('sort',       $sort);
         $this->view->assign('search',     $search);
 
-        // favourite?
-        if (!($tclass = Loader::loadClassFromModule('AddressBook', 'favourite',true)))
-        return z_exit($this->__('Error! Unable to load class [favourite]'));
-
         $where = "fav_adr_id=$id AND fav_user_id=$user_id";
-        $fav = new $tclass();
+        $fav = new AddressBook_DBObject_FavouriteArray();
         $favData  = $fav->getWhere ($where);
 
         if ($favData)
@@ -405,12 +378,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             }
         }
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-            return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
-        }
-
         // filter for category
-
         if ($category) {
             $where .= " AND $address_column[cat_id] = $category";
         }
@@ -442,10 +410,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             // and now the custom fields
             $cus_where = "";
             $cus_sort = "cus_pos ASC";
-            if (!($class_cus = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-                return z_exit($this->__('Error! Unable to load class [customfield]'));
-            }
-            $cus_Array = new $class_cus();
+            $cus_Array = new AddressBook_DBObject_CustomfieldArray();
             $customfields = $cus_Array->get ($cus_where, $cus_sort);
             foreach($customfields as $cus) {
                 if ((!strstr($cus['type'],'tinyint')) && (!strstr($cus['type'],'smallint')))
@@ -480,7 +445,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         // get the result
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot) . 'Array';
+        if (!class_exists($class)) {
             return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
         }
 
@@ -488,10 +454,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $data = $objectArray->get ($where, $sort, $startnum-1, $pagesize);
         $objcount = $objectArray->getCount ($where);
 
-        // load the category registry util
-        if (!Loader::loadClass('CategoryRegistryUtil')) {
-            z_exit($this->__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-        }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
         $this->view->assign('catregistry',   $catregistry);
@@ -571,11 +533,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
                                                              'category'=>$category,
                                                              'private'=>$private));
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
-        }
-
-        $object = new $class();
+        $object = new AddressBook_DBObject_Address();
         $data = $object->get($id);
 
         if (!$data) {
@@ -651,10 +609,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
                                                              'category'=>$category,
                                                              'private'=>$private));
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit(__('Error! Unable to load class [address]', $dom));
-        }
-        $object = new $class();
+        $object = new AddressBook_DBObject_Address();
         $data = $object->get($id);
 
         // security check
@@ -758,19 +713,13 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         // get the details
-        if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-            return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
-        }
-        $object = new $class();
+        $object = new AddressBook_DBObject_Address();
         $data = $object->get($id);
 
         // get the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
-        if (!($cus_class = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return z_exit($this->__('Error! Unable to load class [customfield]'));
-        }
-        $cus_Array = new $cus_class();
+        $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
 
         $this->view->assign('address', $data);

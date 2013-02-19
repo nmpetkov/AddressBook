@@ -59,10 +59,6 @@ class AddressBook_Api_User extends Zikula_AbstractApi
             }
         }
 
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
-            return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
-        }
-
         // typecasting / security
         if (is_string($search))
         {
@@ -86,10 +82,7 @@ class AddressBook_Api_User extends Zikula_AbstractApi
         // and now the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
-        if (!($class_cus = Loader::loadClassFromModule('AddressBook', 'customfield', true))) {
-            return z_exit($this->$this->$this->$this->__('Error! Unable to load class [customfield]'));
-        }
-        $cus_Array = new $class_cus();
+        $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
         foreach($customfields as $cus) {
             if ((!strstr($cus['type'],'tinyint')) && (!strstr($cus['type'],'smallint')))
@@ -123,7 +116,8 @@ class AddressBook_Api_User extends Zikula_AbstractApi
         }
 
         // get the result
-        if (!($class = Loader::loadClassFromModule('AddressBook', $ot, true))) {
+        $class = 'AddressBook_DBObject_'. ucfirst($ot) . 'Array';
+        if (!class_exists($class)) {
             return z_exit($this->__f('Error! Unable to load class [%s]', $ot));
         }
 
@@ -141,10 +135,7 @@ class AddressBook_Api_User extends Zikula_AbstractApi
     function clearItemCache ($item)
     {
         if ($item && !is_array($item)) {
-            if (!($class = Loader::loadClassFromModule('AddressBook', 'address'))) {
-                return z_exit($this->$this->$this->$this->__('Error! Unable to load class [address]'));
-            }
-            $object = new $class();
+            $object = new AddressBook_DBObject_Address();
             $item = $object->get($item);
         }
         if ($item) {

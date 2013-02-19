@@ -1,6 +1,4 @@
 {ajaxheader modname="AddressBook" filename="addressbook.js"}
-{insert name='generateauthkey' module='AddressBook' assign="authid"}
-
 {include file="admin_menu.tpl"}
 <div class="z-admincontainer">
     {gt text="Custom fields" assign="templatetitle"}
@@ -26,7 +24,7 @@
                     {if ($adminAuth)}
                     <a href="{modurl modname="AddressBook" type="admin" func="edit" ot="customfield" id=$obj.id}">{img modname=core src=xedit.gif set=icons/extrasmall __alt="Edit" __title="Edit"}</a>
                     {if $obj.id > 4}
-                    <a href="{modurl modname="AddressBook" type="admin" func="delete" ot="customfield" id=$obj.id authid=$authid}">{img src='14_layer_deletelayer.gif' modname='core' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>
+                    <a href="{modurl modname="AddressBook" type="admin" func="delete" ot="customfield" id=$obj.id}">{img src='14_layer_deletelayer.gif' modname='core' set='icons/extrasmall' __alt="Delete" __title="Delete"}</a>
                     {/if}
                     {/if}
                 </span>

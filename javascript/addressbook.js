@@ -28,10 +28,10 @@ function get_geodata() {
 function get_geodata_response(req) {
 
     if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
+        showajaxerror(req.responseText);
         return;
     }
-    var json = pndejsonize(req.responseText);
+    var json = dejsonize(req.responseText);
     document.getElementById('address_geodata').value = json.data;
 }
 
@@ -57,7 +57,7 @@ function del_fav(objectid, userid) {
 
 function add_fav_response(req) {
     if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
+        showajaxerror(req.responseText);
         return;
     }
     Element.hide('fav', 'inline');
@@ -66,7 +66,7 @@ function add_fav_response(req) {
 
 function del_fav_response(req) {
     if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
+        showajaxerror(req.responseText);
         return;
     }
     Element.show('fav', 'inline');
@@ -101,7 +101,7 @@ function cforderchanged() {
 
 function cforderchanged_response(req) {
     if (req.status != 200) {
-        pnshowajaxerror(req.responseText);
+        showajaxerror(req.responseText);
         return;
     }
 

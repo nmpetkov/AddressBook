@@ -3,7 +3,6 @@
     <div class="z-adminpageicon">{img modname='core' src='editdelete.gif' set='icons/large' __alt='Delete' }</div>
     {if $ot=="categories"}<h2>{gt text="Category"}</h2>{/if}
     {if $ot=="labels"}<h2>{gt text="Contact label"}</h2>{/if}
-    {if $ot=="prefixes"}<h2>{gt text="Prefix"}</h2>{/if}
     <p class="z-warningmsg">{gt text="Do you really want to delete this item?"}</p>
 
     <form class="z-form" action="{modurl modname="AddressBook" type="admin" func="delete"}" method="post" enctype="application/x-www-form-urlencoded">

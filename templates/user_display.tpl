@@ -77,7 +77,7 @@
             {if $address.img && $preferences.use_img==1}
             <div class="z-formnote">
                 {*<a href="{$address.img|addressbook_img:org}" rel="lightbox"><img src="{$address.img|addressbook_img:tmb}" alt="{$templatetitle}" /></a>*}
-                <a href="{$address.img}" rel="lightbox"><img src="{$address.img}" alt="{$templatetitle}" /></a>
+                <a href="{$address.img}" rel="lightbox"><img src="{$address.img}" alt="{$templatetitle}" width="100" /></a>
             </div>
             {/if}
         </div>

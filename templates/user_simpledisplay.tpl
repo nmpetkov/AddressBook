@@ -135,18 +135,11 @@
     </fieldset>
     {/if}
 
-    {if (($preferences.google_api_key) && ($address.geodata))}
+    {if $address.geodata}
     <fieldset class="z-linear">
         <legend>{gt text="Map" domain="module_addressbook"}</legend>
-        <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={$preferences.google_api_key|varprepfordisplay}"></script>
-        <div id="googlemap{$address.id|varprepfordisplay}" class="map" style="width: 100%; height: 200px"></div>
-        <script type="text/javascript">
-            //<![CDATA[
-            Event.observe(window, 'load',
-            function() { googlemap.showMap({$address.id}, "{$address.geodata|varprepfordisplay}", "{$preferences.google_zoom|varprepfordisplay}"); },
-            false);
-            //]]>
-        </script>
+        <div id="googlemap{$address.id|varprepfordisplay}" class="map" style="width: 100%; height: 200px; resize:both;"></div>
+        {include file='user_displaymap.tpl'}
     </fieldset>
     {/if}
 

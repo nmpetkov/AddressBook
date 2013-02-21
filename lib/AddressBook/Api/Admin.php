@@ -13,6 +13,11 @@ class AddressBook_Api_Admin extends Zikula_AbstractApi
     {
         $links = array();
 
+        if (SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_READ)) {
+            $url = ModUtil::url($this->name, 'user', 'main');
+            $links[] = array('url' => $url, 'text'  => $this->__('Frontend'), 
+                'title' => $this->__('Switch to user area.'), 'class' => 'z-icon-es-home');
+        }
         if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
             $args = array();
             $args['ot'] = 'labels';

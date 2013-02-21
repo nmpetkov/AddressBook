@@ -101,7 +101,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $this->setVar('custom_tab', '');
         $this->setVar('use_prefix', 0);
         $this->setVar('use_img', 0);
-        $this->setVar('google_api_key', '');
+        // Not used in Google Maps Api v3 $this->setVar('google_api_key', '');
         $this->setVar('google_zoom', 15);
         $this->setVar('special_chars_1', 'ÄÖÜäöüß');
         $this->setVar('special_chars_2', 'AOUaous');
@@ -125,7 +125,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
                 if (!DBUtil::executeSQL($sql,-1,-1,false,true))
                 return false;
                 // Upgrade successfull
-                ModUtil::setVar('Addressbook', 'google_api_key', '');
+                // Not used in Google Maps Api v3 ModUtil::setVar('Addressbook', 'google_api_key', '');
                 ModUtil::setVar('Addressbook', 'google_zoom', 15);
                 return AddressBook_upgrade(1.1);
             case '1.1':

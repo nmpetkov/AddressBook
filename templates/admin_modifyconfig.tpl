@@ -38,10 +38,12 @@
             </fieldset>
             <fieldset>
                 <legend>{gt text="Google Maps integration"}</legend>
+                {* Not used in Google Maps Api v3
                 <div class="z-formrow">
                     <label for="preferences_google_api_key">{gt text="Google API key"}</label>
                     <input id="preferences_google_api_key" type="text" name="preferences[google_api_key]" size="90" maxlength="120" value="{$preferences.google_api_key|varprepfordisplay}" />
                 </div>
+                *}
                 <div class="z-formrow">
                     <label for="preferences_google_zoom">{gt text="Google zoom"}</label>
                     <input id="preferences_google_zoom" type="text" name="preferences[google_zoom]" size="4" maxlength="2" value="{$preferences.google_zoom|varprepfordisplay}" />

@@ -1,0 +1,639 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AddressBook\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-01 15:20+0000\n"
+"PO-Revision-Date: 2013-02-20 21:25+0100\n"
+"Last-Translator: Charlie-otb <charlie@postnuke-themes.de>\n"
+"Language-Team: Charlie <Charlie@postnuke-themes.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals = 2;\n"
+"Language: German\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: pnadmin.php:60 pnadmin.php:106 pnadmin.php:145 pnuserapi.php:90
+#: pnuserapi.php:154 pnuser.php:80 pnuser.php:133 pnuser.php:284
+#: pnuser.php:359 pnuser.php:368 pnuser.php:531 pnadminform.php:72
+#: pnadminform.php:113 pnuserform.php:59 pnuserform.php:159
+#, php-format
+msgid "Error! Unable to load class [%s]"
+msgstr "Error! Kann Klasse [% s] nicht laden"
+
+#: pnadmin.php:151
+msgid "Error! No such item found."
+msgstr "Error! Kein  Element gefunden."
+
+#: pnadmin.php:172 pnadminform.php:130
+msgid "Done! Item deleted."
+msgstr "Fertig! Artikel gelöscht."
+
+#: pnajax.php:21 pnajax.php:39 pnajax.php:55 pnajax.php:79
+msgid "Error! No authorization to access this module."
+msgstr "Error! Keine Berechtigung, für dieses Modul."
+
+#: pnajax.php:68 pninit.php:202 pninit.php:281
+msgid "Error! Update attempt failed."
+msgstr "Error! Aktualisieren fehlgeschlagen."
+
+#: pnversion.php:17
+msgid "Address book"
+msgstr "Adress Buch "
+
+#: pnversion.php:18
+msgid "addressbook"
+msgstr "adressbuch"
+
+#: pnversion.php:20
+msgid ""
+"A name and address book (NAB) is for storing entries called contacts. Each "
+"contact entry usually consists of a few standard fields."
+msgstr ""
+"Ein Namens-und Adressbuch (NAB) ist zum Speichern von Einträgen aufgerufen. "
+"Jeder Kontakt-Eintrag besteht üblicherweise aus ein paar Standard-Felder "
+
+#: pnsearchapi.php:157
+msgid "Error! Could not load addresses."
+msgstr "Error!  Adressen konnten nicht geladen werden."
+
+#: pnuserapi.php:45 pnuser.php:189
+#, php-format
+msgid ""
+"This website require it's users to be registered to use the address book."
+"<br />Register for free <a href=\"%1$s\">here</a>, or <a href=\\\"%1$s\\"
+"\">log in</a> if you are already registered."
+msgstr ""
+"Diese Webseite erfordert eine Registrierung um das Adress Buch zu benutzen."
+"<br />Registrierung <a href=\"%1$s\">hier</a>, oder <a href=\\\"%1$s\\\">log "
+"in</a> wenn schon Registriert."
+
+#: pnuserapi.php:117 pnuser.php:73 pnuser.php:142 pnuser.php:321
+#: pnuser.php:540 classes/PNAddress.class.php:62
+msgid "Error! Unable to load class [customfield]"
+msgstr "Error! Kann Klasse [customfield] nicht laden"
+
+#: pncontenttypesapi/address.php:11
+msgid "AddressBook contact"
+msgstr "Adress Buch Kontakt "
+
+#: pncontenttypesapi/address.php:16
+msgid "Display a single address."
+msgstr "Anzeige einer Adresse "
+
+#: pncontenttypesapi/address.php:38
+msgid "No address selected"
+msgstr "Keine Adresse ausgewählt "
+
+#: pnuser.php:44 pnuserform.php:207
+msgid "Error! Unable to load class [address]"
+msgstr "Fehler! Kann Klasse [address] nicht laden"
+
+#: pnuser.php:60
+msgid "Be careful. This is a duplicate!"
+msgstr "Seien Sie vorsichtig. Dies ist ein Duplikat!"
+
+#: pnuser.php:121 pnuser.php:526
+#, php-format
+msgid "Error! Invalid id [%s] received."
+msgstr "Error! Ungültige ID [% s] erhalten."
+
+#: pnuser.php:163
+msgid "Error! Unable to load class [favourite]"
+msgstr "Error! Kann Klasse [favourite] nicht laden"
+
+#: pnuser.php:295
+msgid "Current search term: "
+msgstr "Aktueller Suchbegriff:"
+
+#: pnadminform.php:42
+msgid ""
+"Error! Both fields must contain the same number of characters - Special "
+"character replacement was NOT saved!"
+msgstr ""
+"Error! Beide Felder müssen die gleiche Anzahl von Zeichen - Sonderzeichen "
+"haben.Eingaben wurden nicht gespeichert!"
+
+#: pnadminform.php:46
+msgid "Done! Configuration saved."
+msgstr "Erfolgreich!  Konfigration gespeichert"
+
+#: pnadminform.php:119
+#, php-format
+msgid "%1$s with ID of %2$s doesn'\\t seem to exist"
+msgstr "%1$s with ID of %2$s doesn'\\t seem to exist"
+
+#: pnadminapi.php:22 pntemplates/addressbook_admin_labels_view.html:3
+msgid "Contact labels"
+msgstr "Kontakt labels"
+
+#: pnadminapi.php:29 pntemplates/addressbook_admin_customfield_view.html:7
+#: pntemplates/addressbook_admin_customfield_edit.html:10
+msgid "Custom fields"
+msgstr "benutzerdefinierte Felder"
+
+#: pnadminapi.php:36 pntemplates/addressbook_admin_modifyconfig.html:4
+#: pntemplates/addressbook_admin_modifyconfig.html:6
+msgid "Settings"
+msgstr "Einstellungen "
+
+#: pninit.php:25
+msgid "Work"
+msgstr "Arbeit "
+
+#: pninit.php:28
+msgid "Fax"
+msgstr "Fax "
+
+#: pninit.php:31
+msgid "Mobile"
+msgstr "Handy "
+
+#: pninit.php:34
+msgid "Home"
+msgstr "Home "
+
+#: pninit.php:37
+msgid "Email"
+msgstr "Email "
+
+#: pninit.php:40
+msgid "URL"
+msgstr "URL "
+
+#: pninit.php:43
+msgid "Other"
+msgstr "Sonstiges "
+
+#: pninit.php:57
+msgid "Custom Label 1"
+msgstr "Custom Label 1"
+
+#: pninit.php:62
+msgid "Custom Label 2"
+msgstr "Custom Label 2"
+
+#: pninit.php:67
+msgid "Custom Label 3"
+msgstr "Custom Label 3"
+
+#: pninit.php:72
+msgid "Custom Label 4"
+msgstr "Custom Label 4"
+
+#: pninit.php:92
+msgid "Error! Creation attempt failed."
+msgstr "Error! Kreation ist fehlgeschlagen."
+
+#: pninit.php:173 pninit.php:333
+msgid "AddressBook"
+msgstr "Adress Buch "
+
+#: pninit.php:174 pninit.php:334
+msgid "Adress administration."
+msgstr "Adress administration. "
+
+#: pninit.php:252 pninit.php:253 pninit.php:393 pninit.php:394
+#: pntemplates/addressbook_user_edit.html:66
+msgid "Form of address"
+msgstr "Form der Adresse "
+
+#: pninit.php:350 pninit.php:351
+msgid "Business"
+msgstr "Geschäftlich "
+
+#: pninit.php:364 pninit.php:365
+msgid "Personal"
+msgstr "Persönlich "
+
+#: pninit.php:410 pninit.php:411
+msgid "Mr."
+msgstr "Herr "
+
+#: pninit.php:424 pninit.php:425
+msgid "Mrs."
+msgstr "Frau "
+
+#: pnuserform.php:106
+msgid "Done! The address was saved."
+msgstr "Erfolgreich! Die Adresse wurde gespeichert"
+
+#: pnuserform.php:166
+msgid "Error! The deletion of this address failed."
+msgstr "Error! Das Löschen dieser Adresse ist fehlgeschlagen."
+
+#: pnuserform.php:171
+msgid "Done! The deletion of this address was successful."
+msgstr "Fertig! Die Streichung dieser Adresse war erfolgreich."
+
+#: pnuserform.php:223
+msgid "Error! Company update failed."
+msgstr "Error! Firma update fehlgeschlagen"
+
+#: pnuserform.php:226
+msgid "Done! Company update successful."
+msgstr "Fertig! Firma update erfolgreich."
+
+#: classes/PNAddress.class.php:131
+msgid "An address must contain data in at least one field of the name tab!"
+msgstr "An address must contain data in at least one field of the name tab!"
+
+#: pntemplates/addressbook_admin_delete.htm:4
+#: pntemplates/addressbook_admin_delete.htm:26
+#: pntemplates/addressbook_admin_customfield_view.html:30
+#: pntemplates/addressbook_admin_labels_view.html:28
+#: pntemplates/addressbook_user_delete.html:20
+#: pntemplates/addressbook_user_view.html:94
+msgid "Delete"
+msgstr "löschen"
+
+#: pntemplates/addressbook_admin_delete.htm:5
+#: pntemplates/addressbook_user_simpledisplay.html:20
+#: pntemplates/addressbook_user_edit.html:278
+#: pntemplates/addressbook_user_edit.html:280
+#: pntemplates/addressbook_user_display.html:38
+#: pntemplates/addressbook_user_view.html:21
+msgid "Category"
+msgstr "Kategorie"
+
+#: pntemplates/addressbook_admin_delete.htm:6
+#: pntemplates/addressbook_admin_labels_edit.html:9
+#: pntemplates/addressbook_admin_labels_view.html:14
+msgid "Contact label"
+msgstr "Kontakt label"
+
+#: pntemplates/addressbook_admin_delete.htm:7
+msgid "Prefix"
+msgstr "Prefix"
+
+#: pntemplates/addressbook_admin_delete.htm:8
+msgid "Do you really want to delete this item?"
+msgstr "Sicher das du löschen willst?"
+
+#: pntemplates/addressbook_admin_delete.htm:18
+#: pntemplates/addressbook_user_change_company.html:21
+#: pntemplates/addressbook_user_delete.html:18
+msgid "Confirmation prompt"
+msgstr "Sicherheitsabfrage"
+
+#: pntemplates/addressbook_admin_delete.htm:20
+#: pntemplates/addressbook_user_simpledisplay.html:26
+#: pntemplates/addressbook_user_edit.html:63
+#: pntemplates/addressbook_user_display.html:44
+#: pntemplates/addressbook_admin_labels_edit.html:27
+#: pntemplates/addressbook_user_view.html:49
+#: pntemplates/addressbook_user_view.html:51
+msgid "Name"
+msgstr "Name"
+
+#: pntemplates/addressbook_admin_delete.htm:27
+#: pntemplates/addressbook_user_edit.html:306
+#: pntemplates/addressbook_user_edit.html:308
+#: pntemplates/addressbook_admin_labels_edit.html:34
+#: pntemplates/addressbook_admin_modifyconfig.html:61
+#: pntemplates/addressbook_user_change_company.html:24
+#: pntemplates/addressbook_admin_customfield_edit.html:52
+#: pntemplates/addressbook_user_delete.html:21
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: pntemplates/addressbook_user_simpledisplay.html:39
+#: pntemplates/addressbook_user_edit.html:84
+#: pntemplates/addressbook_user_display.html:57
+msgid "Title"
+msgstr "Titel"
+
+#: pntemplates/addressbook_user_simpledisplay.html:48
+#: pntemplates/addressbook_user_edit.html:88
+#: pntemplates/addressbook_user_display.html:66
+#: pntemplates/addressbook_user_view.html:54
+#: pntemplates/addressbook_user_view.html:56
+msgid "Company"
+msgstr "Firma"
+
+#: pntemplates/addressbook_user_simpledisplay.html:55
+#: pntemplates/addressbook_user_edit.html:120
+#: pntemplates/addressbook_user_edit.html:122
+#: pntemplates/addressbook_user_display.html:12
+#: pntemplates/addressbook_user_display.html:73
+msgid "Address"
+msgstr "Adresse"
+
+#: pntemplates/addressbook_user_simpledisplay.html:71
+#: pntemplates/addressbook_user_edit.html:166
+#: pntemplates/addressbook_user_display.html:89
+#: pntemplates/addressbook_user_view.html:58
+msgid "Contact"
+msgstr "Kontakt"
+
+#: pntemplates/addressbook_user_simpledisplay.html:135
+#: pntemplates/addressbook_user_edit.html:270
+#: pntemplates/addressbook_user_display.html:153
+msgid "Note"
+msgstr "Anmerkungen"
+
+#: pntemplates/addressbook_user_simpledisplay.html:142
+#: pntemplates/addressbook_user_display.html:160
+msgid "Map"
+msgstr "Karte"
+
+#: pntemplates/addressbook_user_edit.html:38
+msgid "Edit this address"
+msgstr "Adresse editieren"
+
+#: pntemplates/addressbook_user_edit.html:40
+#: pntemplates/addressbook_user_menu.html:14
+msgid "Add an address"
+msgstr "Adresse hinzufügen"
+
+#: pntemplates/addressbook_user_edit.html:68
+msgid "No Prefix/Title"
+msgstr "Kein Prefix/Titel"
+
+#: pntemplates/addressbook_user_edit.html:76
+msgid "Last Name"
+msgstr "Nachname"
+
+#: pntemplates/addressbook_user_edit.html:80
+msgid "First Name"
+msgstr "Vorname"
+
+#: pntemplates/addressbook_user_edit.html:131
+#: pntemplates/addressbook_user_edit.html:144
+msgid "Zip"
+msgstr "PLZ"
+
+#: pntemplates/addressbook_user_edit.html:135
+#: pntemplates/addressbook_user_edit.html:140
+msgid "City"
+msgstr "Stadt"
+
+#: pntemplates/addressbook_user_edit.html:149
+msgid "State"
+msgstr "Staat"
+
+#: pntemplates/addressbook_user_edit.html:153
+msgid "Country"
+msgstr "Land/Region"
+
+#: pntemplates/addressbook_user_edit.html:158
+msgid "Google Maps coordinates"
+msgstr "Google Maps Koordinaten"
+
+#: pntemplates/addressbook_user_edit.html:160
+msgid "Get coordinates"
+msgstr "Gehe zu Koordinaten"
+
+#: pntemplates/addressbook_user_edit.html:241
+msgid "%Y-%m-%d"
+msgstr "%d-%m-%Y"
+
+#: pntemplates/addressbook_user_edit.html:272
+msgid "Content"
+msgstr "Inhalt"
+
+#: pntemplates/addressbook_user_edit.html:281
+msgid "Choose a category"
+msgstr "Kategorie wählen"
+
+#: pntemplates/addressbook_user_edit.html:292
+msgid "Private"
+msgstr "Privat"
+
+#: pntemplates/addressbook_user_edit.html:299
+#: pntemplates/addressbook_admin_labels_edit.html:33
+#: pntemplates/addressbook_admin_customfield_edit.html:51
+msgid "Create"
+msgstr "Anlegen"
+
+#: pntemplates/addressbook_user_edit.html:301
+msgid "Duplicate this contact"
+msgstr "Kontakt Duplizieren"
+
+#: pntemplates/addressbook_user_edit.html:303
+msgid "Save and duplicate this contact"
+msgstr "Speichern und Duplizieren des Kontakts"
+
+#: pntemplates/addressbook_admin_customfield_view.html:10
+msgid "You can change the order of the fields with drag and drop."
+msgstr "Sie können die Reihenfolge der Felder per Drag & Drop ändern."
+
+#: pntemplates/addressbook_admin_customfield_view.html:11
+msgid "Add new custom field"
+msgstr "Anlegen eines neuen Custom Feldes"
+
+#: pntemplates/addressbook_admin_customfield_view.html:14
+#: pntemplates/addressbook_admin_labels_view.html:13
+msgid "ID"
+msgstr "ID"
+
+#: pntemplates/addressbook_admin_customfield_view.html:15
+msgid "Custom field"
+msgstr "benutzerdefiniertes Feld"
+
+#: pntemplates/addressbook_admin_customfield_view.html:16
+#: pntemplates/addressbook_admin_customfield_edit.html:36
+msgid "Data Type"
+msgstr "Daten Typ"
+
+#: pntemplates/addressbook_admin_customfield_view.html:17
+#: pntemplates/addressbook_admin_labels_view.html:16
+#: pntemplates/addressbook_user_view.html:59
+msgid "Action"
+msgstr "Aktion"
+
+#: pntemplates/addressbook_admin_customfield_view.html:28
+#: pntemplates/addressbook_user_display.html:181
+#: pntemplates/addressbook_admin_labels_view.html:27
+#: pntemplates/addressbook_user_view.html:91
+msgid "Edit"
+msgstr "Edit"
+
+#: pntemplates/addressbook_user_display.html:173
+#, php-format
+msgid "Last changed on %s"
+msgstr "Letzte Änderung am  %s"
+
+#: pntemplates/addressbook_user_display.html:176
+msgid "Back"
+msgstr "Zurück"
+
+#: pntemplates/addressbook_user_display.html:178
+msgid "Copy"
+msgstr "Kopieren"
+
+#: pntemplates/addressbook_admin_labels_edit.html:21
+msgid "Edit contact label"
+msgstr "Edit Kontakt label"
+
+#: pntemplates/addressbook_admin_labels_edit.html:23
+msgid "Add contact label"
+msgstr "Kontakt label hinzufügen"
+
+#: pntemplates/addressbook_user_menu.html:11
+#: pntemplates/addressbook_user_view.html:2
+msgid "Address list"
+msgstr "Adress Liste"
+
+#: pntemplates/addressbook_user_menu.html:19
+msgid "Show all"
+msgstr "Alle anzeigen"
+
+#: pntemplates/addressbook_user_menu.html:21
+msgid "Show favourites"
+msgstr "Favoriten anzeigen"
+
+#: pntemplates/addressbook_user_menu.html:27
+msgid "Add to favourites"
+msgstr "Zu Favoriten hinzufügen"
+
+#: pntemplates/addressbook_user_menu.html:30
+msgid "Remove favourite"
+msgstr "Favoriten löschen"
+
+#: pntemplates/addressbook_user_menu.html:42
+msgid "Favourites"
+msgstr "Favoriten"
+
+#: pntemplates/addressbook_search_options.html:5
+#: pntemplates/addressbook_admin_menu.htm:4
+msgid "Address Book"
+msgstr "Adress Buch"
+
+#: pntemplates/contenttype/address_edit.html:3
+msgid "Please enter the address id"
+msgstr "Adress id eingeben"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:9
+msgid "General settings"
+msgstr "Allgemeine Einstellungen"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:12
+msgid "Title of this Address Book"
+msgstr "Titel des Adress Buchs"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:16
+msgid "Special character (Umlauts) replacement for sort columns"
+msgstr "Sonderzeichen (Umlaute) als Ersatz zum sortieren"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:24
+msgid "Contacts per page"
+msgstr "Kontakte pro Seite"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:28
+msgid "Disable personal address book mode"
+msgstr "Personal Adress Buch ausschalten"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:32
+msgid "Enable the use of the 'form of address' field"
+msgstr "Aktivieren Sie die Verwendung des 'Anrede' Feldes"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:36
+msgid "Enable embedding of mediashare images"
+msgstr "Aktivieren Einbettung von MediaShare Bildern"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:41
+msgid "Google Maps integration"
+msgstr "Google Maps integration"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:43
+msgid "Google API key"
+msgstr "Google API key"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:47
+msgid "Google zoom"
+msgstr "Google zoom"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:52
+msgid "Custom tab"
+msgstr "Registerkarte Benutzerdefiniert"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:54
+msgid "Tab name"
+msgstr "Tab Name"
+
+#: pntemplates/addressbook_admin_modifyconfig.html:56
+msgid "If empty, no custom fields are displayed."
+msgstr "Wenn leer, werden keine benutzerdefinierten Felder angezeigt."
+
+#: pntemplates/addressbook_admin_modifyconfig.html:60
+msgid "Update Configuration"
+msgstr "Update Konfiguration"
+
+#: pntemplates/addressbook_user_change_company.html:2
+msgid "Company update"
+msgstr "Firma update"
+
+#: pntemplates/addressbook_user_change_company.html:5
+msgid "You have changed the address for a company contact."
+msgstr "Sie haben die Kontakt  Adresse einer Firma geändert."
+
+#: pntemplates/addressbook_user_change_company.html:6
+msgid ""
+"Should all other contacts for this company be updated automatically (company "
+"name, address, zip, city, state and country)?"
+msgstr ""
+"Sollten alle anderen Kontakte für dieses Unternehmen automatisch "
+"aktualisiert werden (Firmenname, Adresse, PLZ, Stadt, Staat und Land)?"
+
+#: pntemplates/addressbook_user_change_company.html:23
+msgid "Update"
+msgstr "Update"
+
+#: pntemplates/addressbook_admin_customfield_edit.html:26
+msgid "Edit field"
+msgstr "Edit feld"
+
+#: pntemplates/addressbook_admin_customfield_edit.html:28
+msgid "Add field"
+msgstr "feld hinzufügen"
+
+#: pntemplates/addressbook_admin_customfield_edit.html:31
+msgid "Field name"
+msgstr "Feld name"
+
+#: pntemplates/addressbook_admin_customfield_edit.html:45
+msgid "Items (comma-separated values)"
+msgstr "Artikel (durch komma getrennt)"
+
+#: pntemplates/addressbook_admin_labels_view.html:9
+msgid "Add new contact label"
+msgstr "Neuen Kontakt label anlegen"
+
+#: pntemplates/addressbook_user_delete.html:2
+msgid "Delete contact"
+msgstr "Kontakt löschen"
+
+#: pntemplates/addressbook_user_delete.html:5
+msgid "Do you really want to delete this address?"
+msgstr "Sicher ob du diese Adresse löschen willst"
+
+#: pntemplates/addressbook_user_view.html:16
+msgid "Show private contacts only"
+msgstr "Nur Private Kontakte anzeigen"
+
+#: pntemplates/addressbook_user_view.html:22
+msgid "All"
+msgstr "Alle"
+
+#: pntemplates/addressbook_user_view.html:30
+msgid "Search"
+msgstr "Suche"
+
+#: pntemplates/addressbook_user_view.html:35
+msgid "Go search"
+msgstr "Suche starten"
+
+#: pntemplates/addressbook_user_view.html:88
+msgid "View"
+msgstr "Anzeige"
+
+#: pntemplates/addressbook_user_view.html:99
+msgid "No address found."
+msgstr "Keine Adresse gefunden"

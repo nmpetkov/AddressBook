@@ -6,8 +6,7 @@
 
 <div class="z-menu">
     <span class="z-menuitem-title">
-        [
-        <span><a href="{modurl modname=AddressBook type=user func=main}">{gt text="Address list"}</a></span>
+        [ <span><a href="{modurl modname=AddressBook type=user func=main}">{gt text="Address list"}</a></span>
 
         {if $addAuth}
         <span>| <a href="{modurl modname=AddressBook type=user func=edit}">{gt text="Add an address"}</a></span>
@@ -20,7 +19,9 @@
         <span>| <a href="{modurl modname=AddressBook type=user func=view ot=favourite}">{gt text="Show favourites"}</a></span>
         {/if}
         {/if}
-
+        {if $addAuth}
+         <span>| <a href="{modurl modname=AddressBook type=admin func=main}">{gt text="Admin"}</a></span>
+        {/if}
         {if $user_id && $func neq 'edit'}
         <span id="fav" {if $isFavourite}style="display:none;"{/if}>
             | <a href="#" onclick="javascript:add_fav({$address.id|varprepfordisplay},{$user_id|varprepfordisplay});">{gt text="Add to favourites"}</a>

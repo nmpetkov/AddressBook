@@ -21,7 +21,7 @@ class AddressBook_Version extends Zikula_AbstractVersion
         $meta['oldnames']         = array('Addressbook');
         $meta['displayname']      = __('Address book');
         $meta['url']              = __('addressbook');
-        $meta['version']          = '1.3.3';
+        $meta['version']          = '1.3.4';
         $meta['description']      = __('Zikula module to manage contacts.');
         $meta['author']           = 'AddressBook Development Team';
         $meta['contact']          = 'https://github.com/nmpetkov/AddressBook';

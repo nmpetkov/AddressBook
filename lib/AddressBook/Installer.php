@@ -109,6 +109,9 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
 
         // Register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+        
+        // Register event handlers
+        EventUtil::registerPersistentModuleHandler('AddressBook', 'module.content.gettypes', array('AddressBook_EventHandler_Listeners', 'getContentTypes'));
 
         // Initialisation successful
         return true;
@@ -173,6 +176,12 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
                 }
                 HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
             case '1.3.3':
+                // Register event handlers
+                if (ModUtil::available('Content')) {
+                    Content_Installer::updateContentType('AddressBook');
+                }
+                EventUtil::registerPersistentModuleHandler('AddressBook', 'module.content.gettypes', array('AddressBook_EventHandler_Listeners', 'getContentTypes'));
+            case '1.3.4':
                 return true;
         }
     }
@@ -478,5 +487,19 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         }
 
         return true;
+    }
+
+    /**
+     * Map old ContentType names to new.
+     *
+     * @return array
+     */
+    public static function LegacyContentTypeMap()
+    {
+        $map = array(
+            'address'     => 'Address'
+        );
+
+        return $map;
     }
 }

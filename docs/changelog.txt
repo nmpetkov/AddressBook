@@ -1,4 +1,12 @@
 -------------------------
+Version 1.3.4 2013 (N.Petkov)
+-------------------------
+- ContentType implementation - now can plug addresses in Content module
+- Settings for AddressBook images directory
+- Setting for used images manager
+- Implementation for KCFinder as images manager (upload/select)
+
+-------------------------
 Version 1.3.3 2013 (N.Petkov)
 -------------------------
 - refactored to Zikula 1.3 standards

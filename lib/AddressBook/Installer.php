@@ -101,6 +101,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $this->setVar('custom_tab', '');
         $this->setVar('use_prefix', 0);
         $this->setVar('use_img', 0);
+        $this->setVar('images_dir', 'userdata/addressbook');
+        $this->setVar('images_manager', 'kcfinder');
         // Not used in Google Maps Api v3 $this->setVar('google_api_key', '');
         $this->setVar('google_zoom', 15);
         $this->setVar('special_chars_1', 'ÄÖÜäöüß');
@@ -181,6 +183,9 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
                     Content_Installer::updateContentType('AddressBook');
                 }
                 EventUtil::registerPersistentModuleHandler('AddressBook', 'module.content.gettypes', array('AddressBook_EventHandler_Listeners', 'getContentTypes'));
+                // default images directory and manager
+                $this->setVar('images_dir', 'userdata/addressbook');
+                $this->setVar('images_manager', 'kcfinder');
             case '1.3.4':
                 return true;
         }

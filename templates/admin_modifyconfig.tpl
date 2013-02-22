@@ -35,6 +35,16 @@
                     <label for="preferences_use_img">{gt text="Enable images"}</label>
                     <input id="preferences_use_img" type="checkbox" name="preferences[use_img]" value="1" {if $preferences.use_img}checked="checked"{/if} />
                 </div>
+                <div class="z-formrow">
+                    <label for="preferences_images_dir">{gt text="Default images directory"}</label>
+                    <input id="preferences_images_dir" type="text" name="preferences[images_dir]" value="{$preferences.images_dir|safetext}" />
+                </div>
+                <div class="z-formrow">
+                    <label for="preferences_images_manager">{gt text='Images manager'}</label>
+                    <select id="preferences_images_manager" name="preferences_images_manager" size="1">
+                        <option value="kcfinder"{if $preferences.images_manager eq 'kcfinder'} selected="selected"{/if}>Kcfinder Zikula plugin</option>
+                    </select>
+                </div>
             </fieldset>
             <fieldset>
                 <legend>{gt text="Google Maps integration"}</legend>

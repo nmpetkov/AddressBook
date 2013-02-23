@@ -52,7 +52,7 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
         ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
         ModUtil::setVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
-        ModUtil::setVar('AddressBook', 'images_dir', (isset($prefs['images_dir']) ? $prefs['images_dir'] : 'userdata/addressbook'));
+        ModUtil::setVar('AddressBook', 'images_dir', (isset($prefs['images_dir']) ? $prefs['images_dir'] : 'userdata/Addressbook'));
         ModUtil::setVar('AddressBook', 'images_manager', (isset($prefs['images_manager']) ? $prefs['images_dir'] : 'kcfinder'));
         // Not used in Google Maps Api v3 ModUtil::setVar('AddressBook', 'google_api_key', (isset($prefs['google_api_key']) ? $prefs['google_api_key'] : ''));
         ModUtil::setVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));

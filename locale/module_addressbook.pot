@@ -333,6 +333,9 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
+msgid "Get directions to this location"
+msgstr ""
+
 #: pntemplates/addressbook_user_edit.html:38
 msgid "Edit this address"
 msgstr ""

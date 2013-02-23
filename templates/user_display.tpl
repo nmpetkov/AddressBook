@@ -156,7 +156,6 @@
     {if $address.geodata}
     <fieldset class="z-linear">
         <legend>{gt text="Map"}</legend>
-        <div id="googlemap{$address.id|varprepfordisplay}" class="map" style="width: 100%; height: 200px; resize:both;"></div>
         {include file='user_displaymap.tpl'}
     </fieldset>
     {/if}

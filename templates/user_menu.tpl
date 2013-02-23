@@ -37,7 +37,7 @@
 
 {insert name='getstatusmsg'}
 
-{if $$templatetitle}
+{if $templatetitle}
 <h3 style="line-height:25px;">
     {$templatetitle}{if $ot=="favourite"} - {gt text="Favourites"}{/if}
     {img id="ajax_indicator" style="display: none;" modname='core' set='ajax' src="indicator_circle.gif" alt=""}

@@ -354,6 +354,9 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
+msgid "Image/Logo"
+msgstr ""
+
 #: pntemplates/addressbook_user_edit.html:131
 #: pntemplates/addressbook_user_edit.html:144
 msgid "Zip"
@@ -378,6 +381,9 @@ msgstr ""
 
 #: pntemplates/addressbook_user_edit.html:160
 msgid "Get coordinates"
+msgstr ""
+
+msgid "Get plane"
 msgstr ""
 
 #: pntemplates/addressbook_user_edit.html:241

@@ -63,7 +63,7 @@
                 <label for="address_img">{gt text="Image/Logo"}
                 {if $preferences.images_manager=='kcfinder'}{gt text="Upload/select image" assign="lblImageManage"}
                     <a href="#" onclick="openKCFinder(document.getElementById('address_img'));">{img modname='core' set='icons/extrasmall' src="search.gif" alt=$lblImageManage title=$lblImageManage}</a>
-                    {kcfinderscript_window images_dir=$preferences.images_dir}{*kcfinderscript_iframe images_dir=$preferences.images_dir*}
+                    {kcfinderscript_window upload_dir=$preferences.images_dir}{*kcfinderscript_iframe upload_dir=$preferences.images_dir*}
                 {/if}
                 </label>
                 <input id="address_img" name="address[img]" value="{$address.img|varprepfordisplay}" type="text" size="60" maxlength="80" />{*<div id="kcfinder_div"></div>*}

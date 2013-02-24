@@ -41,9 +41,20 @@ function smarty_function_AddressShowGmap($params, &$smarty)
     $map->setTypeControlsStyle('dropdown');
     $map->setWidth(($params['width']) ? $params['width'] : '100%');
     $map->setHeight(($params['height']) ? $params['height'] : '400px');
-    $arrLatLong = explode(',', $params['lat_long']);
-    $map->setCenterCoords($arrLatLong[1], $arrLatLong[0]);
-    $map->addMarkerByCoords($arrLatLong[1], $arrLatLong[0], $params['title'], $params['html'], $params['tooltip']);
+    // handle one (center) point
+    if (isset($params['lat_long'])) {
+        $arrLatLong = explode(',', $params['lat_long']);
+        $map->setCenterCoords($arrLatLong[1], $arrLatLong[0]);
+        $map->addMarkerByCoords($arrLatLong[1], $arrLatLong[0], $params['title'], $params['html'], $params['tooltip'], $params['icon'], $params['iconshadow']);
+    }
+    // handle array of points
+    if (isset($params['points'])) {
+        foreach($params['points'] as $point) {
+            $arrLatLong = explode(',', $point['lat_long']);
+            $map->addMarkerByCoords($arrLatLong[1], $arrLatLong[0], $point['title'], $point['html'], $point['tooltip'], $point['icon'], $point['iconshadow']);
+        }
+    }
+    // load the map
     $map->enableOnLoad();
 
     if ($assign) {

@@ -16,10 +16,10 @@
 </script>
 *}
 {capture name='markerhtml'}
+{if $address.img && $preferences.use_img==1}<img src="{$baseurl|cat:$address.img}" alt="" height="50" width="70" style="float:left;margin:0 2px 0 0" />{/if}
+<strong>{if $address.title}{$address.title} {/if}{if $address.fname}{$address.fname} {/if}{if $address.lname}{$address.lname} {/if}{if $address.company}{$address.company}{/if}</strong><br >
 {if $address.address1}{$address.address1}<br >{/if}
-{if $address.city}{$address.city}<br >{/if}
-{if $address.state}{$address.state}<br >{/if}
-{if $address.country}{$address.country}<br >{/if}
+{if $address.city}{$address.city} {/if}{if $address.state}{$address.state} {/if}{if $address.country}{$address.country}{/if}
 {/capture}
 {gt text="Address location" assign='lblTitle'}
-{AddressShowGmap zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml directions=true}
+{AddressShowGmap zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml directions=true icon=$baseurl|cat:'modules/AddressBook/images/marker_green-dot.png' iconshadow=$baseurl|cat:'modules/AddressBook/images/marker_shadow.png'}

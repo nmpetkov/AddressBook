@@ -101,3 +101,5 @@
 </div>
 
 {pager show="page" rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum}
+
+{include file='user_viewmap.tpl'}

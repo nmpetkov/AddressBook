@@ -1,15 +1,15 @@
 {*
-<div id="googlemap{$address.id|varprepfordisplay}" class="map" style="width: 100%; height: 200px; resize:both;"></div>
+<div id="googlemap{$address.id|safehtml}" class="map" style="width: 100%; height: 200px; resize:both;"></div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
     //<![CDATA[
     Event.observe(window, 'load',
     function() { 
-        var mapOptions = { zoom: {{$preferences.google_zoom|varprepfordisplay}}, 
-            center: new google.maps.LatLng({{$address.geodata|varprepfordisplay}}), 
+        var mapOptions = { zoom: {{$preferences.google_zoom|safehtml}}, 
+            center: new google.maps.LatLng({{$address.geodata|safehtml}}), 
             mapTypeId: google.maps.MapTypeId.ROADMAP }
-        var map = new google.maps.Map(document.getElementById("googlemap{{$address.id|varprepfordisplay}}"), mapOptions);
-        var marker = new google.maps.Marker({ position: new google.maps.LatLng({{$address.geodata|varprepfordisplay}}), map: map, 
+        var map = new google.maps.Map(document.getElementById("googlemap{{$address.id|safehtml}}"), mapOptions);
+        var marker = new google.maps.Marker({ position: new google.maps.LatLng({{$address.geodata|safehtml}}), map: map, 
             title:"{{gt text="Address location"}}" });
     }, false);
     //]]>
@@ -22,4 +22,4 @@
 {if $address.city}{$address.city} {/if}{if $address.state}{$address.state} {/if}{if $address.country}{$address.country}{/if}
 {/capture}
 {gt text="Address location" assign='lblTitle'}
-{AddressShowGmap zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml directions=true icon=$baseurl|cat:'modules/AddressBook/images/marker_green-dot.png' iconshadow=$baseurl|cat:'modules/AddressBook/images/marker_shadow.png'}
+{AddressShowGmap zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml tooltip=$lblTitle directions=true icon=$baseurl|cat:'modules/AddressBook/images/marker_green-dot.png' iconshadow=$baseurl|cat:'modules/AddressBook/images/marker_shadow.png'}

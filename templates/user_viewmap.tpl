@@ -2,7 +2,7 @@
     $points = array();
     $showmap = false;
     foreach ($this->get_template_vars('objectArray') as $address) {
-        if ($address['geodata']) {
+        if (isset($address['geodata']) && $address['geodata']) {
             $showmap = true;
             $lblTitle = '';
             if ($address['title']) $lblTitle .= $address['title'].' ';
@@ -16,7 +16,7 @@
             if ($address['city']) $markerhtml .= $address['city'].' ';
             if ($address['state']) $markerhtml .= $address['state'].' ';
             if ($address['country']) $markerhtml .= $address['country'];
-            $points[] = array('lat_long' => $address['geodata'], 'title' => $lblTitle, 'html' => $markerhtml, 'icon' => System::getBaseUrl().'modules/AddressBook/images/marker_green-dot.png', 'iconshadow' => System::getBaseUrl().'modules/AddressBook/images/marker_shadow.png');
+            $points[] = array('lat_long' => $address['geodata'], 'title' => $lblTitle, 'html' => $markerhtml, 'tooltip' => $lblTitle, 'icon' => System::getBaseUrl().'modules/AddressBook/images/marker_green-dot.png', 'iconshadow' => System::getBaseUrl().'modules/AddressBook/images/marker_shadow.png');
         }
     }
      $this->assign('points', $points);

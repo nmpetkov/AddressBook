@@ -14,7 +14,7 @@ function get_geodata() {
     params += '&val_3=' + encodeURIComponent(document.getElementById('address_city').value);
     params += '&val_4=' + encodeURIComponent(document.getElementById('address_country').value);
     var pars = "module=AddressBook&type=ajax&func=get_geodata" + params;
-    var myAjax = new Zikula.Ajax.Request("ajax.php", {
+    var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : get_geodata_response
@@ -34,7 +34,7 @@ function get_geodata_response(req) {
 function add_fav(objectid, userid) {
     var pars = "module=AddressBook&type=ajax&func=addfavourite&objectid=" + objectid
             + "&userid=" + userid;
-    var myAjax = new Zikula.Ajax.Request("ajax.php", {
+    var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : add_fav_response
@@ -44,7 +44,7 @@ function add_fav(objectid, userid) {
 function del_fav(objectid, userid) {
     var pars = "module=AddressBook&type=ajax&func=deletefavourite&objectid=" + objectid
             + "&userid=" + userid;
-    var myAjax = new Zikula.Ajax.Request("ajax.php", {
+    var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : del_fav_response
@@ -88,7 +88,7 @@ function customfieldinit() {
 function cforderchanged() {
     var pars = "module=AddressBook&type=ajax&func=change_cf_order&"
             + Sortable.serialize("cf_list");
-    var myAjax = new Zikula.Ajax.Request("ajax.php", {
+    var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
         method : 'post',
         parameters : pars,
         onComplete : cforderchanged_response

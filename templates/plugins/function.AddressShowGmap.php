@@ -39,8 +39,8 @@ function smarty_function_AddressShowGmap($params, &$smarty)
         $map->setZoomLevel($params['zoomlevel']);
     }
     $map->setTypeControlsStyle('dropdown');
-    $map->setWidth(($params['width']) ? $params['width'] : '100%');
-    $map->setHeight(($params['height']) ? $params['height'] : '400px');
+    $map->setWidth((isset($params['width']) && $params['width']) ? $params['width'] : '100%');
+    $map->setHeight((isset($params['height']) && $params['height']) ? $params['height'] : '400px');
     // handle one (center) point
     if (isset($params['lat_long'])) {
         $arrLatLong = explode(',', $params['lat_long']);

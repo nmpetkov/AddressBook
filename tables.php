@@ -170,7 +170,7 @@ function addCustomFieldsToTableDefinition (&$columns)
         if ($result) {
             $customfields = DBUtil::marshallObjects ($result, array('id'), true);
             foreach ($customfields as $cus) {
-                $col_def = 'custom_'.$cus[id];
+                $col_def = 'custom_'.$cus['id'];
                 $columns[$col_def] = 'adr_'.$col_def;
             }
         }

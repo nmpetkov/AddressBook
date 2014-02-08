@@ -11,13 +11,11 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
 {
     function addfavourite()
     {
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         $objectid = FormUtil::getPassedValue('objectid', null, 'POST');
         $userid   = FormUtil::getPassedValue('userid', null, 'POST');
 
         if (!SecurityUtil::checkPermission('AddressBook::', "::", ACCESS_COMMENT)) {
-            AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
+            AjaxUtil::error($this->__('Error! No authorization to access this module.'));
         }
 
         $obj['favadr_id'] = $objectid;
@@ -29,13 +27,11 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
 
     function deletefavourite()
     {
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         $objectid = FormUtil::getPassedValue('objectid', null, 'POST');
         $userid   = FormUtil::getPassedValue('userid', null, 'POST');
 
         if (!SecurityUtil::checkPermission('AddressBook::', "::", ACCESS_COMMENT)) {
-            AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
+            AjaxUtil::error($this->__('Error! No authorization to access this module.'));
         }
 
         $ztables    = DBUtil::getTables();
@@ -48,10 +44,8 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
 
     function change_cf_order()
     {
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         if (!SecurityUtil::checkPermission('AddressBook::', "::", ACCESS_ADMIN)) {
-            AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
+            AjaxUtil::error($this->__('Error! No authorization to access this module.'));
         }
 
         $cf_list = FormUtil::getPassedValue('cf_list');
@@ -64,7 +58,7 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
         }
         $res = DBUtil::updateObjectArray($cfplacements, 'addressbook_customfields');
         if (!$res) {
-            AjaxUtil::error(__('Error! Update attempt failed.', $dom));
+            AjaxUtil::error($this->__('Error! Update attempt failed.'));
         }
 
         return array('result' => true);
@@ -72,10 +66,8 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
 
     function get_geodata()
     {
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         if (!SecurityUtil::checkPermission('AddressBook::', "::", ACCESS_EDIT)) {
-            AjaxUtil::error(__('Error! No authorization to access this module.', $dom));
+            AjaxUtil::error($this->__('Error! No authorization to access this module.'));
         }
 
         $val_1 = FormUtil::getPassedValue('val_1', NULL, 'GETPOST');

@@ -25,6 +25,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $search     = FormUtil::getPassedValue('search', 0);
         $category   = FormUtil::getPassedValue('category', 0);
         $returnid   = FormUtil::getPassedValue('returnid', 0, 'GET');
+        $private    = FormUtil::getPassedValue('private', 0);
 
         // Get user id
         if (UserUtil::isLoggedIn()) {
@@ -84,8 +85,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         // Confirm the forms authorisation key
         $this->checkCsrfToken();
 
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         // get passed values
         $ot         = FormUtil::getPassedValue('ot', 'address', 'POST');
         $startnum   = FormUtil::getPassedValue('startnum', 1, 'GET');
@@ -117,7 +116,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         $object = new AddressBook_DBObject_Address();
-        $data =& $object->getDataFromInput();
+        //$data =& $object->getDataFromInput();
+        $data = $object->getDataFromInput();
 
         // permission check
         if (UserUtil::isLoggedIn()) {
@@ -150,7 +150,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         // check for company update - part 1: get the old data
-        if ($data['id']) {
+        if (isset($data['id']) && $data['id']) {
             $oldObject = DBUtil::selectObjectByID('addressbook_address', $data['id']);
             if (($oldObject['company'])&&(($oldObject['company']!=$data['company'])||($oldObject['address1']!=$data['address1'])||($oldObject['address2']!=$data['address2'])||($oldObject['zip']!=$data['zip'])||($oldObject['city']!=$data['city'])||($oldObject['state']!=$data['state'])||($oldObject['country']!=$data['country'])))
             {
@@ -171,7 +171,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $object->save();
 
         // create a status message
-        LogUtil::registerStatus (__('Done! The address was saved.', $dom));
+        LogUtil::registerStatus ($this->__('Done! The address was saved.'));
 
         // clear respective cache
         ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
@@ -255,10 +255,9 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         $where = "fav_adr_id=$id AND fav_user_id=$user_id";
         $fav = new AddressBook_DBObject_FavouriteArray();
-        $favData  = $fav->getWhere ($where);
+        $favData  = $fav->getWhere($where);
 
-        if ($favData)
-        $this->view->assign ('isFavourite', 1);
+        $this->view->assign('isFavourite', $favData ? 1 : 0);
 
         unset ($fav);
         unset ($favData);
@@ -269,7 +268,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('lang',        ZLanguage::getLanguageCode());
 
         return $this->view->fetch($template);
-
     }
 
     function view()
@@ -295,6 +293,9 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         if (empty($sort)) {
             $sort = "sortname ASC";
+        }
+        if ($ot == 'favourite') {
+            $sort = '';
         }
 
         // Get user id
@@ -509,7 +510,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         // Confirm the forms authorisation key
         $this->checkCsrfToken();
 
-        $dom = ZLanguage::getModuleDomain('AddressBook');
         // security check
         if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_DELETE))) {
             return LogUtil::registerPermissionError();
@@ -537,12 +537,12 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $data = $object->get($id);
 
         if (!$data) {
-            LogUtil::registerError(__('Error! The deletion of this address failed.', $dom));
+            LogUtil::registerError($this->__('Error! The deletion of this address failed.'));
             return System::redirect($url);
         }
 
         $object->delete();
-        LogUtil::registerStatus(__('Done! The deletion of this address was successful.', $dom));
+        LogUtil::registerStatus($this->__('Done! The deletion of this address was successful.'));
 
         // clear respective cache
         ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
@@ -579,6 +579,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('private',    $private);
         $this->view->assign('sort',       $sort);
         $this->view->assign('search',     $search);
+        $this->view->assign('oldvalue',   $oldvalue);
 
         // return output
         return $this->view->fetch('user_change_company.tpl');
@@ -588,8 +589,6 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
     {
         // Confirm the forms authorisation key
         $this->checkCsrfToken();
-
-        $dom = ZLanguage::getModuleDomain('AddressBook');
 
         $ot = FormUtil::getPassedValue('ot', 'address', 'GETPOST');
         $id = (int)FormUtil::getPassedValue('id', 0, 'GETPOST');
@@ -623,25 +622,25 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerPermissionError();
         }
 
-        $obj = array('company'  => $data[company],
-                     'address1' => $data[address1],
-                     'address2' => $data[address2],
-                     'zip'      => $data[zip],
-                     'city'     => $data[city],
-                     'state'    => $data[state],
-                     'country'  => $data[country]);
+        $obj = array('company'  => $data['company'],
+                     'address1' => $data['address1'],
+                     'address2' => $data['address2'],
+                     'zip'      => $data['zip'],
+                     'city'     => $data['city'],
+                     'state'    => $data['state'],
+                     'country'  => $data['country']);
 
         $res = DBUtil::updateObject($obj, 'addressbook_address', '', 'company');
 
         if (!$res) {
-            LogUtil::registerError (__('Error! Company update failed.', $dom));
+            LogUtil::registerError ($this->__('Error! Company update failed.'));
             return System::redirect($url);
         }
 
         // clear respective cache
         ModUtil::apiFunc('AddressBook', 'user', 'clearItemCache', $data);
 
-        LogUtil::registerStatus (__('Done! Company update successful.', $dom));
+        LogUtil::registerStatus ($this->__('Done! Company update successful.'));
 
         return System::redirect($url);
     }

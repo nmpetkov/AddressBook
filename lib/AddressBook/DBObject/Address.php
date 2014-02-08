@@ -9,7 +9,7 @@
 
 class AddressBook_DBObject_Address extends DBObject
 {
-    function AddressBook_DBObject_Address($init=null, $key=0)
+    public function AddressBook_DBObject_Address($init=null, $key=0)
     {
         $this->_objType  = 'addressbook_address';
         $this->_objField = 'id';
@@ -17,7 +17,7 @@ class AddressBook_DBObject_Address extends DBObject
         $this->_init($init, $key);
     }
 
-    function getDataFromInputPostProcess ($data=null)
+    public function getDataFromInputPostProcess ($data=null)
     {
         if (!$data)
         $data =& $this->_objData;
@@ -27,17 +27,12 @@ class AddressBook_DBObject_Address extends DBObject
         return $data;
     }
 
-    function insertPreProcess()
+    public function insertPreProcess($data = null)
     {
         $data =& $this->_objData;
 
         // sort column
-        if (ModUtil::getVar('AddressBook', 'name_order')==1) {
-            $sortvalue = $data[fname].' '.$data[lname];
-        }
-        else {
-            $sortvalue = $data[lname].', '.$data[fname];
-        }
+        $sortvalue = $data['fname'].' '.$data['lname'];
 
         $data['sortname']    = $sortvalue; // removet _normalize_special_chars, no need if utf8
         $data['sortcompany'] = $data['company']; // same
@@ -90,18 +85,18 @@ class AddressBook_DBObject_Address extends DBObject
         return $data;
     }
 
-    function insertPostProcess()
+    public function insertPostProcess($data = null)
     {
         $data['id'] = DBUtil::getInsertID('addressbook_address');
         return $data;
     }
 
-    function updatePreProcess()
+    public function updatePreProcess($data = null)
     {
         return $this->insertPreProcess();
     }
 
-    function validate ($data=null)
+    public function validate ($data=null)
     {
         $dom = ZLanguage::getModuleDomain('AddressBook');
         if (!$data) {
@@ -112,7 +107,7 @@ class AddressBook_DBObject_Address extends DBObject
             return false;
         }
 
-        if (($data['company'] == '' || empty($data['company'])) && ($data['name'] == '' || empty($data['name']))&& ($data['fname'] == '' || empty($data['fname'])))
+        if (($data['company'] == '' || empty($data['company'])) && ($data['lname'] == '' || empty($data['lname']))&& ($data['fname'] == '' || empty($data['fname'])))
         {
             $_SESSION['validationErrors'][$this->_objPath]['company'] = __('An address must contain data in at least one field of the name tab!', $dom);
             $_SESSION['validationFailedObjects'][$this->_objPath] = $data;

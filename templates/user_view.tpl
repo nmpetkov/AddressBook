@@ -3,9 +3,9 @@
 {formutil_getpassedvalue key="sort" assign="sort"}
 {usergetvar name="uid" assign="user_id"}
 {userloggedin assign="loggedin"}
-{securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_READ' assign='viewAuth'}
-{securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
-{securityutil_checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_READ' assign='viewAuth'}
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
 
 <form class="z-form" id="addressbook-search" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
     <div>
@@ -35,7 +35,7 @@
         </fieldset>
     </div>
     <div id="addressbook-alphafilter" class="z-center">
-        <strong>[{pagerabc posvar="letter" forwardvars="sort,category,private,search,ot" printempty=true}]</strong>
+        {pagerabc posvar="letter" forwardvars="sort,category,private,search,ot" printempty=true}
     </div>
 </form>
 
@@ -61,13 +61,9 @@
             {foreach item=object from=$objectArray}
             <tr class="{cycle values="z-odd,z-even"}">
                 <td>
-                    {if $name_order == 1}
-                    {if $object.fname && $object.lname}{$object.fname|varprepfordisplay} {$object.lname|varprepfordisplay}{else}{$object.fname|varprepfordisplay}{$object.lname|varprepfordisplay}{/if}
-                    {else}
-                    {if $object.fname && $object.lname}{$object.lname|varprepfordisplay}, {$object.fname|varprepfordisplay}{else}{$object.lname|varprepfordisplay}{$object.fname|varprepfordisplay}{/if}
-                    {/if}
+                    {if $object.fname && $object.lname}{$object.fname|safehtml} {$object.lname|safehtml}{else}{$object.fname|safehtml}{$object.lname|safehtml}{/if}
                 </td>
-                <td>{$object.company|varprepfordisplay}</td>
+                <td>{$object.company|safehtml}</td>
                 <td>
                     {if $object.c_main == 0}
                     {$object.contact_1|contact}
@@ -83,13 +79,13 @@
                 </td>
                 <td class="z-nowrap">
                     {if $viewAuth}
-                    <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="demo.gif" __alt="View" __title="View"}</a>
+                    <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="demo.png" __alt="View" __title="View"}</a>
                     {/if}
                     {if $editAuth || $user_id == $object.user_id}
-                    <a href="{modurl modname=AddressBook type=user func=edit id=$object.id formcall="edit" ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="xedit.gif" __alt="Edit" __title="Edit"}</a>
+                    <a href="{modurl modname=AddressBook type=user func=edit id=$object.id formcall="edit" ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="xedit.png" __alt="Edit" __title="Edit"}</a>
                     {/if}
                     {if $delAuth || $user_id == $object.user_id}
-                    <a href="{modurl modname=AddressBook type=user func=delete id=$object.id ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="14_layer_deletelayer.gif" __alt="Delete" __title="Delete"}</a>
+                    <a href="{modurl modname=AddressBook type=user func=delete id=$object.id ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="14_layer_deletelayer.png" __alt="Delete" __title="Delete"}</a>
                     {/if}
                 </td>
             </tr>

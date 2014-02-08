@@ -138,7 +138,7 @@ class AddressBook_Api_User extends Zikula_AbstractApi
             $object = new AddressBook_DBObject_Address();
             $item = $object->get($item);
         }
-        if ($item) {
+        if ($item && isset($item['id']) && $item['id'] > 0) {
             // Clear View_cache
             $cache_ids = array();
             $cache_ids[] = 'display/id_'.$item['id'];

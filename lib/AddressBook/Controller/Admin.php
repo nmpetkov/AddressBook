@@ -53,18 +53,18 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
         ModUtil::setVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
         ModUtil::setVar('AddressBook', 'images_dir', (isset($prefs['images_dir']) ? $prefs['images_dir'] : 'userdata/Addressbook'));
-        ModUtil::setVar('AddressBook', 'images_manager', (isset($prefs['images_manager']) ? $prefs['images_dir'] : 'kcfinder'));
+        ModUtil::setVar('AddressBook', 'images_manager', (isset($prefs['images_manager']) ? $prefs['images_manager'] : 'kcfinder'));
         // Not used in Google Maps Api v3 ModUtil::setVar('AddressBook', 'google_api_key', (isset($prefs['google_api_key']) ? $prefs['google_api_key'] : ''));
         ModUtil::setVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));
         ModUtil::setVar('AddressBook', 'itemsperpage', ($prefs['itemsperpage']>1 ? $prefs['itemsperpage'] : 30));
         ModUtil::setVar('AddressBook', 'custom_tab', (isset($prefs['custom_tab']) ? $prefs['custom_tab'] : ''));
 
         if (mb_strlen($prefs['special_chars_1']) != mb_strlen($prefs['special_chars_2']))
-        LogUtil::registerError(__('Error! Both fields must contain the same number of characters - Special character replacement was NOT saved!', $dom));
+        LogUtil::registerError($this->__('Error! Both fields must contain the same number of characters - Special character replacement was NOT saved!'));
 
 
         // redirect back to to main admin page
-        LogUtil::registerStatus (__('Done! Configuration saved.', $dom));
+        LogUtil::registerStatus ($this->__('Done! Configuration saved.'));
         return System::redirect(ModUtil::url('AddressBook', 'admin', 'main'));
     }
     
@@ -114,8 +114,6 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         // Security check
 		 $this->throwForbiddenUnless(SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN));
 
-        $dom = ZLanguage::getModuleDomain('AddressBook');
-
         $ot =  FormUtil::getPassedValue('ot', 'categories', 'POST');
         $url = ModUtil::url('AddressBook', 'admin', 'view', array('ot'=>$ot));
 
@@ -126,7 +124,7 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
 
         $class = 'AddressBook_DBObject_'. ucfirst($ot);
         if (!class_exists($class)) {
-            return z_exit(__f('Error! Unable to load class [%s]', $ot, $dom));
+            return z_exit(__f('Error! Unable to load class [%s]', $ot));
         }
 
         $object = new $class();
@@ -138,7 +136,7 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
             $obj = $object->getDataFromInput();
             if ($obj['type']=='dropdown')
             $obj['type']='text';
-            if ($obj['id']) {
+            if (isset($obj['id']) && $obj['id']) {
                 $sql="ALTER TABLE addressbook_address CHANGE adr_custom_".$obj['id']." adr_custom_".$obj['id']." ".$obj['type'];
             } else {
                 $cus_id = DBUtil::getInsertID('addressbook_customfields');

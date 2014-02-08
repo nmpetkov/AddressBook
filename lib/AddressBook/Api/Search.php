@@ -125,12 +125,7 @@ class AddressBook_Api_Search extends Zikula_AbstractApi
 
       foreach ($addresses as $address)
       {
-          if ((ModUtil::getVar('AddressBook', 'name_order'))==1)
-          {
-              $line_1 = $address['fname']." ".$address['lname'];
-          } else {
-              $line_1 = $address['lname'].", ".$address['fname'];
-          }
+          $line_1 = $address['fname']." ".$address['lname'];
           if (empty($line_1))
           $line_1 = $address['company'];
           else {

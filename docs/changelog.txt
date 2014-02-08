@@ -15,7 +15,7 @@ Version 1.3.3 2013 (N.Petkov)
 -------------------------
 Version 1.3.2 2013 (N.Petkov)
 -------------------------
-- tegged version
+- tagged version
 - more cleanup
 
 -------------------------

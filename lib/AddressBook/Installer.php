@@ -220,7 +220,6 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
 
     function _addressbook_migratecategories()
     {
-        $dom = ZLanguage::getModuleDomain('AddressBook');
         $dbprefix = System::getVar('prefix');
         $dbprefix = $dbprefix ? $dbprefix.'_' : '';
 
@@ -243,8 +242,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'AddressBook');
-            $cat->setDataField('display_name', array($lang => __('AddressBook', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Adress administration.', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('AddressBook')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Adress administration.')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -272,7 +271,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
 
             $sql = "UPDATE {$dbprefix}addressbook_address SET adr_catid = $catid WHERE adr_catid = $category[0]";
             if (!DBUtil::executeSQL($sql)) {
-                return LogUtil::registerError(__('Error! Update attempt failed.', $dom));
+                return LogUtil::registerError($this->__('Error! Update attempt failed.'));
             }
         }
 
@@ -318,8 +317,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'Form of address');
-            $cat->setDataField('display_name', array($lang => __('Form of address', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Form of address', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Form of address')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Form of address')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -347,7 +346,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
 
             $sql = "UPDATE {$dbprefix}addressbook_address SET adr_prefix = $catid WHERE adr_prefix = $prefix[0]";
             if (!DBUtil::executeSQL($sql)) {
-                return LogUtil::registerError(__('Error! Update attempt failed.', $dom));
+                return LogUtil::registerError($this->__('Error! Update attempt failed.'));
             }
         }
 
@@ -391,8 +390,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'AddressBook');
-            $cat->setDataField('display_name', array($lang => __('AddressBook', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Adress administration.', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('AddressBook')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Adress administration.')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -408,8 +407,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $adrCat['id']);
             $cat->setDataField('name', 'Business');
             $cat->setDataField('is_leaf', 1);
-            $cat->setDataField('display_name', array($lang => __('Business', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Business', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Business')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Business')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -422,8 +421,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $adrCat['id']);
             $cat->setDataField('name', 'Personal');
             $cat->setDataField('is_leaf', 1);
-            $cat->setDataField('display_name', array($lang => __('Personal', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Personal', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Personal')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Personal')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -451,8 +450,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'Form of address');
-            $cat->setDataField('display_name', array($lang => __('Form of address', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Form of address', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Form of address')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Form of address')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -468,8 +467,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $foaCat['id']);
             $cat->setDataField('name', 'Mr');
             $cat->setDataField('is_leaf', 1);
-            $cat->setDataField('display_name', array($lang => __('Mr.', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Mr.', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Mr.')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Mr.')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -482,8 +481,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $foaCat['id']);
             $cat->setDataField('name', 'Mrs');
             $cat->setDataField('is_leaf', 1);
-            $cat->setDataField('display_name', array($lang => __('Mrs.', $dom)));
-            $cat->setDataField('display_desc', array($lang => __('Mrs.', $dom)));
+            $cat->setDataField('display_name', array($lang => $this->__('Mrs.')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Mrs.')));
             if (!$cat->validate('admin')) {
                 return false;
             }

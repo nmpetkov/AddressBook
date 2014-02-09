@@ -26,8 +26,10 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN))) {
             return LogUtil::registerPermissionError();
         }
+        $modvars = ModUtil::getVar('AddressBook');
+
         // Create output object
-        $this->view->assign('preferences', ModUtil::getVar('AddressBook'));
+        $this->view->assign('preferences', $modvars);
 
         return $this->view->fetch('admin_modifyconfig.tpl');
     }
@@ -47,8 +49,6 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
 
         // now for each perference entry, set the appropriate module variable
         ModUtil::setVar('AddressBook', 'abtitle', (isset($prefs['abtitle']) ? $prefs['abtitle'] : ''));
-        ModUtil::setVar('AddressBook', 'special_chars_1', (isset($prefs['special_chars_1']) ? $prefs['special_chars_1'] : ''));
-        ModUtil::setVar('AddressBook', 'special_chars_2', (isset($prefs['special_chars_2']) ? $prefs['special_chars_2'] : ''));
         ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
         ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
         ModUtil::setVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
@@ -58,10 +58,8 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         ModUtil::setVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));
         ModUtil::setVar('AddressBook', 'itemsperpage', ($prefs['itemsperpage']>1 ? $prefs['itemsperpage'] : 30));
         ModUtil::setVar('AddressBook', 'custom_tab', (isset($prefs['custom_tab']) ? $prefs['custom_tab'] : ''));
-
-        if (mb_strlen($prefs['special_chars_1']) != mb_strlen($prefs['special_chars_2']))
-        LogUtil::registerError($this->__('Error! Both fields must contain the same number of characters - Special character replacement was NOT saved!'));
-
+        ModUtil::setVar('AddressBook', 'addressbooktype', (isset($prefs['addressbooktype']) ? $prefs['addressbooktype'] : 1));
+        ModUtil::setVar('AddressBook', 'showabcfilter', (isset($prefs['showabcfilter']) ? $prefs['showabcfilter'] : 0));
 
         // redirect back to to main admin page
         LogUtil::registerStatus ($this->__('Done! Configuration saved.'));

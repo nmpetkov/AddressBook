@@ -12,12 +12,15 @@
                     <input id="preferences_abtitle" type="text" name="preferences[abtitle]" size="30" maxlength="60" value="{$preferences.abtitle|safehtml}" />
                 </div>
                 <div class="z-formrow">
-                    <label>{gt text="Special character (Umlauts) replacement for sort columns"}</label>
-                    <div>
-                        <input id="preferences_special_chars_1" type="text" name="preferences[special_chars_1]" size="12" maxlength="24" value="{$preferences.special_chars_1|safehtml}" />
-                        =>
-                        <input id="preferences_special_chars_2" type="text" name="preferences[special_chars_2]" size="12" maxlength="24" value="{$preferences.special_chars_2|safehtml}" />
-                    </div>
+                    <label for="preferences_addressbooktype">{gt text="Type of this Address Book"}</label>
+                    <select id="preferences_addressbooktype" name="preferences[addressbooktype]" size="1">
+                        <option value="1"{if $preferences.addressbooktype eq 1} selected="selected"{/if}>People</option>
+                        <option value="2"{if $preferences.addressbooktype eq 2} selected="selected"{/if}>Companies</option>
+                    </select>
+                </div>
+                <div class="z-formrow">
+                    <label for="preferences_showabcfilter">{gt text="Show ABC filter"}</label>
+                    <input id="preferences_showabcfilter" type="checkbox" name="preferences[showabcfilter]" value="1" {if $preferences.showabcfilter eq 1}checked="checked"{/if} />
                 </div>
                 <div class="z-formrow">
                     <label for="preferences_itemsperpage">{gt text="Contacts per page"}</label>

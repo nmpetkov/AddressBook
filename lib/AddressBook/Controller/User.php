@@ -21,7 +21,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $id         = (int) FormUtil::getPassedValue('id', 0, 'GET');
         $startnum   = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter     = FormUtil::getPassedValue('letter', 0);
-        $sort       = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort       = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
+
         $search     = FormUtil::getPassedValue('search', 0);
         $category   = FormUtil::getPassedValue('category', 0);
         $returnid   = FormUtil::getPassedValue('returnid', 0, 'GET');
@@ -89,7 +90,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $ot         = FormUtil::getPassedValue('ot', 'address', 'POST');
         $startnum   = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter     = FormUtil::getPassedValue('letter', 0);
-        $sort       = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort       = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search     = FormUtil::getPassedValue('search', 0);
         $category   = FormUtil::getPassedValue('category', 0);
         $private    = FormUtil::getPassedValue('private', 0);
@@ -207,7 +208,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $id = (int)FormUtil::getPassedValue('id', 0, 'GET');
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);
@@ -286,13 +287,27 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $pagesize = ModUtil::getVar('AddressBook', 'itemsperpage', 30);
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);
 
         if (empty($sort)) {
-            $sort = "sortname ASC";
+            if (ModUtil::getVar('AddressBook', 'addressbooktype')==1) {
+                $sort = "sortname ASC";
+            } else {
+                $sort = "sortcompany ASC";
+            }
+        } else {
+            if (ModUtil::getVar('AddressBook', 'addressbooktype')==1) {
+                if (strpos($sort, 'sortname') === false) {
+                    $sort .= ", sortname ASC";
+                }
+            } else {
+                if (strpos($sort, 'sortcompany') === false) {
+                    $sort .= ", sortcompany ASC";
+                }
+            }
         }
         if ($ot == 'favourite') {
             $sort = '';
@@ -384,6 +399,15 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             $where .= " AND $address_column[cat_id] = $category";
         }
 
+        // Inactive status is visible to admins only
+        if ($ot=="address" && !(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN))) {
+            $where .= " AND $address_column[status] = 1";
+        }
+        // Filter by language
+        if ($ot=="address") {
+            $where .= " AND ($address_column[language] = '' OR $address_column[language] = '".DataUtil::formatForStore(ZLanguage::getLanguageCode())."')";
+        }
+
         // filter for search
         if ($search) {
             LogUtil::registerStatus ($this->__('Current search term: ').$search);
@@ -452,6 +476,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         $objectArray = new $class();
+            //print_r($sort);
         $data = $objectArray->get ($where, $sort, $startnum-1, $pagesize);
         $objcount = $objectArray->getCount ($where);
 
@@ -466,6 +491,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('private',       $private);
         $this->view->assign('search',        $search);
         $this->view->assign('globalprotect', ModUtil::getVar('AddressBook', 'globalprotect'));
+        $this->view->assign('preferences',   ModUtil::getVar('AddressBook'));
         $this->view->assign('pager',         array('numitems'     => $objcount,
                                                  'itemsperpage' => $pagesize));
 
@@ -484,7 +510,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $id = (int)FormUtil::getPassedValue('id', 0, 'GETPOST');
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);
@@ -520,7 +546,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);
@@ -563,7 +589,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $oldvalue = (int)FormUtil::getPassedValue('oldvalue', 0, 'GETPOST');
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);
@@ -595,7 +621,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $oldvalue = (int)FormUtil::getPassedValue('oldvalue', 0, 'GETPOST');
         $startnum = FormUtil::getPassedValue('startnum', 1, 'GET');
         $letter   = FormUtil::getPassedValue('letter', 0);
-        $sort     = FormUtil::getPassedValue('sort', 'sortname ASC');
+        $sort     = FormUtil::getPassedValue('sort', ModUtil::getVar('AddressBook', 'addressbooktype')==1 ? 'sortname ASC' : 'sortcompany ASC');
         $search   = FormUtil::getPassedValue('search', 0);
         $category = FormUtil::getPassedValue('category', 0);
         $private  = FormUtil::getPassedValue('private', 0);

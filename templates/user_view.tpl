@@ -7,63 +7,88 @@
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
 
-<form class="z-form" id="addressbook-search" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
+<form class="z-form z-linear" id="addressbook-search" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <fieldset>
             {if !$globalprotect && !empty($loggedin)}
-            <div class="z-formrow">
+            <div>
                 <label for="private">{gt text="Show private contacts only"}</label>
                 <input id="private" type="checkbox" name="private" value="1" {if $private}checked{/if} />
             </div>
             {/if}
-            <div class="z-formrow">
-                <label>{gt text="Category"}</label>
-                {gt text='All' assign='lblDef'}
-                {nocache}
-                {foreach from=$catregistry key='property' item='catview'}
-                <div class="z-formnote">{selector_category category=$catview name="category" field='id' selectedValue=$category defaultValue=0 defaultText=$lblDef editLink=false}</div>
-                {/foreach}
-                {/nocache}
-            </div>
-            <div class="z-formrow">
-                <label for="search_letter">{gt text="Search"}</label>
-                <input id="search_letter" type="text" name="search" value="" style="width:120px;" maxlength="50" />
-            </div>
-            <div class="z-formbuttons">
-                <input type="submit" value="{gt text="Go search"}" />
-            </div>
+            <label for="category">{gt text="Category"}</label>
+            {gt text='All' assign='lblDef'}
+            {nocache}
+            {foreach from=$catregistry key='property' item='catview'}
+            {selector_category category=$catview name="category" field='id' selectedValue=$category defaultValue=0 defaultText=$lblDef editLink=false}
+            {/foreach}
+            {/nocache}
+            <label for="search_letter">{gt text="Search"}</label>
+            <input id="search_letter" type="text" name="search" value="" style="width:120px;" maxlength="50" />
+            <input type="submit" value="{gt text="Search"}" />
         </fieldset>
     </div>
-    <div id="addressbook-alphafilter" class="z-center">
+    {if $preferences.showabcfilter}
+    <div id="addressbook-alphafilter">
         {pagerabc posvar="letter" forwardvars="sort,category,private,search,ot" printempty=true}
     </div>
+    {/if}
 </form>
 
 <div class="addressbook_itemlist">
     <table class="z-datatable">
         <thead>
             <tr>
-                {if $sort=="lname ASC"}
-                <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="lname DESC"}">{gt text="Name"}</a>{if strpos($sort,'name')} {img modname='AddressBook' src="s_asc.png" alt="" }{/if}</th>
-                {else}
-                <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="lname ASC"}">{gt text="Name"}</a>{if strpos($sort,'name')} {img modname='AddressBook' src="s_desc.png" alt="" }{/if}</th>
+                {if $preferences.addressbooktype == 2}
+                    <th>{gt text="Logo"}</th>
+                {/if}
+                {if $preferences.addressbooktype == 1}
+                    {if $sort=="lname ASC"}
+                    <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="lname DESC"}">{gt text="Name"}</a>{if strpos($sort,'name')} {img modname='AddressBook' src="s_asc.png" alt="" }{/if}</th>
+                    {else}
+                    <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="lname ASC"}">{gt text="Name"}</a>{if strpos($sort,'name')} {img modname='AddressBook' src="s_desc.png" alt="" }{/if}</th>
+                    {/if}
                 {/if}
                 {if $sort=="company ASC"}
                 <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="company DESC"}">{gt text="Company"}</a>{if strpos($sort,'ompany')} {img modname='AddressBook' src="s_asc.png" alt="" }{/if}</th>
                 {else}
                 <th><a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter search=$search sort="company ASC"}">{gt text="Company"}</a>{if strpos($sort,'ompany')} {img modname='AddressBook' src="s_desc.png" alt="" }{/if}</th>
                 {/if}
+                {if $preferences.addressbooktype == 2}
+                    <th>{gt text="City"}</th>
+                    <th>{gt text="Activity"}</th>
+                {/if}
                 <th>{gt text="Contact"}</th>
                 <th>{gt text="Action"}</th>
+                {if $editAuth}
+                    <th>{gt text="Viewed"}</th>
+                {/if}
             </tr>
         </thead>
         <tbody>
             {foreach item=object from=$objectArray}
             <tr class="{cycle values="z-odd,z-even"}">
+                {if $preferences.addressbooktype == 2}
+                    <td style="text-align:center">
+                        {if isset($object.img) && $object.img<>''}<a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}"><img src="{$object.img}" alt="" />{/if}</a>
+                    </td>
+                {/if}
+                {if $preferences.addressbooktype == 1}
                 <td>
                     {if $object.fname && $object.lname}{$object.fname|safehtml} {$object.lname|safehtml}{else}{$object.fname|safehtml}{$object.lname|safehtml}{/if}
                 </td>
-                <td>{$object.company|safehtml}</td>
+                {/if}
+                <td>
+                    <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{$object.company|safehtml}</a>
+                </td>
+                {if $preferences.addressbooktype == 2}
+                    <td>
+                        {if isset($object.city)}{$object.city|safehtml}{/if}
+                    </td>
+                    <td>
+                        {if isset($object.custom_1)}{$object.custom_1|safehtml}{/if}
+                    </td>
+                {/if}
                 <td>
                     {if $object.c_main == 0}
                     {$object.contact_1|contact}
@@ -88,6 +113,9 @@
                     <a href="{modurl modname=AddressBook type=user func=delete id=$object.id ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="14_layer_deletelayer.png" __alt="Delete" __title="Delete"}</a>
                     {/if}
                 </td>
+            {if $editAuth}
+                <td style="text-align:center">{if isset($object.counter)}{$object.counter}{/if}</td>
+            {/if}
             </tr>
             {foreachelse}
             <tr class="z-datatableempty"><td colspan="6">{gt text="No address found."}</td></tr>

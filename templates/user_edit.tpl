@@ -29,13 +29,59 @@
         <input type="hidden" name="returnid" value="{$returnid|safehtml}" />
 
         <fieldset>
+            <legend>{gt text="Category"}</legend>
+            <div class="z-formrow">
+                <label>{gt text='Category'}</label>
+                {gt text='Choose a category' assign='lblDef'}
+                {nocache}
+                {foreach from=$catregistry key='property' item='categoryitem'}
+                <div class="z-formnote">
+                    {if $address.id}
+                    {selector_category category=$categoryitem name="address[cat_id]" field='id' selectedValue=$address.cat_id defaultValue=0 defaultText=$lblDef}
+                    {else}
+                    {selector_category category=$categoryitem name="address[cat_id]" field='id' defaultValue=0 defaultText=$lblDef}
+                    {/if}
+                </div>
+                {/foreach}
+                {/nocache}
+            </div>
+            <div class="z-formrow">
+                <label for="address_language">{gt text='Language for which should be displayed'}</label>
+                {if $address.id}
+                    {html_select_languages id="address_language" name="address[language]" installed=1 all=1 selected=$address.language}
+                {else}
+                    {html_select_languages id="address_language" name="address[language]" installed=1 all=1}
+                {/if}
+            </div>
+            <div class="z-formrow">
+                <label for="address_status">{gt text="Status"}</label>
+                <select name="address[status]" id="address_status">
+                    <option label="{gt text="Active"}" value="1"{if $address.id && $address.status eq 1} selected="selected"{/if}>{gt text="Active"}</option>
+                    <option label="{gt text="Inactive"}" value="0"{if $address.id && $address.status eq 0} selected="selected"{/if}>{gt text="Inactive"}</option>
+                </select>
+            </div>
+            {if $preferences.globalprotect}
+            <input id="address_private" name="address[private]" type="hidden" value="" />
+            {else}
+            <div class="z-formrow">
+                <label for="address_private">{gt text="Private"}</label>
+                <input id="address_private" name="address[private]" type="checkbox" {if $address.id && $address.private}checked="checked"{/if} />
+            </div>
+            {/if}
+        </fieldset>
+
+        <fieldset>
             <legend>{gt text="Name"}</legend>
             {if $preferences.use_prefix==1}
             <div class="z-formrow">
                 <label for="address_prefix_">{gt text="Form of address"}</label>
                 <div>
                     {gt text="No Prefix/Title" assign="defaultPrfxText"}
-                    {selector_category path="/__SYSTEM__/General/Form of address" name="address[prefix]" defaultValue="0" defaultText=$defaultPrfxText selectedValue=$address.prefix editLink=true}
+                    {if $address.id}
+                        {selector_category path="/__SYSTEM__/General/Form of address" name="address[prefix]" defaultValue="0" defaultText=$defaultPrfxText selectedValue=$address.prefix editLink=true}
+                    {else}
+                        {selector_category path="/__SYSTEM__/General/Form of address" name="address[prefix]" defaultValue="0" defaultText=$defaultPrfxText editLink=true}
+                    {/if}
                 </div>
             </div>
             {else}
@@ -254,33 +300,6 @@
                 <label for="address_note">{gt text="Content"}</label>
                 <textarea id="address_note" name="address[note]" class="z_texpand" rows="6" cols="40">{if $address.id}{$address.note|safehtml}{/if}</textarea>
             </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>{gt text="Category"}</legend>
-            <div class="z-formrow">
-                <label>{gt text='Category'}</label>
-                {gt text='Choose a category' assign='lblDef'}
-                {nocache}
-                {foreach from=$catregistry key='property' item='categoryitem'}
-                <div class="z-formnote">
-                    {if $address.id}
-                    {selector_category category=$categoryitem name="address[cat_id]" field='id' selectedValue=$address.cat_id defaultValue=0 defaultText=$lblDef}
-                    {else}
-                    {selector_category category=$categoryitem name="address[cat_id]" field='id' defaultValue=0 defaultText=$lblDef}
-                    {/if}
-                </div>
-                {/foreach}
-                {/nocache}
-            </div>
-            {if $preferences.globalprotect}
-            <input id="address_private" name="address[private]" type="hidden" value="" />
-            {else}
-            <div class="z-formrow">
-                <label for="address_private">{gt text="Private"}</label>
-                <input id="address_private" name="address[private]" type="checkbox" {if $address.id && $address.private}checked="checked"{/if} />
-            </div>
-            {/if}
         </fieldset>
 
         {notifydisplayhooks eventname='addressbook.ui_hooks.items.form_edit' id=null}

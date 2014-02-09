@@ -24,7 +24,11 @@ class AddressBook_Api_User extends Zikula_AbstractApi
         }
 
         $search = (isset($args['search']) ? $args['search'] : '');
-        $sort = "sortname ASC";
+        if (ModUtil::getVar('AddressBook', 'addressbooktype')==1) {
+            $sort = "sortname ASC";
+        } else {
+            $sort = "sortcompany ASC";
+        }
         $ot   = "address";
 
         // Get user id

@@ -49,7 +49,9 @@ function AddressBook_tables()
         'user_id'          => 'adr_user',
         'private'          => 'adr_private',
         'date'             => 'adr_date',
-        'counter'          => 'adr_counter' // count clicks
+        'counter'          => 'adr_counter',
+        'language'         => 'adr_language',
+        'status'           => 'adr_status'
     );
 
     // Enable categorization services
@@ -97,7 +99,9 @@ function AddressBook_tables()
         'user_id'       => "I DEFAULT NULL",
         'private'       => "I2 DEFAULT NULL",
         'date'          => "I  NOTNULL DEFAULT 0",
-        'counter'       => "I  NOTNULL DEFAULT 0"
+        'counter'       => "I  NOTNULL DEFAULT 0",
+        'language'      => "C(30) NOTNULL DEFAULT ''",
+        'status'        => "I1 DEFAULT '1'"
     );
     ObjectUtil::addStandardFieldsToTableDataDefinition($tables['addressbook_address_column_def'], 'adr_');
 

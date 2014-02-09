@@ -1,4 +1,12 @@
 -------------------------
+Version 1.3.5 2014 (N.Petkov)
+-------------------------
+- Clean the code to work in Zikula 1.3.7 dev mode
+- Added language column
+- Added status column (Active/Inactive)
+- Added new setting, type of address book:  People or Companies
+
+-------------------------
 Version 1.3.4 2013 (N.Petkov)
 -------------------------
 - ContentType implementation - now can plug addresses in Content module
@@ -11,6 +19,9 @@ Version 1.3.3 2013 (N.Petkov)
 -------------------------
 - refactored to Zikula 1.3 standards
 - Implemented subscribers hooks - display and edit
+- Make Ajax functional
+- Google maps library is updated to v3, also maps templates
+- Added overview map with markers, shown below the table with listed addresses
 
 -------------------------
 Version 1.3.2 2013 (N.Petkov)

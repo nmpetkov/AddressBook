@@ -105,9 +105,9 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $this->setVar('images_manager', 'kcfinder');
         // Not used in Google Maps Api v3 $this->setVar('google_api_key', '');
         $this->setVar('google_zoom', 15);
-        $this->setVar('special_chars_1', 'ÄÖÜäöüß');
-        $this->setVar('special_chars_2', 'AOUaous');
         $this->setVar('enablecategorization', true);
+        $this->setVar('addressbooktype', 1); // 1-people, 2-companies
+        $this->setVar('showabcfilter', 1);
 
         // Register hooks
         HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
@@ -187,6 +187,19 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
                 $this->setVar('images_dir', 'userdata/Addressbook');
                 $this->setVar('images_manager', 'kcfinder');
             case '1.3.4':
+                // Add language and status column
+                DBUtil::changeTable('addressbook_address');
+                // Assume language of created records is "All". Status set to active.
+                $objArray = array('language' => '', 'status' => 1);
+                DBUtil::updateObject($objArray, 'addressbook_address', 'WHERE 1');
+                
+                // Delete unused settings
+                ModUtil::delVar('Addressbook', 'special_chars_1');
+                ModUtil::delVar('Addressbook', 'special_chars_2');
+                // Register new settings
+                $this->setVar('addressbooktype', 1); // 1-people, 2-companies
+                $this->setVar('showabcfilter', 1);
+            case '1.3.5':
                 return true;
         }
     }
@@ -206,10 +219,9 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         ModUtil::delVar('AddressBook');
 
         // Delete entries from category registry
-        if (!ModUtil::dbInfoLoad('Categories')) {
-            return false;
+        if (ModUtil::dbInfoLoad('Categories')) {
+            DBUtil::deleteWhere('categories_registry', "modname='AddressBook'");
         }
-        DBUtil::deleteWhere('categories_registry', "modname='AddressBook'");
 
         // Remove hooks
         HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());

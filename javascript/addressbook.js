@@ -23,12 +23,15 @@ function get_geodata() {
 
 function get_geodata_response(req) {
 
-    if (req.status != 200) {
-        showajaxerror(req.responseText);
+    if (!req.isSuccess()) {
+        Zikula.showajaxerror(req.getMessage());
         return;
     }
-    var json = Zikula.dejsonize(req.responseText);
-    document.getElementById('address_geodata').value = json.data;
+    var data = req.getData();
+
+    if (data.lat_lon) {
+        document.getElementById('address_geodata').value = data.lat_lon;
+    }
 }
 
 function add_fav(objectid, userid) {

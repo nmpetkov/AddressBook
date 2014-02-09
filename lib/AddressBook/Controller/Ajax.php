@@ -83,11 +83,15 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
         include_once('modules/AddressBook/lib/vendor/GMaps/GoogleMapV3.php');
         $map = new GoogleMapAPI();
         $geocode = $map->getGeocode($val_1.', '.$val_2.', '.$val_3.', '.$val_4);
-        $result = $geocode['lat'].','.$geocode['lon'];
+        if (isset($geocode['lat']) && isset($geocode['lon'])) {
+            $result = $geocode['lat'].','.$geocode['lon'];
+        } else {
+            $result = '';
+        }
 
         if (FormUtil::getPassedValue('plane', NULL, 'GETPOST')) {
             return $result;
         }
-        return array('data' => $result,'result' => true);
+        return new Zikula_Response_Ajax(array('lat_lon' => $result, 'result' => ($result ? true : false)));
     }
 }

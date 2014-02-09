@@ -3,43 +3,42 @@
 {userloggedin assign="loggedin"}
 {formutil_getpassedvalue key="func" assign="func"}
 <h2>{modgetvar module="AddressBook" name="abtitle"}</h2>
-
-<div class="z-menu">
-    <span class="z-menuitem-title">
-        [ <span><a href="{modurl modname=AddressBook type=user func=main}">{gt text="Address list"}</a></span>
+{if !empty($loggedin)}
+<div class="z-menu">{strip}
+    <ul class="z-menulinks">
+        <li style="display: inline;"><a href="{modurl modname=AddressBook type=user func=main}">{gt text="Address list"}</a></li>
 
         {if $addAuth}
-        <span>| <a href="{modurl modname=AddressBook type=user func=edit}">{gt text="Add an address"}</a></span>
+        <li style="display: inline;"><a href="{modurl modname=AddressBook type=user func=edit}">{gt text="Add an address"}</a></li>
         {/if}
 
         {if !empty($loggedin)}
         {if $ot=="favourite"}
-        <span>| <a href="{modurl modname=AddressBook type=user func=view ot=address}">{gt text="Show all"}</a></span>
+        <li style="display: inline;"><a href="{modurl modname=AddressBook type=user func=view ot=address}">{gt text="Show all"}</a></li>
         {else}
-        <span>| <a href="{modurl modname=AddressBook type=user func=view ot=favourite}">{gt text="Show favourites"}</a></span>
+        <li style="display: inline;"><a href="{modurl modname=AddressBook type=user func=view ot=favourite}">{gt text="Show favourites"}</a></li>
         {/if}
         {/if}
+
         {if $addAuth}
-         <span>| <a href="{modurl modname=AddressBook type=admin func=main}">{gt text="Admin"}</a></span>
+         <li style="display: inline;"><a href="{modurl modname=AddressBook type=admin func=main}">{gt text="Admin"}</a></li>
         {/if}
+
         {if isset($user_id) && $user_id && $func neq 'edit'}
-        <span id="fav" {if $isFavourite}style="display:none;"{/if}>
-            | <a href="#" onclick="javascript:add_fav({$address.id|safehtml},{$user_id|safehtml});">{gt text="Add to favourites"}</a>
-        </span>
-        <span id="nofav" {if !$isFavourite}style="display:none;"{/if}>
-            | <a href="#" onclick="javascript:del_fav({$address.id|safehtml},{$user_id|safehtml});">{gt text="Remove favourite"}</a>
-        </span>
+        <li id="fav" style="display: inline;{if $isFavourite} display:none;{/if}">
+            <a href="#" onclick="javascript:add_fav({$address.id|safehtml},{$user_id|safehtml});">{gt text="Add to favourites"}</a>
+        </li>
+        <li id="nofav" style="display: inline;{if !$isFavourite} display:none;{/if}">
+            <a href="#" onclick="javascript:del_fav({$address.id|safehtml},{$user_id|safehtml});">{gt text="Remove favourite"}</a>
+        </li>
         {/if}
-
-        ]
-    </span>
-</div>
-
-{insert name='getstatusmsg'}
+    </ul>
+{/strip}</div>
 
 {if $templatetitle}
-<h3 style="line-height:25px;">
-    {$templatetitle}{if $ot=="favourite"} - {gt text="Favourites"}{/if}
-    {img id="ajax_indicator" style="display: none;" modname='core' set='ajax' src="indicator_circle.gif" alt=""}
-</h3>
+    {if $ot=="favourite"}
+        <h3>{$templatetitle} - {gt text="Favourites"}</h3>
+    {/if}
 {/if}
+{/if}
+{img id="ajax_indicator" style="display: none;" modname='core' set='ajax' src="indicator_circle.gif" alt=""}

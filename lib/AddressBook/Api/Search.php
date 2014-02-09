@@ -117,7 +117,11 @@ class AddressBook_Api_Search extends Zikula_AbstractApi
 
       ModUtil::loadApi('AddressBook', 'user');
 
-      $sort = "sortname DESC,sortcompany DESC";
+      if (ModUtil::getVar('AddressBook', 'addressbooktype')==1) {
+          $sort = "sortname DESC,sortcompany DESC";
+      } else {
+          $sort = "sortcompany DESC,sortname DESC";
+      }
 
       $permChecker = new addressbook_result_checker();
       //$addresses = DBUtil::selectObjectArray('addressbook_address', $where, null, null, '', $permChecker, null);

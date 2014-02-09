@@ -32,9 +32,7 @@ class AddressBook_DBObject_Address extends DBObject
         $data =& $this->_objData;
 
         // sort column
-        $sortvalue = $data['fname'].' '.$data['lname'];
-
-        $data['sortname']    = $sortvalue; // removet _normalize_special_chars, no need if utf8
+        $data['sortname']    = $data['fname'].' '.$data['lname'];
         $data['sortcompany'] = $data['company']; // same
         $data['date']        = time();
 

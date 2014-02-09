@@ -31,13 +31,13 @@
         {if $address.cat_id}
         {category_path id=$address.cat_id field="display_name" assign="category_name"}
         {/if}
-        {if $address.prefix && $preferences.use_prefix==1}
+        {if $preferences.use_prefix==1 && $address.prefix}
         {category_path id=$address.prefix field="display_name" assign="prefix_name"}
         {/if}
         <legend>{if isset($category_name)}{gt text="Category"}: {$category_name.$lang|safehtml}{/if}</legend>
         <div class="z-clearfix">
             <div class="z-formrow">
-                {if $preferences.use_prefix==1 && $prefix_name}
+                {if $preferences.use_prefix==1 && $address.prefix && $prefix_name}
                 <span class="z-formlist">{$prefix_name.$lang|safehtml}</span>
                 {/if}
                 <label>{gt text="Name"}:</label>

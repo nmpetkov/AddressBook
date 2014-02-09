@@ -7,7 +7,7 @@
  * @package AddressBook
  */
 
-class AddressBook_Controller_Ajax extends Zikula_AbstractController
+class AddressBook_Controller_Ajax extends Zikula_Controller_AbstractAjax
 {
     function addfavourite()
     {
@@ -93,5 +93,44 @@ class AddressBook_Controller_Ajax extends Zikula_AbstractController
             return $result;
         }
         return new Zikula_Response_Ajax(array('lat_lon' => $result, 'result' => ($result ? true : false)));
+    }
+
+    /**
+     * This function sets active/inactive status.
+     *
+     * @param id
+     *
+     * @return mixed true or Ajax error
+     */
+    public function setstatus()
+    {
+        $this->checkAjaxToken();
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN));
+
+        $id = $this->request->request->get('id', 0);
+        $status = $this->request->request->get('status', 0);
+        $alert = '';
+  
+        if ($id == 0) {
+            $alert .= $this->__('No ID passed.');
+        } else {
+            $item = array('id' => $id, 'status' => $status);
+            $res = DBUtil::updateObject($item, 'addressbook_address', '', 'id');
+            if (!$res) {
+                $alert .= $item['id'].', '. $this->__f('Could not change item, ID %s.', DataUtil::formatForDisplay($id));
+                if ($item['status']) {
+                    $item['status'] = 0;
+                } else {
+                    $item['status'] = 1;
+                }
+            }
+        }
+        // get current status to return
+        $item = DBUtil::selectObjectByID('addressbook_address', $id, 'id');
+        if (!$item) {
+            $alert .= $this->__f('Could not get data, ID %s.', DataUtil::formatForDisplay($id));
+        }
+
+        return new Zikula_Response_Ajax(array('id' => $id, 'status' => $item['status'], 'alert' => $alert));
     }
 }

@@ -6,6 +6,10 @@
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_READ' assign='viewAuth'}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_ADMIN' assign='adminAuth'}
+{if $adminAuth}
+    {ajaxheader modname='AddressBook' filename='addressbook.js' nobehaviour=true noscriptaculous=true}
+{/if}
 
 <form class="z-form z-linear" id="addressbook-search" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
     <div>
@@ -59,6 +63,9 @@
                     <th>{gt text="Activity"}</th>
                 {/if}
                 <th>{gt text="Contact"}</th>
+                {if $adminAuth}
+                    <th>{gt text="Status"}</th>
+                {/if}
                 <th>{gt text="Action"}</th>
                 {if $editAuth}
                     <th>{gt text="Viewed"}</th>
@@ -102,6 +109,21 @@
                     {$object.contact_5|contact}
                     {/if}
                 </td>
+                {if $adminAuth}
+                    {gt text="Click to activate" assign='activate'}
+                    {gt text="Click to deactivate" assign='deactivate'}
+                    <td class="z-nowrap">
+                        <div id="statusactive_{$object.id}" style="display: {if $object.status}block{else}none{/if};">
+                            <a href="javascript:void(0);" onclick="setstatus({$object.id},0)">{img src="greenled.png" modname="core" set="icons/extrasmall" title=$deactivate alt=$deactivate}</a>
+                            &nbsp;{gt text="Active"}
+                        </div>
+                        <div id="statusinactive_{$object.id}" style="display: {if $object.status}none{else}block{/if};">
+                            <a href="javascript:void(0);" onclick="setstatus({$object.id},1)">{img src="redled.png" modname="core" set="icons/extrasmall" title=$activate alt=$activate}</a>
+                            &nbsp;{gt text="Inactive"}
+                        </div>
+                        {img id="statusajaxind_"|cat:$object.id style="display: none;" modname=core set="ajax" src="indicator_circle.gif" alt=""}
+                    </td>
+                {/if}
                 <td class="z-nowrap">
                     {if $viewAuth}
                     <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' set='icons/extrasmall' src="demo.png" __alt="View" __title="View"}</a>

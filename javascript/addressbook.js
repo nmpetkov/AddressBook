@@ -113,3 +113,43 @@ function toggleoption() {
     else
         $('custom_option').fade();
 }
+
+/**
+ * Toggle active/inactive status
+ */
+function setstatus(id, status)
+{
+    ajaxindicator = document.getElementById("statusajaxind_"+id);
+    ajaxindicator.style.display = "inline";
+
+    var pars = {id: id, status: status};
+    new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php?module=AddressBook&type=ajax&func=setstatus",
+        {parameters: pars, onComplete: setstatus_response});
+}
+function setstatus_response(req)
+{
+    if (!req.isSuccess()) {
+        Zikula.showajaxerror(req.getMessage());
+        return;
+    }
+    var data = req.getData();
+    
+    if (data.alert) {
+        alert(data.alert);
+    }
+
+    ajaxindicator = document.getElementById("statusajaxind_"+data.id);
+    ajaxindicator.style.display = "none";
+
+    elementActive = document.getElementById("statusactive_"+data.id);
+    elementInactive = document.getElementById("statusinactive_"+data.id);
+    if (elementActive && elementInactive) {
+        if (data.status == 1) {
+            elementActive.style.display = "block";
+            elementInactive.style.display = "none";
+        } else {
+            elementActive.style.display = "none";
+            elementInactive.style.display = "block";
+        }
+    }
+}

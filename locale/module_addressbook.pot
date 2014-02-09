@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-09 19:28+0000\n"
+"POT-Creation-Date: 2014-02-09 20:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Error! Could not load addresses."
 msgstr ""
 
-#: lib/AddressBook/Api/User.php:18 lib/AddressBook/Controller/User.php:278
+#: lib/AddressBook/Api/User.php:18
 #, php-format
 msgid ""
 "This website require it's users to be registered to use the address book."
@@ -238,6 +238,20 @@ msgstr ""
 msgid "Error! No authorization to access this module."
 msgstr ""
 
+#: lib/AddressBook/Controller/Ajax.php:115
+msgid "No ID passed."
+msgstr ""
+
+#: lib/AddressBook/Controller/Ajax.php:120
+#, php-format
+msgid "Could not change item, ID %s."
+msgstr ""
+
+#: lib/AddressBook/Controller/Ajax.php:131
+#, php-format
+msgid "Could not get data, ID %s."
+msgstr ""
+
 #: templates/admin_customfield_edit.tpl:25
 msgid "Edit field"
 msgstr ""
@@ -276,81 +290,101 @@ msgstr ""
 msgid "Address list"
 msgstr ""
 
-#: templates/user_view.tpl:15
+#: templates/user_view.tpl:19
 msgid "Show private contacts only"
 msgstr ""
 
-#: templates/user_view.tpl:19 templates/user_simpledisplay.tpl:18
+#: templates/user_view.tpl:23 templates/user_simpledisplay.tpl:18
 #: templates/admin_delete.tpl:4 templates/user_display.tpl:37
 #: templates/user_edit.tpl:32 templates/user_edit.tpl:34
 msgid "Category"
 msgstr ""
 
-#: templates/user_view.tpl:20
+#: templates/user_view.tpl:24
 msgid "All"
 msgstr ""
 
-#: templates/user_view.tpl:26 templates/user_view.tpl:28
+#: templates/user_view.tpl:30 templates/user_view.tpl:32
 msgid "Search"
 msgstr ""
 
-#: templates/user_view.tpl:43
+#: templates/user_view.tpl:47
 msgid "Logo"
 msgstr ""
 
-#: templates/user_view.tpl:47 templates/user_view.tpl:49
+#: templates/user_view.tpl:51 templates/user_view.tpl:53
 #: templates/user_simpledisplay.tpl:24 templates/admin_delete.tpl:18
 #: templates/admin_labels_edit.tpl:26 templates/user_display.tpl:43
 #: templates/user_edit.tpl:74
 msgid "Name"
 msgstr ""
 
-#: templates/user_view.tpl:53 templates/user_view.tpl:55
+#: templates/user_view.tpl:57 templates/user_view.tpl:59
 #: templates/user_simpledisplay.tpl:46 templates/user_display.tpl:65
 #: templates/user_edit.tpl:103
 msgid "Company"
 msgstr ""
 
-#: templates/user_view.tpl:58 templates/user_edit.tpl:143
+#: templates/user_view.tpl:62 templates/user_edit.tpl:143
 #: templates/user_edit.tpl:148
 msgid "City"
 msgstr ""
 
-#: templates/user_view.tpl:59
+#: templates/user_view.tpl:63
 msgid "Activity"
 msgstr ""
 
-#: templates/user_view.tpl:61 templates/user_simpledisplay.tpl:70
+#: templates/user_view.tpl:65 templates/user_simpledisplay.tpl:70
 #: templates/user_display.tpl:89 templates/user_edit.tpl:174
 msgid "Contact"
 msgstr ""
 
-#: templates/user_view.tpl:62 templates/admin_customfield_view.tpl:14
+#: templates/user_view.tpl:67 templates/user_edit.tpl:57
+msgid "Status"
+msgstr ""
+
+#: templates/user_view.tpl:69 templates/admin_customfield_view.tpl:14
 #: templates/admin_labels_view.tpl:13
 msgid "Action"
 msgstr ""
 
-#: templates/user_view.tpl:64
+#: templates/user_view.tpl:71
 msgid "Viewed"
 msgstr ""
 
-#: templates/user_view.tpl:107
+#: templates/user_view.tpl:113
+msgid "Click to activate"
+msgstr ""
+
+#: templates/user_view.tpl:114
+msgid "Click to deactivate"
+msgstr ""
+
+#: templates/user_view.tpl:118 templates/user_edit.tpl:59
+msgid "Active"
+msgstr ""
+
+#: templates/user_view.tpl:122 templates/user_edit.tpl:60
+msgid "Inactive"
+msgstr ""
+
+#: templates/user_view.tpl:129
 msgid "View"
 msgstr ""
 
-#: templates/user_view.tpl:110 templates/user_display.tpl:175
+#: templates/user_view.tpl:132 templates/user_display.tpl:175
 #: templates/admin_customfield_view.tpl:25 templates/admin_labels_view.tpl:24
 msgid "Edit"
 msgstr ""
 
-#: templates/user_view.tpl:113 templates/admin_delete.tpl:3
+#: templates/user_view.tpl:135 templates/admin_delete.tpl:3
 #: templates/admin_delete.tpl:24 templates/user_display.tpl:178
 #: templates/admin_customfield_view.tpl:27 templates/admin_labels_view.tpl:25
 #: templates/user_delete.tpl:19
 msgid "Delete"
 msgstr ""
 
-#: templates/user_view.tpl:121
+#: templates/user_view.tpl:143
 msgid "No address found."
 msgstr ""
 
@@ -489,18 +523,6 @@ msgstr ""
 
 #: templates/user_edit.tpl:49
 msgid "Language for which should be displayed"
-msgstr ""
-
-#: templates/user_edit.tpl:57
-msgid "Status"
-msgstr ""
-
-#: templates/user_edit.tpl:59
-msgid "Active"
-msgstr ""
-
-#: templates/user_edit.tpl:60
-msgid "Inactive"
 msgstr ""
 
 #: templates/user_edit.tpl:67

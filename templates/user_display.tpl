@@ -1,4 +1,3 @@
-{insert name='getstatusmsg'}
 {ajaxheader modname=AddressBook filename=addressbook.js}
 {userloggedin assign="loggedin"}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}

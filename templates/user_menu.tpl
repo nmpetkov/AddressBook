@@ -2,6 +2,9 @@
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_ADD' assign='addAuth'}
 {userloggedin assign="loggedin"}
 {formutil_getpassedvalue key="func" assign="func"}
+
+{insert name='getstatusmsg'}
+
 <h2>{modgetvar module="AddressBook" name="abtitle"}</h2>
 {if !empty($loggedin)}
 <div class="z-menu">{strip}

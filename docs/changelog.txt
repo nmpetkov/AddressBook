@@ -1,13 +1,15 @@
 -------------------------
-Version 1.3.5 2014 (N.Petkov)
+Version 1.3.5 2014
 -------------------------
 - Clean the code to work in Zikula 1.3.7 dev mode
 - Added language column
-- Added status column (Active/Inactive)
+- Added status column (Active/Inactive) with Ajax change
 - Added new setting, type of address book:  People or Companies
+- Setting 'Disable personal address book mode' no longer prevents from access from unregistered users. This is controlled from Zikula permissions.
+- Setting to disable from showing to users of ABC filter bar.
 
 -------------------------
-Version 1.3.4 2013 (N.Petkov)
+Version 1.3.4 2013
 -------------------------
 - ContentType implementation - now can plug addresses in Content module
 - Settings for AddressBook images directory
@@ -15,7 +17,7 @@ Version 1.3.4 2013 (N.Petkov)
 - Implementation for KCFinder as images manager (upload/select)
 
 -------------------------
-Version 1.3.3 2013 (N.Petkov)
+Version 1.3.3 2013
 -------------------------
 - refactored to Zikula 1.3 standards
 - Implemented subscribers hooks - display and edit
@@ -24,13 +26,13 @@ Version 1.3.3 2013 (N.Petkov)
 - Added overview map with markers, shown below the table with listed addresses
 
 -------------------------
-Version 1.3.2 2013 (N.Petkov)
+Version 1.3.2 2013
 -------------------------
 - tagged version
 - more cleanup
 
 -------------------------
-Version 1.3.1 2012 (N.Petkov)
+Version 1.3.1 2012
 -------------------------
 - making to work with Zikula 1.3 in legacy mode
 - replaced depreciated commands

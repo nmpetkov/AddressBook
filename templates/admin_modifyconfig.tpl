@@ -14,8 +14,8 @@
                 <div class="z-formrow">
                     <label for="preferences_addressbooktype">{gt text="Type of this Address Book"}</label>
                     <select id="preferences_addressbooktype" name="preferences[addressbooktype]" size="1">
-                        <option value="1"{if $preferences.addressbooktype eq 1} selected="selected"{/if}>People</option>
-                        <option value="2"{if $preferences.addressbooktype eq 2} selected="selected"{/if}>Companies</option>
+                        <option value="1"{if $preferences.addressbooktype eq 1} selected="selected"{/if}>{gt text="People"}</option>
+                        <option value="2"{if $preferences.addressbooktype eq 2} selected="selected"{/if}>{gt text="Companies"}</option>
                     </select>
                 </div>
                 <div class="z-formrow">

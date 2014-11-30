@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zikula 1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-30 10:12+0000\n"
+"POT-Creation-Date: 2014-11-30 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Error! Could not load addresses."
 msgstr ""
 
-#: lib/AddressBook/Api/User.php:18
+#: lib/AddressBook/Api/User.php:18 lib/AddressBook/Controller/User.php:278
 #, php-format
 msgid ""
 "This website require it's users to be registered to use the address book."
@@ -282,7 +282,7 @@ msgstr ""
 #: templates/user_change_company.tpl:23 templates/admin_delete.tpl:25
 #: templates/admin_labels_edit.tpl:33 templates/user_edit.tpl:327
 #: templates/user_edit.tpl:329 templates/user_delete.tpl:20
-#: templates/admin_modifyconfig.tpl:76
+#: templates/admin_modifyconfig.tpl:77
 msgid "Cancel"
 msgstr ""
 
@@ -290,105 +290,106 @@ msgstr ""
 msgid "Address list"
 msgstr ""
 
-#: templates/user_view.tpl:19
+#: templates/user_view.tpl:20
 msgid "Show private contacts only"
 msgstr ""
 
-#: templates/user_view.tpl:23 templates/user_simpledisplay.tpl:18
+#: templates/user_view.tpl:24 templates/user_simpledisplay.tpl:18
 #: templates/admin_delete.tpl:4 templates/user_display.tpl:36
 #: templates/user_edit.tpl:33 templates/user_edit.tpl:35
 msgid "Category"
 msgstr ""
 
-#: templates/user_view.tpl:24
+#: templates/user_view.tpl:25
 msgid "All"
 msgstr ""
 
-#: templates/user_view.tpl:30 templates/user_view.tpl:32
+#: templates/user_view.tpl:32 templates/user_view.tpl:33
+#: templates/user_view.tpl:35
 msgid "Search"
 msgstr ""
 
-#: templates/user_view.tpl:47
+#: templates/user_view.tpl:51
 msgid "Logo"
 msgstr ""
 
-#: templates/user_view.tpl:51 templates/user_view.tpl:53
+#: templates/user_view.tpl:55 templates/user_view.tpl:57
 #: templates/user_simpledisplay.tpl:24 templates/admin_delete.tpl:18
 #: templates/admin_labels_edit.tpl:26 templates/user_display.tpl:42
 #: templates/user_edit.tpl:86
 msgid "Name"
 msgstr ""
 
-#: templates/user_view.tpl:57 templates/user_view.tpl:59
+#: templates/user_view.tpl:61 templates/user_view.tpl:63
 #: templates/user_simpledisplay.tpl:46 templates/user_display.tpl:64
 #: templates/user_edit.tpl:115
 msgid "Company"
 msgstr ""
 
-#: templates/user_view.tpl:62 templates/user_edit.tpl:155
+#: templates/user_view.tpl:66 templates/user_edit.tpl:155
 #: templates/user_edit.tpl:160
 msgid "City"
 msgstr ""
 
-#: templates/user_view.tpl:63
+#: templates/user_view.tpl:67
 msgid "Activity"
 msgstr ""
 
-#: templates/user_view.tpl:65 templates/user_simpledisplay.tpl:70
+#: templates/user_view.tpl:69 templates/user_simpledisplay.tpl:70
 #: templates/user_display.tpl:88 templates/user_edit.tpl:186
 msgid "Contact"
 msgstr ""
 
-#: templates/user_view.tpl:67 templates/user_edit.tpl:58
+#: templates/user_view.tpl:71 templates/user_edit.tpl:58
 msgid "Status"
 msgstr ""
 
-#: templates/user_view.tpl:68 templates/user_edit.tpl:73
+#: templates/user_view.tpl:72 templates/user_edit.tpl:73
 msgid "User owner"
 msgstr ""
 
-#: templates/user_view.tpl:70 templates/admin_customfield_view.tpl:14
+#: templates/user_view.tpl:75
+msgid "Viewed"
+msgstr ""
+
+#: templates/user_view.tpl:77 templates/admin_customfield_view.tpl:14
 #: templates/admin_labels_view.tpl:13
 msgid "Action"
 msgstr ""
 
-#: templates/user_view.tpl:72
-msgid "Viewed"
-msgstr ""
-
-#: templates/user_view.tpl:114
+#: templates/user_view.tpl:140
 msgid "Click to activate"
 msgstr ""
 
-#: templates/user_view.tpl:115
+#: templates/user_view.tpl:141
 msgid "Click to deactivate"
 msgstr ""
 
-#: templates/user_view.tpl:119 templates/user_edit.tpl:60
+#: templates/user_view.tpl:145 templates/user_edit.tpl:60
 msgid "Active"
 msgstr ""
 
-#: templates/user_view.tpl:123 templates/user_edit.tpl:61
+#: templates/user_view.tpl:149 templates/user_edit.tpl:61
 msgid "Inactive"
 msgstr ""
 
-#: templates/user_view.tpl:133
+#: templates/user_view.tpl:163
 msgid "View"
 msgstr ""
 
-#: templates/user_view.tpl:136 templates/user_display.tpl:174
+#: templates/user_view.tpl:166 templates/user_display.tpl:174
 #: templates/admin_customfield_view.tpl:25 templates/admin_labels_view.tpl:24
 msgid "Edit"
 msgstr ""
 
-#: templates/user_view.tpl:139 templates/admin_delete.tpl:3
+#: templates/user_view.tpl:169 templates/admin_delete.tpl:3
 #: templates/admin_delete.tpl:24 templates/user_display.tpl:177
 #: templates/admin_customfield_view.tpl:27 templates/admin_labels_view.tpl:25
 #: templates/user_delete.tpl:19
 msgid "Delete"
 msgstr ""
 
-#: templates/user_view.tpl:147
+#: templates/user_view.tpl:174
 msgid "No address found."
 msgstr ""
 
@@ -638,49 +639,53 @@ msgid "Contacts per page"
 msgstr ""
 
 #: templates/admin_modifyconfig.tpl:30
-msgid "Disable personal address book mode"
+msgid "Private Address Book mode"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:34
+#: templates/admin_modifyconfig.tpl:32
+msgid "For users only, users see only their own records (admin sees all)."
+msgstr ""
+
+#: templates/admin_modifyconfig.tpl:35
 msgid "Enable the use of the 'form of address' field"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:38
+#: templates/admin_modifyconfig.tpl:39
 msgid "Enable images"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:42
+#: templates/admin_modifyconfig.tpl:43
 msgid "Default images directory"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:46
+#: templates/admin_modifyconfig.tpl:47
 msgid "Images manager"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:54
+#: templates/admin_modifyconfig.tpl:55
 msgid "Google Maps integration"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:57
+#: templates/admin_modifyconfig.tpl:58
 msgid "Google API key"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:62
+#: templates/admin_modifyconfig.tpl:63
 msgid "Google zoom"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:67
+#: templates/admin_modifyconfig.tpl:68
 msgid "Custom tab"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:69
+#: templates/admin_modifyconfig.tpl:70
 msgid "Tab name"
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:71
+#: templates/admin_modifyconfig.tpl:72
 msgid "If empty, no custom fields are displayed."
 msgstr ""
 
-#: templates/admin_modifyconfig.tpl:75
+#: templates/admin_modifyconfig.tpl:76
 msgid "Update Configuration"
 msgstr ""

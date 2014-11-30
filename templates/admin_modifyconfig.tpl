@@ -27,8 +27,9 @@
                     <input id="preferences_itemsperpage" type="text" name="preferences[itemsperpage]" size="4" maxlength="4" value="{$preferences.itemsperpage|safehtml}" />
                 </div>
                 <div class="z-formrow">
-                    <label for="preferences_globalprotect">{gt text="Disable personal address book mode"}</label>
+                    <label for="preferences_globalprotect">{gt text="Private Address Book mode"}</label>
                     <input id="preferences_globalprotect" type="checkbox" name="preferences[globalprotect]" value="1" {if $preferences.globalprotect}checked="checked"{/if} />
+                    <em class="z-sub z-formnote">{gt text="For users only, users see only their own records (admin sees all)."}</em>
                 </div>
                 <div class="z-formrow">
                     <label for="preferences_use_prefix">{gt text="Enable the use of the 'form of address' field"}</label>

@@ -27,6 +27,11 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
         $modvars = ModUtil::getVar('AddressBook');
+        
+        // Default values
+        if (!isset($modvars['allowprivate'])) {
+            $modvars['allowprivate'] = 0;
+        }
 
         // Create output object
         $this->view->assign('preferences', $modvars);
@@ -50,6 +55,7 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         // now for each perference entry, set the appropriate module variable
         ModUtil::setVar('AddressBook', 'abtitle', (isset($prefs['abtitle']) ? $prefs['abtitle'] : ''));
         ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
+        ModUtil::setVar('AddressBook', 'allowprivate', (isset($prefs['allowprivate']) ? $prefs['allowprivate'] : 0));
         ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
         ModUtil::setVar('AddressBook', 'use_img', (isset($prefs['use_img']) ? $prefs['use_img'] : 0));
         ModUtil::setVar('AddressBook', 'images_dir', (isset($prefs['images_dir']) ? $prefs['images_dir'] : 'userdata/Addressbook'));

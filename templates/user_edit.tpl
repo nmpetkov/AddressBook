@@ -1,3 +1,4 @@
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_ADMIN' assign='adminAuth'}
 {ajaxheader modname=AddressBook filename=addressbook.js}
 {if $preferences.use_img}
 {ajaxheader lightbox=true}
@@ -19,7 +20,7 @@
         {/if}
         <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="ot" value="{$ot|safehtml}" />
-        <input type="hidden" name="address[user_id]" value="{$user_id|safehtml}" />
+        {*<input type="hidden" name="address[user_id]" value="{$user_id|safehtml}" />*}
         <input type="hidden" name="startnum" value="{$startnum|safehtml}" />
         <input type="hidden" name="letter" value="{$letter|safehtml}" />
         <input type="hidden" name="sort" value="{$sort|safehtml}" />
@@ -68,6 +69,17 @@
                 <input id="address_private" name="address[private]" type="checkbox" {if $address.id && $address.private}checked="checked"{/if} />
             </div>
             {/if}
+            <div class="z-formrow">
+                <label for="address_user_id">{gt text="User owner"}</label>
+                {if $adminAuth}{assign var="uiddisabled" value=false}{else}{assign var="uiddisabled" value=true}{/if}
+                {if $uiddisabled}
+                    <span><input id="address_user_id" name="address[user_id]" value="{if $address.id}{$address.user_id|safehtml}{/if}" type="text" readonly /> ({usergetvar name='uname' uid=$address.user_id})</span>
+                {else}
+                    {*<input id="address_user_id" name="address[user_id]" value="{if $address.id}{$address.user_id|safehtml}{/if}" type="text"{if !$adminAuth} readonly{/if} />*}
+                    {if $address.id}{assign var="selectedvalue" value=$address.user_id}{else}{assign var="selectedvalue" value=0}{/if}
+                    {selector_user selectedValue=$selectedvalue id='address_user_id' name='address[user_id]' disabled=$uiddisabled allValue=0 allText="none"}
+                {/if}
+            </div>
         </fieldset>
 
         <fieldset>

@@ -65,6 +65,7 @@
                 <th>{gt text="Contact"}</th>
                 {if $adminAuth}
                     <th>{gt text="Status"}</th>
+                    <th>{gt text="User owner"}</th>
                 {/if}
                 <th>{gt text="Action"}</th>
                 {if $editAuth}
@@ -122,6 +123,9 @@
                             &nbsp;{gt text="Inactive"}
                         </div>
                         {img id="statusajaxind_"|cat:$object.id style="display: none;" modname=core set="ajax" src="indicator_circle.gif" alt=""}
+                    </td>
+                    <td class="z-nowrap">
+                        {$object.user_id|profilelinkbyuid}
                     </td>
                 {/if}
                 <td class="z-nowrap">

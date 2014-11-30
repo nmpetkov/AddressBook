@@ -32,9 +32,27 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         if (!isset($modvars['allowprivate'])) {
             $modvars['allowprivate'] = 0;
         }
+        if (!isset($modvars['abtitle'])) {
+            $modvars['abtitle'] = 'Address Book';
+        }
+        if (!isset($modvars['custom_tab'])) {
+            $modvars['custom_tab'] = '';
+        }
+
+        // Multilingual items
+        $languages = ZLanguage::getInstalledLanguages();
+        foreach ($languages as $language) {
+            if (!isset($modvars['abtitle_'.$language])) {
+                $modvars['abtitle_'.$language] = $modvars['abtitle'];
+            }
+            if (!isset($modvars['custom_tab_'.$language])) {
+                $modvars['custom_tab_'.$language] = $modvars['custom_tab'];
+            }
+        }
 
         // Create output object
         $this->view->assign('preferences', $modvars);
+        $this->view->assign('languages', $languages);
 
         return $this->view->fetch('admin_modifyconfig.tpl');
     }
@@ -52,8 +70,13 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         // retrieve the associative preferences array
         $prefs = FormUtil::getPassedValue('preferences', null, 'POST');
 
+        $languages = ZLanguage::getInstalledLanguages();
+
         // now for each perference entry, set the appropriate module variable
-        ModUtil::setVar('AddressBook', 'abtitle', (isset($prefs['abtitle']) ? $prefs['abtitle'] : ''));
+        foreach ($languages as $language) {
+            ModUtil::setVar('AddressBook', 'abtitle_'.$language, (isset($prefs['abtitle_'.$language]) ? $prefs['abtitle_'.$language] : ''));
+            ModUtil::setVar('AddressBook', 'custom_tab_'.$language, (isset($prefs['custom_tab_'.$language]) ? $prefs['custom_tab_'.$language] : ''));
+        }
         ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));
         ModUtil::setVar('AddressBook', 'allowprivate', (isset($prefs['allowprivate']) ? $prefs['allowprivate'] : 0));
         ModUtil::setVar('AddressBook', 'use_prefix', (isset($prefs['use_prefix']) ? $prefs['use_prefix'] : 0));
@@ -63,7 +86,6 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         // Not used in Google Maps Api v3 ModUtil::setVar('AddressBook', 'google_api_key', (isset($prefs['google_api_key']) ? $prefs['google_api_key'] : ''));
         ModUtil::setVar('AddressBook', 'google_zoom', (isset($prefs['google_zoom']) ? $prefs['google_zoom'] : 15));
         ModUtil::setVar('AddressBook', 'itemsperpage', ($prefs['itemsperpage']>1 ? $prefs['itemsperpage'] : 30));
-        ModUtil::setVar('AddressBook', 'custom_tab', (isset($prefs['custom_tab']) ? $prefs['custom_tab'] : ''));
         ModUtil::setVar('AddressBook', 'addressbooktype', (isset($prefs['addressbooktype']) ? $prefs['addressbooktype'] : 1));
         ModUtil::setVar('AddressBook', 'showabcfilter', (isset($prefs['showabcfilter']) ? $prefs['showabcfilter'] : 0));
 

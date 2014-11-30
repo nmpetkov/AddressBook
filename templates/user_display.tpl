@@ -123,9 +123,10 @@
         {/if}
     </fieldset>
 
-    {if $preferences.custom_tab}
+    {assign_concat name='prefkey' 1='custom_tab_' 2=$lang}
+    {if $preferences.$prefkey}
     <fieldset>
-        <legend>{$preferences.custom_tab}</legend>
+        <legend>{$preferences.$prefkey}</legend>
         {foreach item=cusfield from=$customfields}
         {assign_concat 1="custom_" 2=$cusfield.id name="fieldname"}
         {if $cusfield.type=="tinyint default NULL"}

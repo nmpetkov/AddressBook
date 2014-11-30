@@ -9,7 +9,13 @@
                 <legend>{gt text="General settings"}</legend>
                 <div class="z-formrow">
                     <label for="preferences_abtitle">{gt text="Title of this Address Book"}</label>
-                    <input id="preferences_abtitle" type="text" name="preferences[abtitle]" size="30" maxlength="60" value="{$preferences.abtitle|safehtml}" />
+                    {foreach item=language from=$languages}
+                    {assign_concat name='prefkey' 1='abtitle_' 2=$language}
+                    <div class="z-formlist">
+                        <input id="preferences_abtitle_{$language}" name="preferences[abtitle_{$language}]" value="{$preferences.$prefkey|safehtml}" type="text" size="50" maxlength="255" />
+                        <label for="preferences_abtitle_{$language}">({$language})</label>
+                    </div>
+                    {/foreach}
                 </div>
                 <div class="z-formrow">
                     <label for="preferences_addressbooktype">{gt text="Type of this Address Book"}</label>
@@ -73,7 +79,13 @@
                 <legend>{gt text="Custom tab"}</legend>
                 <div class="z-formrow">
                     <label for="preferences_custom_tab">{gt text="Tab name"}</label>
-                    <input id="preferences_custom_tab" type="text" name="preferences[custom_tab]" size="30" maxlength="60" value="{$preferences.custom_tab|safehtml}" />
+                    {foreach item=language from=$languages}
+                    {assign_concat name='prefkey' 1='custom_tab_' 2=$language}
+                    <div class="z-formlist">
+                        <input id="preferences_custom_tab_{$language}" name="preferences[custom_tab_{$language}]" value="{$preferences.$prefkey|safehtml}" type="text" size="50" maxlength="255" />
+                        <label for="preferences_custom_tab_{$language}">({$language})</label>
+                    </div>
+                    {/foreach}
                     <em class="z-sub z-formnote">{gt text="If empty, no custom fields are displayed."}</em>
                 </div>
             </fieldset>

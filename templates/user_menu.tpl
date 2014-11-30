@@ -5,7 +5,8 @@
 
 {insert name='getstatusmsg'}
 
-<h2>{modgetvar module="AddressBook" name="abtitle"}</h2>
+{assign_concat name='prefkey' 1='abtitle_' 2=$lang}
+<h2>{$preferences.$prefkey}</h2>
 {if !empty($loggedin)}
 <div class="z-menu">{strip}
     <ul class="z-menulinks">

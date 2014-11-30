@@ -93,9 +93,8 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             return LogUtil::registerError($this->__('Error! Creation attempt failed.'));
         }
        
-        
         // Set up an initial value for a module variable.
-        $this->setVar('abtitle', 'Zikula Address Book');
+        $this->setVar('abtitle', 'Address Book');
         $this->setVar('itemsperpage', 30);
         $this->setVar('globalprotect', 0);
         $this->setVar('allowprivate', 0);

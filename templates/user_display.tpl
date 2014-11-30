@@ -2,6 +2,9 @@
 {userloggedin assign="loggedin"}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_EDIT' assign='editAuth'}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
+{checkpermission component='AddressBook::' instance='::' level='ACCESS_ADMIN' assign='adminAuth'}
+
+{if $themeinfo.name == 'Mobile'}{assign var='mobile_mode' value=1}{else}{assign var='mobile_mode' value=0}{/if}
 
 {if $preferences.use_img}
 {ajaxheader lightbox=true}
@@ -35,6 +38,7 @@
         {/if}
         <legend>{if isset($category_name)}{gt text="Category"}: {$category_name.$lang|safehtml}{/if}</legend>
         <div class="z-clearfix">
+            {if $address.fname or $address.lname}
             <div class="z-formrow">
                 {if $preferences.use_prefix==1 && $address.prefix && $prefix_name}
                 <span class="z-formlist">{$prefix_name.$lang|safehtml}</span>
@@ -48,6 +52,7 @@
                     {/if}
                 </strong></span>
             </div>
+            {/if}
 
             {if $address.title}
             <div class="z-formrow">
@@ -78,7 +83,7 @@
             {if $address.img && $preferences.use_img==1}
             <div class="z-formnote">
                 {*<a href="{$address.img|addressbook_img:org}" rel="lightbox"><img src="{$address.img|addressbook_img:tmb}" alt="{$templatetitle}" /></a>*}
-                <a href="{$address.img}" rel="lightbox"><img src="{$address.img}" alt="{$templatetitle}" width="100" /></a>
+                <a href="{$address.img}" rel="lightbox"><img src="{$address.img}" alt="{$templatetitle}" style="max-height: 300px; max-width: 600px;" /></a>
             </div>
             {/if}
         </div>
@@ -138,16 +143,18 @@
             <span>{$address.$fieldname|safehtml|formatnumber}</span>
         </div>
         {else}
+        {if $address.$fieldname<>''}
         <div class="z-formrow">
             <label>{$cusfield.name}:</label>
             <span class="z-formlist">{$address.$fieldname|safehtml}</span>
         </div>
         {/if}
+        {/if}
         {/foreach}
     </fieldset>
     {/if}
 
-    {if $address.note}
+    {if $address.note && $adminAuth}
     <fieldset class="z-linear">
         <legend>{gt text="Note"}</legend>
         <div class="z-formrow">{$address.note|safehtml}</div>
@@ -163,18 +170,18 @@
 
     <p class="z-sub">{gt text="Last changed on %s" tag1=$address.date|safehtml|date_format}</p>
 
-    <div class="z-formbuttons">
-        <a href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{img modname='core' src='agt_back.png' set='icons/small'   __alt='Back' __title='Back'}</a>
-
-        {browserhack condition="if IE"}
-        &nbsp;&nbsp;<a href="#" onclick="javascript:window.clipboardData.setData('Text','{if $address.company|safehtml}{$address.company|safehtml}\n{/if}{if $address.fname|safehtml}{$address.fname|safehtml} {/if}{if $address.lname}{$address.lname}\n\n{/if}{if $address.address1}{$address.address1|safehtml}\n{/if}{if $address.address2}{$address.address2|safehtml}\n{/if}{if $address.zip}{$address.zip|safehtml} {/if}{if $address.city}{$address.city|safehtml}\n{/if}{if $address.country}{$address.country|safehtml}{/if}');">{img modname='core' src='editpaste.png' set='icons/small'   __alt="Copy" __title="Copy"}</a>
-
-        {/browserhack}
+    <div {if $mobile_mode} data-role="controlgroup" data-type="horizontal"{else}class="z-formbuttons z-buttons"{/if}>
+        <a{if $mobile_mode} data-role="button" data-icon="back"{/if} href="{modurl modname=AddressBook type=user func=view ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{if !$mobile_mode}{img modname='core' src='agt_back.png' set='icons/small'   __alt='Back' __title='Back'}{/if}{gt text="Back"}</a>
+        {if !$mobile_mode}
+            {browserhack condition="if IE"}
+                <a href="#" onclick="javascript:window.clipboardData.setData('Text','{if $address.company|safehtml}{$address.company|safehtml}\n{/if}{if $address.fname|safehtml}{$address.fname|safehtml} {/if}{if $address.lname}{$address.lname}\n\n{/if}{if $address.address1}{$address.address1|safehtml}\n{/if}{if $address.address2}{$address.address2|safehtml}\n{/if}{if $address.zip}{$address.zip|safehtml} {/if}{if $address.city}{$address.city|safehtml}\n{/if}{if $address.country}{$address.country|safehtml}{/if}');">{img modname='core' src='editpaste.png' set='icons/small'   __alt="Copy" __title="Copy"}</a>
+            {/browserhack}
+        {/if}
         {if $editAuth || $user_id == $address.user_id}
-        &nbsp;&nbsp;<a href="{modurl modname=AddressBook type=user func=edit id=$address.id formcall="edit" ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search returnid=$address.id}">{img modname='core' set='icons/small' src="edit.png" __alt='Edit' __title='Edit'}</a>
+        <a{if $mobile_mode} data-role="button" data-icon="edit"{/if} class="z-bt-edit" href="{modurl modname=AddressBook type=user func=edit id=$address.id formcall=edit ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search returnid=$address.id}">{gt text="Edit"}</a>
         {/if}
         {if $delAuth}
-        <a class="z-bt-delete" href="{modurl modname=AddressBook type=user func=delete id=$address.id ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search returnid=$address.id}">{gt text="Delete"}</a>
+        <a{if $mobile_mode} data-role="button" data-icon="delete"{/if} class="z-bt-delete" href="{modurl modname=AddressBook type=user func=delete id=$address.id ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search returnid=$address.id}">{gt text="Delete"}</a>
         {/if}
     </div>
 </div>

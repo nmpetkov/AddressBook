@@ -55,11 +55,18 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
             return LogUtil::registerPermissionError();
         }
 
+        $lang = ZLanguage::getLanguageCode();
+
         // get the custom fields
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
         $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
+        foreach ($customfields as $key => $customfield) {
+            if (isset($customfield['name1']) && $customfield['name1'] && $lang<>'en') {
+                $customfields[$key]['name'] = $customfield['name1'];
+            }
+        }
 
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 
@@ -77,6 +84,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('search',       $search);
         $this->view->assign('returnid',     $returnid);
         $this->view->assign('preferences',  ModUtil::getVar('AddressBook'));
+        $this->view->assign('lang',         $lang);
 
         return $this->view->fetch('user_edit.tpl');
     }
@@ -238,6 +246,11 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $cus_sort = "cus_pos ASC";
         $cus_Array = new AddressBook_DBObject_CustomfieldArray();
         $customfields = $cus_Array->get ($cus_where, $cus_sort);
+        foreach ($customfields as $key => $customfield) {
+            if (isset($customfield['name1']) && $customfield['name1'] && $lang<>'en') {
+                $customfields[$key]['name'] = $customfield['name1'];
+            }
+        }
 
         DBUtil::incrementObjectFieldByID('addressbook_address', 'counter', $id, 'id'); // count clicks
 
@@ -264,9 +277,22 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         unset ($favData);
         unset ($where);
 
+        $lang = ZLanguage::getLanguageCode();
+        
+        // Labels
+        $addressbook_labels = DBUtil::selectObjectArray('addressbook_labels');
+        $ablabels = array();
+        foreach ($addressbook_labels as $addressbook_label) {
+            if (isset($addressbook_label['name1']) && $addressbook_label['name1'] && $lang<>'en') {
+                $addressbook_label['name'] = $addressbook_label['name1'];
+            }
+            $ablabels[$addressbook_label['id']] = $addressbook_label;
+        }
+        
         // Google Maps
         $this->view->assign('preferences', ModUtil::getVar('AddressBook'));
-        $this->view->assign('lang',        ZLanguage::getLanguageCode());
+        $this->view->assign('lang', $lang);
+        $this->view->assign('ablabels', $ablabels);
 
         return $this->view->fetch($template);
     }
@@ -734,6 +760,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         unset($args);
 
+        $lang = ZLanguage::getLanguageCode();
+
         if (!$id) {
             return z_exit($this->__f('Error! Invalid id [%s] received.', $id));
         }
@@ -746,7 +774,22 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $cus_where = "";
         $cus_sort = "cus_pos ASC";
         $cus_Array = new AddressBook_DBObject_CustomfieldArray();
-        $customfields = $cus_Array->get ($cus_where, $cus_sort);
+        $customfields = $cus_Array->get($cus_where, $cus_sort);
+        foreach ($customfields as $key => $customfield) {
+            if (isset($customfield['name1']) && $customfield['name1'] && $lang<>'en') {
+                $customfields[$key]['name'] = $customfield['name1'];
+            }
+        }
+
+        // Labels
+        $addressbook_labels = DBUtil::selectObjectArray('addressbook_labels');
+        $ablabels = array();
+        foreach ($addressbook_labels as $addressbook_label) {
+            if (isset($addressbook_label['name1']) && $addressbook_label['name1'] && $lang<>'en') {
+                $addressbook_label['name'] = $addressbook_label['name1'];
+            }
+            $ablabels[$addressbook_label['id']] = $addressbook_label;
+        }
 
         $this->view->assign('address', $data);
         $this->view->assign('customfields', $customfields);
@@ -754,7 +797,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('category', $category);
         $this->view->assign('private', $private);
         $this->view->assign('preferences', ModUtil::getVar('AddressBook'));
-        $this->view->assign('lang',        ZLanguage::getLanguageCode());
+        $this->view->assign('lang', $lang);
+        $this->view->assign('ablabels', $ablabels);
 
         return $this->view->fetch('user_simpledisplay.tpl');
     }

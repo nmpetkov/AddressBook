@@ -9,6 +9,7 @@
             <tr class="{cycle values="z-odd,z-even"}">
                 <th><a href="{modurl modname="AddressBook" type="admin" func="view" ot="labels" sort="id"}">{gt text="ID"}</a></th>
                 <th><a href="{modurl modname="AddressBook" type="admin" func="view" ot="labels" sort="name"}">{gt text="Contact label"}</a></th>
+                <th><a href="{modurl modname="AddressBook" type="admin" func="view" ot="labels" sort="name1"}">{gt text="Contact label locale"}</a></th>
                 {checkpermissionblock component='AddressBook::' instance='::' level=ACCESS_ADMIN}
                 <th>{gt text="Action"}</th>
                 {/checkpermissionblock}
@@ -19,6 +20,7 @@
             <tr class="{cycle values="z-odd,z-even"}">
                 <td>{$obj.id|safehtml}</td>
                 <td>{$obj.name|safehtml}</td>
+                <td>{$obj.name1|safehtml}</td>
                 {checkpermissionblock component='AddressBook::' instance='::' level=ACCESS_ADMIN}
                 <td>
                     <a href="{modurl modname="AddressBook" type="admin" func="edit" ot="labels" id=$obj.id}">{img modname=core src=xedit.png set=icons/extrasmall __alt="Edit" __title="Edit"}</a>

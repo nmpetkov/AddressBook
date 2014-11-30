@@ -26,6 +26,10 @@
                     <label for="labels_name">{gt text="Name"}</label>
                     <input id="labels_name" name="labels[name]" value="{if $labels.id}{$labels.name|safehtml}{/if}" type="text" size="60" maxlength="80" />
                 </div>
+                <div class="z-formrow">
+                    <label for="labels_name1">{gt text="Name locale"}</label>
+                    <input id="labels_name1" name="labels[name1]" value="{if $labels.id}{$labels.name1|safehtml}{/if}" type="text" size="60" maxlength="80" />
+                </div>
             </fieldset>
 
             <div class="z-formbuttons">

@@ -182,6 +182,7 @@
             </div>
         </fieldset>
 
+        {if $lang=='en'}{assign var='namefield' value='name'}{else}{assign var='namefield' value='name1'}{/if}
         <fieldset>
             <legend>{gt text="Contact"}</legend>
             <div class="z-formrow">
@@ -192,7 +193,7 @@
                     {else}
                     {assign var="lbl_default" value="1"}
                     {/if}
-                    {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_1]" field="name" assocKey="id"  selectedValue=$lbl_default}
+                    {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_1]" field=$namefield assocKey="id"  selectedValue=$lbl_default}
                 </div>
                 <input id="address_contact_1" name="address[contact_1]" value="{if $address.id}{$address.contact_1}{/if}" type="text" size="60" maxlength="80" />
             </div>
@@ -204,7 +205,7 @@
                     {else}
                     {assign var="lbl_default2" value="5"}
                     {/if}
-                    {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_2]" field="name" assocKey="id"  selectedValue=$lbl_default2}
+                    {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_2]" field=$namefield assocKey="id"  selectedValue=$lbl_default2}
                 </div>
                 <input id="address_contact_2" name="address[contact_2]" value="{if $address.id}{$address.contact_2}{/if}" type="text" size="60" maxlength="80" />
             </div>
@@ -212,10 +213,10 @@
                 <div class="z-label">
                     {if $address.id}
                         <input id="address_c_main3" name="address[c_main]" type="radio" value="2" {if $address.c_main==2}checked="checked"{/if} />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_3]" field="name" assocKey="id"  selectedValue=$address.c_label_3}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_3]" field=$namefield assocKey="id"  selectedValue=$address.c_label_3}
                     {else}
                         <input id="address_c_main3" name="address[c_main]" type="radio" value="2" />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_3]" field="name" assocKey="id"}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_3]" field=$namefield assocKey="id"}
                     {/if}
                 </div>
                 <input id="address_contact_3" name="address[contact_3]" value="{if $address.id}{$address.contact_3}{/if}" type="text" size="60" maxlength="80" />
@@ -224,10 +225,10 @@
                 <div class="z-label">
                     {if $address.id}
                         <input id="address_c_main4" name="address[c_main]" type="radio" value="3" {if $address.c_main==3}checked="checked"{/if} />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_4]" field="name" assocKey="id"  selectedValue=$address.c_label_4}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_4]" field=$namefield assocKey="id"  selectedValue=$address.c_label_4}
                     {else}
                         <input id="address_c_main4" name="address[c_main]" type="radio" value="3" />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_4]" field="name" assocKey="id"}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_4]" field=$namefield assocKey="id"}
                     {/if}
                 </div>
                 <input id="address_contact_4" name="address[contact_4]" value="{if $address.id}{$address.contact_4}{/if}" type="text" size="60" maxlength="80" />
@@ -236,19 +237,20 @@
                 <div class="z-label">
                     {if $address.id}
                         <input id="address_c_main5" name="address[c_main]" type="radio" value="4" {if $address.c_main==4}checked="checked"{/if} />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_5]" field="name" assocKey="id"  selectedValue=$address.c_label_5}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_5]" field=$namefield assocKey="id"  selectedValue=$address.c_label_5}
                     {else}
                         <input id="address_c_main5" name="address[c_main]" type="radio" value="4" />
-                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_5]" field="name" assocKey="id"}
+                        {selector_field_array modname="AddressBook" table="addressbook_labels" name="address[c_label_5]" field=$namefield assocKey="id"}
                     {/if}
                 </div>
                 <input id="address_contact_5" name="address[contact_5]" value="{if $address.id}{$address.contact_5}{/if}" type="text" size="60" maxlength="80" />
             </div>
         </fieldset>
 
-        {if $preferences.custom_tab}
+        {assign_concat name='prefkey' 1='custom_tab_' 2=$lang}
+        {if $preferences.$prefkey}
         <fieldset class="z-linear">
-            <legend>{$preferences.custom_tab}</legend>
+            <legend>{$preferences.$prefkey}</legend>
             {foreach item=cusfield from=$customfields}
             {assign_concat 1="custom_" 2=$cusfield.id name="fieldname"}
             <div class="z-formrow">

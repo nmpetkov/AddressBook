@@ -31,6 +31,10 @@
                     <input id="customfield_name" name="customfield[name]" value="{if $customfield.id}{$customfield.name|safehtml}{/if}" type="text" size="60" maxlength="80" />
                 </div>
                 <div class="z-formrow">
+                    <label for="customfield_name1">{gt text="Field name locale"}</label>
+                    <input id="customfield_name1" name="customfield[name1]" value="{if $customfield.id}{$customfield.name1|safehtml}{/if}" type="text" size="60" maxlength="80" />
+                </div>
+                <div class="z-formrow">
                     {ab_getdatatypes assign="ab_datatype"}
                     <label for="customfield_type">{gt text="Data Type"}</label>
                     <select id="customfield_type" name="customfield[type]" onchange="toggleoption();">

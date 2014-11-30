@@ -70,31 +70,36 @@
         <legend>{gt text="Contact" domain="module_addressbook"}</legend>
         {if $address.contact_1}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_1}:{if $address.c_main==0}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_1}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_1|contact}</span>
         </div>
         {/if}
         {if $address.contact_2}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_2}:{if $address.c_main==1}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_2}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_2|contact}</span>
         </div>
         {/if}
         {if $address.contact_3}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_3}:{if $address.c_main==2}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_3}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_3|contact}</span>
         </div>
         {/if}
         {if $address.contact_4}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_4}:{if $address.c_main==3}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_4}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_4|contact}</span>
         </div>
         {/if}
         {if $address.contact_5}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_5}:{if $address.c_main==4}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_5}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_5|contact}</span>
         </div>
         {/if}

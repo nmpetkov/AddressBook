@@ -9,16 +9,18 @@
     <ol id="cf_list" class="z-itemlist">
         <li id="cf_list_header" class="z-itemheader z-clearfix">
             <span class="z-itemcell z-w05">{gt text="ID"}</span>
-            <span class="z-itemcell z-w40">{gt text="Custom field"}</span>
-            <span class="z-itemcell z-w40">{gt text="Data Type"}</span>
+            <span class="z-itemcell z-w20">{gt text="Custom field"}</span>
+            <span class="z-itemcell z-w20">{gt text="Custom field locale"}</span>
+            <span class="z-itemcell z-w20">{gt text="Data Type"}</span>
             <span class="z-itemcell z-w10">{gt text="Action"}</span>
         </li>
         {foreach from=$objectArray item=obj}
         <li id="cfitem_{$obj.id|safehtml}" class="{cycle values="z-odd,z-even"} z-sortable z-clearfix">
             <div class="z-clearfix">
                 <span class="z-itemcell z-w05">{$obj.id|safehtml}</span>
-                <span class="z-itemcell z-w40">{$obj.name|safehtml}</span>
-                <span class="z-itemcell z-w40">{$obj.type|customtype}</span>
+                <span class="z-itemcell z-w20">{$obj.name|safehtml}</span>
+                <span class="z-itemcell z-w20">{$obj.name1|safehtml}</span>
+                <span class="z-itemcell z-w20">{$obj.type|customtype}</span>
                 <span class="z-itemcell z-w10">
                     {checkpermission component='AddressBook::' instance='::' level='ACCESS_ADMIN' assign='adminAuth'}
                     {if ($adminAuth)}

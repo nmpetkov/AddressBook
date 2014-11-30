@@ -93,31 +93,36 @@
         <legend>{gt text="Contact"}</legend>
         {if $address.contact_1}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_1}:{if $address.c_main==0}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_1}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_1|contact}</span>
         </div>
         {/if}
         {if $address.contact_2}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_2}:{if $address.c_main==1}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_2}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_2|contact}</span>
         </div>
         {/if}
         {if $address.contact_3}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_3}:{if $address.c_main==2}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_3}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_3|contact}</span>
         </div>
         {/if}
         {if $address.contact_4}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_4}:{if $address.c_main==3}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_4}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_4|contact}</span>
         </div>
         {/if}
         {if $address.contact_5}
         <div class="z-formrow">
-            <label>{getvaluebyid table="addressbook_labels" field="name" id=$address.c_label_5}:{if $address.c_main==4}<span class="z-mandatorysym">*</span>{/if}</label>
+            {assign var='lblid' value=$address.c_label_5}
+            <label>{$ablabels.$lblid.name}:</label>
             <span>{$address.contact_5|contact}</span>
         </div>
         {/if}
@@ -128,29 +133,29 @@
     <fieldset>
         <legend>{$preferences.$prefkey}</legend>
         {foreach item=cusfield from=$customfields}
-        {assign_concat 1="custom_" 2=$cusfield.id name="fieldname"}
-        {if $cusfield.type=="tinyint default NULL"}
-        <br />
-        {elseif $cusfield.type=="smallint default NULL"}
-        <hr />
-        {elseif $cusfield.type=="date default NULL"}
-        <div class="z-formrow">
-            <label>{$cusfield.name}:</label>
-            <span>{$address.$fieldname|safehtml|date_format}</span>
-        </div>
-        {elseif $cusfield.type=="decimal(10,2) default NULL"}
-        <div class="z-formrow">
-            <label>{$cusfield.name}:</label>
-            <span>{$address.$fieldname|safehtml|formatnumber}</span>
-        </div>
-        {else}
-        {if $address.$fieldname<>''}
-        <div class="z-formrow">
-            <label>{$cusfield.name}:</label>
-            <span class="z-formlist">{$address.$fieldname|safehtml}</span>
-        </div>
-        {/if}
-        {/if}
+            {assign_concat 1="custom_" 2=$cusfield.id name="fieldname"}
+            {if $cusfield.type=="tinyint default NULL"}
+            <br />
+            {elseif $cusfield.type=="smallint default NULL"}
+            <hr />
+            {elseif $cusfield.type=="date default NULL"}
+            <div class="z-formrow">
+                <label>{$cusfield.name}:</label>
+                <span>{$address.$fieldname|safehtml|date_format}</span>
+            </div>
+            {elseif $cusfield.type=="decimal(10,2) default NULL"}
+            <div class="z-formrow">
+                <label>{$cusfield.name}:</label>
+                <span>{$address.$fieldname|safehtml|formatnumber}</span>
+            </div>
+            {else}
+            {if $address.$fieldname<>''}
+            <div class="z-formrow">
+                <label>{$cusfield.name}:</label>
+                <span class="z-formlist">{$address.$fieldname|safehtml}</span>
+            </div>
+            {/if}
+            {/if}
         {/foreach}
     </fieldset>
     {/if}

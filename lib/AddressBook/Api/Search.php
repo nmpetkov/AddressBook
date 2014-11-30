@@ -85,7 +85,7 @@ class AddressBook_Api_Search extends Zikula_AbstractApi
 
         $where = search_construct_where($args, $searchcols);
 
-        // admin always sees all records but favourites
+        // admin always sees all records but favorites
         if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADMIN)) {
             $where .= " AND ($addresscolumn[user_id] IS NOT NULL)";
         } else {

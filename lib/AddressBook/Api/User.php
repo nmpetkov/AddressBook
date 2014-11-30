@@ -9,11 +9,11 @@
 
 class AddressBook_Api_User extends Zikula_AbstractApi
 {
-    //  fumction for calls by external modules
+    //  function for calls by external modules
     //  returns an array of items based on the given search param
     function search ($args)
     {
-        //Private Address Book mode, for users only
+        // Private Address Book mode, for users only
         if ((!UserUtil::isLoggedIn()) && (ModUtil::getVar('AddressBook', 'globalprotect')==1)) {
             return LogUtil::registerError($this->__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(ModUtil::url('Users', 'user', 'view'))));
         }

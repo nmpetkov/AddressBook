@@ -273,10 +273,10 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
     function view()
     {
-        //Private Address Book mode, for users only - commented, because access for registered/unregistered users can be set in site permissions!
-        /*if ((!UserUtil::isLoggedIn()) && (ModUtil::getVar('AddressBook', 'globalprotect')==1)) {
+        // Private Address Book mode, for users only - commented, because access for registered/unregistered users can be set in site permissions!
+        if ((!UserUtil::isLoggedIn()) && (ModUtil::getVar('AddressBook', 'globalprotect')==1)) {
             return LogUtil::registerError($this->__f('This website require it\'s users to be registered to use the address book.<br />Register for free <a href="%1$s">here</a>, or <a href=\"%1$s\">log in</a> if you are already registered.', array(ModUtil::url('Users', 'user', 'view'))));
-        }*/
+        }
 
         // security check
         if (!(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_READ))) {

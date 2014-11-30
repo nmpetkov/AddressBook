@@ -98,6 +98,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
         $this->setVar('abtitle', 'Zikula Address Book');
         $this->setVar('itemsperpage', 30);
         $this->setVar('globalprotect', 0);
+        $this->setVar('allowprivate', 0);
         $this->setVar('custom_tab', '');
         $this->setVar('use_prefix', 0);
         $this->setVar('use_img', 0);
@@ -200,6 +201,10 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
                 $this->setVar('addressbooktype', 1); // 1-people, 2-companies
                 $this->setVar('showabcfilter', 1);
             case '1.3.5':
+                // Register new settings
+                $this->setVar('allowprivate', 0);
+                return true;
+            case '1.3.6':
                 return true;
         }
     }

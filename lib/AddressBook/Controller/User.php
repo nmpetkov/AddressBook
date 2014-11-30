@@ -491,6 +491,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('private',       $private);
         $this->view->assign('search',        $search);
         $this->view->assign('globalprotect', ModUtil::getVar('AddressBook', 'globalprotect'));
+        $this->view->assign('allowprivate',  ModUtil::getVar('AddressBook', 'allowprivate'));
         $this->view->assign('preferences',   ModUtil::getVar('AddressBook'));
         $this->view->assign('pager',         array('numitems'     => $objcount,
                                                  'itemsperpage' => $pagesize));

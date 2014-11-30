@@ -61,7 +61,7 @@
                     <option label="{gt text="Inactive"}" value="0"{if $address.id && $address.status eq 0} selected="selected"{/if}>{gt text="Inactive"}</option>
                 </select>
             </div>
-            {if $preferences.globalprotect}
+            {if $preferences.globalprotect || !$preferences.allowprivate}
             <input id="address_private" name="address[private]" type="hidden" value="" />
             {else}
             <div class="z-formrow">

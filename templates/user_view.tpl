@@ -15,7 +15,7 @@
 
 <form id="addressbook-search" class="z-form z-linear" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
     <fieldset{if $mobile_mode} data-role="fieldcontain" class="ui-hide-label"{/if}>
-        {if !$globalprotect && !empty($loggedin)}
+        {if !$globalprotect && !empty($loggedin) && $allowprivate}
         <div>
             <label for="private">{gt text="Show private contacts only"}</label>
             <input id="private" type="checkbox" name="private" value="1" {if $private}checked{/if} />

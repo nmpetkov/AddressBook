@@ -32,6 +32,11 @@
                     <em class="z-sub z-formnote">{gt text="For users only, users see only their own records (admin sees all)."}</em>
                 </div>
                 <div class="z-formrow">
+                    <label for="preferences_allowprivate">{gt text="Allow private addresses"}</label>
+                    <input id="preferences_allowprivate" type="checkbox" name="preferences[allowprivate]" value="1" {if $preferences.allowprivate}checked="checked"{/if} />
+                    <em class="z-sub z-formnote">{gt text="If to use private addresses at all."}</em>
+                </div>
+                <div class="z-formrow">
                     <label for="preferences_use_prefix">{gt text="Enable the use of the 'form of address' field"}</label>
                     <input id="preferences_use_prefix" type="checkbox" name="preferences[use_prefix]" value="1" {if $preferences.use_prefix}checked="checked"{/if} />
                 </div>

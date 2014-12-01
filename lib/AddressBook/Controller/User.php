@@ -502,9 +502,8 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         }
 
         $objectArray = new $class();
-            //print_r($sort);
-        $data = $objectArray->get ($where, $sort, $startnum-1, $pagesize);
-        $objcount = $objectArray->getCount ($where);
+        $data = $objectArray->get($where, $sort, $startnum-1, $pagesize);
+        $objcount = $objectArray->getCount($where);
 
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
 

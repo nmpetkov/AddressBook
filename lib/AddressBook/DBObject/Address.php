@@ -23,6 +23,9 @@ class AddressBook_DBObject_Address extends DBObject
         $data =& $this->_objData;
 
         $data['private']     = (isset($data['private']) ? 1 : 0);
+        if (!ModUtil::getVar('AddressBook', 'allowprivate')) {
+            $data['private'] = 0;
+        }
 
         return $data;
     }

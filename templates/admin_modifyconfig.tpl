@@ -1,4 +1,4 @@
-{include file="admin_menu.tpl"}
+{adminheader}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt='Settings' }</div>
     <form class="z-form" action="{modurl modname="AddressBook" type="admin" func="updateconfig"}" method="post">

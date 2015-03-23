@@ -1,4 +1,4 @@
-{include file="admin_menu.tpl"}
+{adminheader}
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='editdelete.png' set='icons/large' __alt='Delete' }</div>
     {if $ot=="categories"}<h2>{gt text="Category"}</h2>{/if}

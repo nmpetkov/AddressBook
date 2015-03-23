@@ -1,5 +1,5 @@
 {ajaxheader modname="AddressBook" filename="addressbook.js"}
-{include file="admin_menu.tpl"}
+{adminheader}
 <div class="z-admincontainer">
     {gt text="Custom fields" assign="templatetitle"}
     <div class="z-adminpageicon">{img modname='core' src='windowlist.png' set='icons/large' alt=$templatetitle}</div>

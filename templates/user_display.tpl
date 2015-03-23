@@ -4,7 +4,7 @@
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_DELETE' assign='delAuth'}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_ADMIN' assign='adminAuth'}
 
-{if $themeinfo.name == 'Mobile'}{assign var='mobile_mode' value=1}{else}{assign var='mobile_mode' value=0}{/if}
+{if $themeinfo.name|strpos:"Mobile" !== false || $themeinfo.name|strpos:"Bootstrap" !== false}{assign var='mobile_mode' value=1}{else}{assign var='mobile_mode' value=0}{/if}
 
 {if $preferences.use_img}
 {ajaxheader lightbox=true}

@@ -801,4 +801,42 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
 
         return $this->view->fetch('user_simpledisplay.tpl');
     }
+
+    public function categories()
+    {
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_READ), LogUtil::getErrorMsgPermission());
+
+        $this->view->setCacheId('main');
+        if ($this->view->is_cached('user/main.tpl')) {
+            return $this->view->fetch('user/main.tpl');
+        }
+        
+        // Create output object
+        $enablecategorization = ModUtil::getVar('AddressBook', 'enablecategorization');
+
+        if ($enablecategorization) {
+            // get the categories registered for the AddressBook
+            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('AddressBook', 'addressbook_address');
+            $properties  = array_keys($catregistry);
+
+            $propertiesdata = array();
+            foreach ($properties as $property)
+            {
+                $rootcat = CategoryUtil::getCategoryByID($catregistry[$property]);
+                if (!empty($rootcat)) {
+                    $rootcat['path'] .= '/'; // add this to make the relative paths of the subcategories with ease - mateo
+                    $subcategories = CategoryUtil::getCategoriesByParentID($rootcat['id']);
+                    $propertiesdata[] = array('name' => $property,
+                            'rootcat' => $rootcat,
+                            'subcategories' => $subcategories);
+                }
+            }
+
+            // Assign some useful vars to customize the main
+            $this->view->assign('properties', $properties);
+            $this->view->assign('propertiesdata', $propertiesdata);
+        }
+
+        return $this->view->fetch('user_categories.tpl');
+    }
 }

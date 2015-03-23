@@ -1,5 +1,5 @@
 {ajaxheader modname="AddressBook" filename="addressbook.js"}
-{include file="admin_menu.tpl"}
+{adminheader}
 <div class="z-admincontainer">
     {if $customfield.id}
     <div class="z-adminpageicon">{img modname='core' src='xedit.png' set='icons/large' alt=''}</div>

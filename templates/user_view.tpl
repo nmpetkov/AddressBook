@@ -11,7 +11,7 @@
     {ajaxheader modname='AddressBook' filename='addressbook.js' nobehaviour=true noscriptaculous=true}
 {/if}
 
-{if $themeinfo.name == 'Mobile'}{assign var='mobile_mode' value=1}{else}{assign var='mobile_mode' value=0}{/if}
+{if $themeinfo.name|strpos:"Mobile" !== false || $themeinfo.name|strpos:"Bootstrap" !== false}{assign var='mobile_mode' value=1}{else}{assign var='mobile_mode' value=0}{/if}
 
 <form id="addressbook-search" class="z-form z-linear" action="{modurl modname="AddressBook" type="user" func="view"}" method="post" enctype="application/x-www-form-urlencoded">
     <fieldset{if $mobile_mode} data-role="fieldcontain" class="ui-hide-label"{/if}>
@@ -83,10 +83,14 @@
             <tr class="{cycle values=z-odd,z-even}">
             {if $mobile_mode}
                 <td>
-                    {if $preferences.addressbooktype == 2}
-                        {if isset($object.img) && $object.img<>''}<a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}"><img src="{$object.img}" alt="" style="float: left; margin-right: 5px;" />{/if}</a>
+                    {if $preferences.addressbooktype == 2 && isset($object.img) && $object.img<>''}
+                        <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">
+                            <img src="{$object.img}" alt="" style="float: left; margin-right: 5px;" />
+                        </a>
                     {/if}
-                    <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">{$object.company|safehtml}</a>
+                    <a href="{modurl modname=AddressBook type=user func=display id=$object.id search=$search ot=$ot startnum=$startnum private=$private category=$category letter=$letter sort=$sort search=$search}">
+                        <strong>{$object.company|safehtml}</strong>
+                    </a>
                     {if isset($object.city)}{$object.city|safehtml}{/if}<br />
                     {if isset($object.custom_1)}{$object.custom_1|safehtml}{/if}<br />
                     {if $object.c_main == 0}

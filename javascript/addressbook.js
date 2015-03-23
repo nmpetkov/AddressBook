@@ -34,42 +34,34 @@ function get_geodata_response(req) {
     }
 }
 
-function add_fav(objectid, userid) {
-    var pars = "module=AddressBook&type=ajax&func=addfavourite&objectid=" + objectid
-            + "&userid=" + userid;
+function AddressBook_toggleFavourite(objectid, userid) {
+    if (AddressBook_favState) {
+        var pars = "module=AddressBook&type=ajax&func=deletefavourite&objectid=" + objectid + "&userid=" + userid;
+    } else {
+        var pars = "module=AddressBook&type=ajax&func=addfavourite&objectid=" + objectid + "&userid=" + userid;
+    }
     var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
         method : 'post',
         parameters : pars,
-        onComplete : add_fav_response
+        onComplete : AddressBook_toggleFavourite_response
     });
 }
 
-function del_fav(objectid, userid) {
-    var pars = "module=AddressBook&type=ajax&func=deletefavourite&objectid=" + objectid
-            + "&userid=" + userid;
-    var myAjax = new Zikula.Ajax.Request(Zikula.Config.baseURL+"ajax.php", {
-        method : 'post',
-        parameters : pars,
-        onComplete : del_fav_response
-    });
-}
-
-function add_fav_response(req) {
+function AddressBook_toggleFavourite_response(req) {
     if (req.status != 200) {
         showajaxerror(req.responseText);
         return;
     }
-    Element.hide('fav', 'inline');
-    Element.show('nofav', 'inline');
-}
-
-function del_fav_response(req) {
-    if (req.status != 200) {
-        showajaxerror(req.responseText);
-        return;
+    aElement = document.getElementById("adr_fav");
+    if (AddressBook_favState) {
+        AddressBook_favState = 0;
+        document.getElementById("adr_fav_add").style.display = 'inline';
+        document.getElementById("adr_fav_remove").style.display = 'none';
+    } else {
+        AddressBook_favState = 1;
+        document.getElementById("adr_fav_add").style.display = 'none';
+        document.getElementById("adr_fav_remove").style.display = 'inline';
     }
-    Element.show('fav', 'inline');
-    Element.hide('nofav', 'inline');
 }
 
 function customfieldinit() {

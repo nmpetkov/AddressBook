@@ -1,4 +1,4 @@
-{include file="admin_menu.tpl"}
+{adminheader}
 <div class="z-admincontainer">
     {if $labels.id}
     <div class="z-adminpageicon">{img modname='core' src='xedit.png' set='icons/large' alt=''}</div>

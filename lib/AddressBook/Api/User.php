@@ -171,4 +171,56 @@ class AddressBook_Api_User extends Zikula_AbstractApi
             }
         }
     }
+
+    /**
+     * Get module links
+     *
+     * @return array array of menu links
+     */
+    public function getLinks()
+    {
+        if (!SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_OVERVIEW)) {
+            return;
+        }
+
+        $func = FormUtil::getPassedValue('func', 'view');
+        $links = array();
+
+        $links[] = array('url' => ModUtil::url($this->name, 'user', 'main'),
+                'text' => $this->__('Address list'),
+                'class' => 'z-icon-es-view');
+        if (SecurityUtil::checkPermission('AddressBook::', '::', ACCESS_ADD)) {
+            $links[] = array('url' => ModUtil::url($this->name, 'user', 'edit'),
+                    'text' => $this->__('Add an address'),
+                    'class' => 'z-icon-es-add');
+            $links[] = array('url' => ModUtil::url($this->name, 'admin', 'main'),
+                    'text' => $this->__('Admin'),
+                    'class' => 'z-icon-es-options');
+        }
+        if (UserUtil::isLoggedIn()) {
+            if (FormUtil::getPassedValue('ot', '', 'GET') == 'favourite') {
+                $links[] = array('url' => ModUtil::url($this->name, 'user', 'view', array('ot' => 'address')),
+                        'text' => $this->__('Show all'),
+                        'class' => 'z-icon-es-filter');
+            } else {
+                $links[] = array('url' => ModUtil::url($this->name, 'user', 'view', array('ot' => 'favourite')),
+                        'text' => $this->__('Show favourites'),
+                        'class' => 'z-icon-es-filter');
+            }
+            $user_id = UserUtil::getVar('uid');
+            if ($user_id > 0 && $func == 'display') {
+                // onclick is added in javascript
+                $links[] = array('url' => '#',
+                        'text' => $this->__('Add to favourites'),
+                        'id' => 'adr_fav_add',
+                        'class' => 'z-icon-es-cubes');
+                $links[] = array('url' => '#',
+                        'text' => $this->__('Remove favourite'),
+                        'id' => 'adr_fav_remove',
+                        'class' => 'z-icon-es-cubes');
+            }
+        }
+
+        return $links;
+    }
 }

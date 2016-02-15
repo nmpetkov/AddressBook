@@ -10,18 +10,22 @@
 {ajaxheader lightbox=true}
 {/if}
 
-{capture assign=templatetitle}
-{gt text="Address"}:
-{if $address.fname && $address.lname}
+{capture assign=templatetitle}{strip}
+{if $address.company && $preferences.addressbooktype == 2}
+{$address.company|safehtml}
+{elseif $address.fname && $address.lname}
 {$address.fname|safehtml} {$address.lname|safehtml}
 {elseif $address.lname}
 {$address.fname|safehtml}{$address.lname|safehtml}
 {/if}
-{/capture}
+{/strip}{/capture}
 
 {include file="user_menu.tpl"}
+{setmetatag name='description' value=$address.custom_1|strip_tags|trim|truncate:500}
+{assign_concat name='prefkey' 1='abmetakeyword_' 2=$lang}
+{setmetatag name='keywords' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
 
-<div class="adr_display z-form">
+<div id="adr_display_id" class="adr_display z-form">
     <input type="hidden" name="ot" value="{$ot|safehtml}" />
     <input type="hidden" name="startnum" value="{$startnum|safehtml}" />
     <input type="hidden" name="letter" value="{$letter|safehtml}" />
@@ -191,5 +195,10 @@
         {/if}
     </div>
 </div>
+{if $themeinfo.name|strpos:"Bootstrap" !== false}
+<script type="text/javascript">
+    setImgClassResponsive("adr_display_id");
+</script>
+{/if}
 
 {notifydisplayhooks eventname='addressbook.ui_hooks.items.display_view' id=$address.id}

@@ -45,6 +45,15 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
             if (!isset($modvars['abtitle_'.$language])) {
                 $modvars['abtitle_'.$language] = $modvars['abtitle'];
             }
+            if (!isset($modvars['abmetatitle_'.$language])) {
+                $modvars['abmetatitle_'.$language] = $modvars['abmetatitle'];
+            }
+            if (!isset($modvars['abmetadescription_'.$language])) {
+                $modvars['abmetadescription_'.$language] = $modvars['abmetadescription'];
+            }
+            if (!isset($modvars['abmetakeyword_'.$language])) {
+                $modvars['abmetakeyword_'.$language] = $modvars['abmetakeyword'];
+            }
             if (!isset($modvars['custom_tab_'.$language])) {
                 $modvars['custom_tab_'.$language] = $modvars['custom_tab'];
             }
@@ -75,6 +84,9 @@ class AddressBook_Controller_Admin extends Zikula_AbstractController
         // now for each perference entry, set the appropriate module variable
         foreach ($languages as $language) {
             ModUtil::setVar('AddressBook', 'abtitle_'.$language, (isset($prefs['abtitle_'.$language]) ? $prefs['abtitle_'.$language] : ''));
+            ModUtil::setVar('AddressBook', 'abmetatitle_'.$language, (isset($prefs['abmetatitle_'.$language]) ? $prefs['abmetatitle_'.$language] : ''));
+            ModUtil::setVar('AddressBook', 'abmetadescription_'.$language, (isset($prefs['abmetadescription_'.$language]) ? $prefs['abmetadescription_'.$language] : ''));
+            ModUtil::setVar('AddressBook', 'abmetakeyword_'.$language, (isset($prefs['abmetakeyword_'.$language]) ? $prefs['abmetakeyword_'.$language] : ''));
             ModUtil::setVar('AddressBook', 'custom_tab_'.$language, (isset($prefs['custom_tab_'.$language]) ? $prefs['custom_tab_'.$language] : ''));
         }
         ModUtil::setVar('AddressBook', 'globalprotect', (isset($prefs['globalprotect']) ? $prefs['globalprotect'] : 0));

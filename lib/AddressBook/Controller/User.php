@@ -513,6 +513,7 @@ class AddressBook_Controller_User extends Zikula_AbstractController {
         $this->view->assign('startnum',      $startnum);
         $this->view->assign('letter',        $letter);
         $this->view->assign('category',      $category);
+        $this->view->assign('categorydata',  CategoryUtil::getCategoryByID ($category));
         $this->view->assign('private',       $private);
         $this->view->assign('search',        $search);
         $this->view->assign('globalprotect', ModUtil::getVar('AddressBook', 'globalprotect'));

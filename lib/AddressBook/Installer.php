@@ -95,6 +95,9 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
        
         // Set up an initial value for a module variable.
         $this->setVar('abtitle', 'Address Book');
+        $this->setVar('abmetatitle', 'Address Book');
+        $this->setVar('abmetadescription', 'Address book');
+        $this->setVar('abmetakeyword', 'catalog, addressbook');
         $this->setVar('itemsperpage', 30);
         $this->setVar('globalprotect', 0);
         $this->setVar('allowprivate', 0);

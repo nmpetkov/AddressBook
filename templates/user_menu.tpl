@@ -1,9 +1,9 @@
-{pagesetvar name='title' value=$templatetitle}
 {checkpermission component='AddressBook::' instance='::' level='ACCESS_ADD' assign='addAuth'}
 {assign_concat name='prefkey' 1='abtitle_' 2=$lang}
 {formutil_getpassedvalue key="func" assign="func"}
 
 {moduleheader modname='AddressBook' type='user' title=$preferences.$prefkey setpagetitle=true insertstatusmsg=true}
+{if $templatetitle}{pagesetvar name='title' value=$templatetitle|strip_tags}{/if}
 
 {if isset($user_id) && $user_id && $func neq 'edit'}
     <script type="text/javascript">

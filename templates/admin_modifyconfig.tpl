@@ -18,6 +18,36 @@
                     {/foreach}
                 </div>
                 <div class="z-formrow">
+                    <label for="preferences_abmetatitle">{gt text="Meta title"}</label>
+                    {foreach item=language from=$languages}
+                    {assign_concat name='prefkey' 1='abmetatitle_' 2=$language}
+                    <div class="z-formlist">
+                        <input id="preferences_abmetatitle_{$language}" name="preferences[abmetatitle_{$language}]" value="{$preferences.$prefkey|safehtml}" type="text" size="50" maxlength="255" />
+                        <label for="preferences_abmetatitle_{$language}">({$language})</label>
+                    </div>
+                    {/foreach}
+                </div>
+                <div class="z-formrow">
+                    <label for="preferences_abmetadescription">{gt text="Meta description"}</label>
+                    {foreach item=language from=$languages}
+                    {assign_concat name='prefkey' 1='abmetadescription_' 2=$language}
+                    <div class="z-formlist">
+                        <textarea id="preferences_abmetadescription_{$language}" name="preferences[abmetadescription_{$language}]" cols="60" rows="3">{$preferences.$prefkey|safehtml}</textarea>
+                        <label for="preferences_abmetadescription_{$language}">({$language})</label>
+                    </div>
+                    {/foreach}
+                </div>
+                <div class="z-formrow">
+                    <label for="preferences_abmetakeyword">{gt text="Meta keywords"}</label>
+                    {foreach item=language from=$languages}
+                    {assign_concat name='prefkey' 1='abmetakeyword_' 2=$language}
+                    <div class="z-formlist">
+                        <textarea id="preferences_abmetakeyword_{$language}" name="preferences[abmetakeyword_{$language}]" cols="60" rows="3">{$preferences.$prefkey|safehtml}</textarea>
+                        <label for="preferences_abmetakeyword_{$language}">({$language})</label>
+                    </div>
+                    {/foreach}
+                </div>
+                <div class="z-formrow">
                     <label for="preferences_addressbooktype">{gt text="Type of this Address Book"}</label>
                     <select id="preferences_addressbooktype" name="preferences[addressbooktype]" size="1">
                         <option value="1"{if $preferences.addressbooktype eq 1} selected="selected"{/if}>{gt text="People"}</option>

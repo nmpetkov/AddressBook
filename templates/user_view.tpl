@@ -1,5 +1,19 @@
-{gt text="Address list" assign=templatetitle}
+{if $categorydata|is_array && $categorydata.display_name.$lang}
+    {assign var='templatetitle' value=$categorydata.display_name.$lang}
+{else}
+    {assign_concat name='prefkey' 1='abmetatitle_' 2=$lang}
+    {assign var='templatetitle' value=$preferences.$prefkey}
+{/if}
 {include file="user_menu.tpl"}
+{if $categorydata|is_array && $categorydata.display_desc.$lang}
+    {setmetatag name='description' value=$categorydata.display_desc.$lang|strip_tags|trim|truncate:500}
+{else}
+    {assign_concat name='prefkey' 1='abmetadescription_' 2=$lang}
+    {setmetatag name='description' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
+    {assign_concat name='prefkey' 1='abmetakeyword_' 2=$lang}
+    {setmetatag name='keywords' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
+{/if}
+
 {formutil_getpassedvalue key="sort" assign="sort"}
 {usergetvar name="uid" assign="user_id"}
 {userloggedin assign="loggedin"}

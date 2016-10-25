@@ -22,4 +22,4 @@
 {if $address.city}{$address.city} {/if}{if $address.state}{$address.state} {/if}{if $address.country}{$address.country}{/if}
 {/capture}
 {gt text="Address location" assign='lblTitle'}
-{AddressShowGmap zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml tooltip=$lblTitle directions=true icon=$baseurl|cat:'modules/AddressBook/images/marker_green-dot.png' iconshadow=$baseurl|cat:'modules/AddressBook/images/marker_shadow.png'}
+{AddressShowGmap api_key=$preferences.google_api_key zoomlevel=$preferences.google_zoom lat_long=$address.geodata mapid=$address.id maptype='roadmap' title=$lblTitle html=$smarty.capture.markerhtml tooltip=$lblTitle directions=true icon=$baseurl|cat:'modules/AddressBook/images/marker_green-dot.png' iconshadow=$baseurl|cat:'modules/AddressBook/images/marker_shadow.png'}

@@ -10,9 +10,9 @@
 {else}
     {assign_concat name='prefkey' 1='abmetadescription_' 2=$lang}
     {setmetatag name='description' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
-    {assign_concat name='prefkey' 1='abmetakeyword_' 2=$lang}
-    {setmetatag name='keywords' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
 {/if}
+{assign_concat name='prefkey' 1='abmetakeyword_' 2=$lang}
+{setmetatag name='keywords' value=$preferences.$prefkey|strip_tags|trim|truncate:500}
 
 {formutil_getpassedvalue key="sort" assign="sort"}
 {usergetvar name="uid" assign="user_id"}

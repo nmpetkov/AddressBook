@@ -22,4 +22,4 @@
      $this->assign('points', $points);
      $this->assign('showmap', $showmap);
 {/php}
-{if $showmap}{AddressShowGmap height='500px' mapid='View' maptype='roadmap' points=$points}{/if}
+{if $showmap}{AddressShowGmap api_key=$preferences.google_api_key height='500px' mapid='View' maptype='roadmap' points=$points}{/if}

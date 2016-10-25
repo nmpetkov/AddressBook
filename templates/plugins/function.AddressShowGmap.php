@@ -47,6 +47,10 @@ function smarty_function_AddressShowGmap($params, &$smarty)
         $map->setCenterCoords($arrLatLong[1], $arrLatLong[0]);
         $map->addMarkerByCoords($arrLatLong[1], $arrLatLong[0], $params['title'], $params['html'], $params['tooltip'], $params['icon'], $params['iconshadow']);
     }
+    // API key
+    if (isset($params['api_key'])) {
+        $map->setApiKey($params['api_key']);
+    }
     // handle array of points
     if (isset($params['points'])) {
         foreach($params['points'] as $point) {

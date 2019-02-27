@@ -1,12 +1,3 @@
-Event.observe(window, 'load', addressbook_texpand_init, false);
-
-function addressbook_texpand_init()
-{
-    $$('.z_texpand').each(function(el){
-      new Texpand(el, {autoShrink: true, shrinkOnBlur:false, expandOnFocus: false, expandOnLoad: false });
-    });
-}
-
 function get_geodata() {
     var params = '';
     params += '&val_1=' + encodeURIComponent(document.getElementById('address_address1').value);

@@ -262,7 +262,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'AddressBook');
             $cat->setDataField('display_name', array($lang => $this->__('AddressBook')));
-            $cat->setDataField('display_desc', array($lang => $this->__('Adress administration.')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Address administration.')));
             if (!$cat->validate('admin')) {
                 return false;
             }
@@ -410,7 +410,7 @@ class AddressBook_Installer extends Zikula_AbstractInstaller
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'AddressBook');
             $cat->setDataField('display_name', array($lang => $this->__('AddressBook')));
-            $cat->setDataField('display_desc', array($lang => $this->__('Adress administration.')));
+            $cat->setDataField('display_desc', array($lang => $this->__('Address administration.')));
             if (!$cat->validate('admin')) {
                 return false;
             }

@@ -259,7 +259,7 @@
                 <input id="address_custom_{$cusfield.id|safehtml}" name="address[custom_{$cusfield.id|safehtml}]" value="{if $address.id}{$address.$fieldname|safehtml}{/if}" type="text" size="60" maxlength="80" />
                 {elseif $cusfield.type=="varchar(120) default NULL"}
                 <label for="address_custom_{$cusfield.id|safehtml}">{$cusfield.name|safehtml}</label>
-                <textarea id="address_custom_{$cusfield.id|safehtml}" name="address[custom_{$cusfield.id|safehtml}]" class="z_texpand" rows="2" cols="40">{if $address.id}{$address.$fieldname|safehtml}{/if}</textarea>
+                <textarea id="address_custom_{$cusfield.id|safehtml}" name="address[custom_{$cusfield.id|safehtml}]" class="z_texpand noeditor" rows="2" cols="40">{if $address.id}{$address.$fieldname|safehtml}{/if}</textarea>
                 {elseif $cusfield.type=="varchar(240) default NULL"}
                 <label for="address_custom_{$cusfield.id|safehtml}">{$cusfield.name|safehtml}</label>
                 <textarea id="address_custom_{$cusfield.id|safehtml}" name="address[custom_{$cusfield.id|safehtml}]" class="z_texpand" rows="4" cols="40">{if $address.id}{$address.$fieldname|safehtml}{/if}</textarea>
@@ -312,11 +312,11 @@
             <legend>{gt text="Note"}</legend>
             <div class="z-formrow">
                 <label for="address_note">{gt text="Content"}</label>
-                <textarea id="address_note" name="address[note]" class="z_texpand" rows="6" cols="40">{if $address.id}{$address.note|safehtml}{/if}</textarea>
+                <textarea id="address_note" name="address[note]" class="z_texpand noeditor" rows="6" cols="40">{if $address.id}{$address.note|safehtml}{/if}</textarea>
             </div>
         </fieldset>
 
-        {notifydisplayhooks eventname='addressbook.ui_hooks.items.form_edit' id=null}
+        {notifydisplayhooks eventname='addressbook.ui_hooks.items.form_edit' id=$address.id}
 
         <div class="z-formbuttons">
             {button src='button_ok.png' set='icons/small' __alt="Create" __title="Create" class="formbutton"}
